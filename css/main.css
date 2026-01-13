@@ -1,8 +1,77 @@
+/* Normal  Arimo*/
+@font-face {
+  font-family: 'Arimo';
+  src: url('../assets/fonts/Arimo-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Bold  Arimo*/
+@font-face {
+  font-family: 'Arimo';
+  src: url('../assets/fonts/Arimo-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+html {
+    font-size: 16px;
+    background-color: #f8f8f8;
+    font-family: 'Arimo', sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: flex-start;
+    width: 100% - 2rem;
+
+    margin: 0;
+    padding: 2rem;
+
+}
+
 h1 {
-    color: red;
+    font-size: 1.5rem;
+    color: #0A0A0A;
    
+}
+
+h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #364153;
 }
 
 label {
     display: block;
+}
+
+#bill-information {
+    flex: 1;
+    background-color: #F9FAFB;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    border-radius: 1rem;
+
+}
+
+#preview-and-generate {
+    width: 8.5in;
+    margin-left: 2rem;
+
+    
+}
+
+#bill-preview {
+    width: 8.5in;
+    min-height: 13in;
+    background-color: red;
+    margin-bottom: 1rem;
+}
+
+#generate {
+    display: flex;
+    justify-content: center;
+   
 }
