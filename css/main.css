@@ -14,55 +14,74 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Arimo';
+  src: url('../assets/fonts/Arimo-VariableFont_wght.ttf') format('woff2');
+  font-weight: 100 900;    /* specify the weight range */
+  font-style: normal;      /* or italic if applicable */
+}
+
 
 html {
     font-size: 16px;
-    font-family: 'Arimo', sans-serif;
+    /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif */
+    font-family: "Arimo", sans-serif;
+}
+
+p {
+    margin: 0;
 }
 
 body {
     background-color: #F9FAFB;
+    margin: 0;
 }
 
 main {
     display: flex;
     align-items: flex-start;
-    width: 100% - 2rem;
-    max-width: 1643px;
+    width: calc(100% - 4rem);
+    max-width: 1600px;
     margin: 0 auto;
     padding: 2rem;
 }
 
 h1 {
-    font-size: 1.5rem;
-    color: #0A0A0A;
-   
+    font-weight: 600;
+    color: oklch(0.145 0 0);
+    margin: 0;
 }
 
 h3 {
     font-size: 1rem;
-    font-weight: bold;
-    color: #364153;
+    font-weight: 500;
+    color: oklch(0.373 0.034 259.733);
+    margin: 0;
 }
 
 label {
     display: block;
+    color: oklch(0.145 0 0);
     /* border: 1px solid red; */
 }
 
 input:not([type="checkbox"]), select {
-    background-color: #f3f3f5;
+    background-color: rgb(238, 238, 238);
     border: 0;
-    height: 36px;
+    height: 26px;
     margin-top: 4px;
     padding: 4px 12px;
     border-radius: 8px;
 }
 
-input:focus {
-    outline: none;
-    border: 1px solid #616161;
+select {
+    height: 36px;
 }
+
+input:focus, select:focus {
+    outline: 4px solid oklab(0.708 0 0 / 0.5);
+}
+
 
 #bill-information {
     flex: 1;
@@ -72,9 +91,14 @@ input:focus {
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    row-gap: 1.5rem;
+    row-gap: 3rem;
 }
 
+/* 
+
+patient details 
+
+*/
 
 #patient-details label {
     margin-top: 12px;
@@ -108,10 +132,79 @@ input[type="date"]{
 
 #gender {
     width: calc(10rem + 24px);
+    font-family: "Arimo", sans-serif;
+}
+
+
+/* 
+
+services and packages
+
+*/
+
+#packages {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.25);
+    accent-color: rgb(19, 19, 19);
+    outline: none;
+    background-color: red;
+}
+
+#mcp, #encp {
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    /* blue version */
+    background-color: oklch(94.158% 0.02414 254.032);
+
+    /* dark version */
+    /* background-color: oklch(0.985 0.002 247.839); */
+}
+
+#packages>div>label {
+    font-weight: 600;
+
+}
+
+#rual-pf, #dalire-pf {
+    background-color: white;
+    width: calc(10rem - 12px);
+}
+
+#professional-fee {
+    margin-left: 1.5rem;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.pf {
+    margin-left: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#additional {
+    border-top: 2px solid rgba(0, 0, 0, 0.15);
+    padding-top: 2rem;
 }
 
 
 
+
+
+
+/* 
+Preview
+*/
 
 #preview-and-generate {
     width: 8.5in;
