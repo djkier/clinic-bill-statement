@@ -17,18 +17,20 @@
 
 html {
     font-size: 16px;
-    background-color: #f8f8f8;
     font-family: 'Arimo', sans-serif;
 }
 
 body {
+    background-color: #F9FAFB;
+}
+
+main {
     display: flex;
     align-items: flex-start;
     width: 100% - 2rem;
-
-    margin: 0;
+    max-width: 1643px;
+    margin: 0 auto;
     padding: 2rem;
-
 }
 
 h1 {
@@ -39,22 +41,77 @@ h1 {
 
 h3 {
     font-size: 1rem;
-    font-weight: normal;
+    font-weight: bold;
     color: #364153;
 }
 
 label {
     display: block;
+    /* border: 1px solid red; */
+}
+
+input:not([type="checkbox"]), select {
+    background-color: #f3f3f5;
+    border: 0;
+    height: 36px;
+    margin-top: 4px;
+    padding: 4px 12px;
+    border-radius: 8px;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #616161;
 }
 
 #bill-information {
     flex: 1;
-    background-color: #F9FAFB;
+    background-color: #fff;
     border: 2px solid rgba(0, 0, 0, 0.15);
-    padding: 1.5rem 0 1.5rem 1.5rem;
+    padding: 1.5rem;
     border-radius: 1rem;
-
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
 }
+
+
+#patient-details label {
+    margin-top: 12px;
+}
+
+#patient-name {
+    width: calc(100% - 1.5rem);
+}
+
+.patient-date-info{
+    display: flex;
+    justify-content: space-between;
+    column-gap: 12px;
+    width: 100%;
+}
+
+input[type="date"]{
+    width: calc(100% - 24px);
+    font-family: "Amiro", sans-serif;
+}
+
+.patient-baby-info label{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.patient-baby-info label input{
+    width: 10rem;
+}
+
+#gender {
+    width: calc(10rem + 24px);
+}
+
+
+
 
 #preview-and-generate {
     width: 8.5in;
@@ -63,11 +120,16 @@ label {
     
 }
 
+
+
+
+
 #bill-preview {
     width: 8.5in;
     min-height: 13in;
-    background-color: red;
+
     margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 #generate {
