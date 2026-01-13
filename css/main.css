@@ -1,4 +1,8 @@
 h1 {
     color: red;
-    font-size: 2em;
+   
+}
+
+label {
+    display: block;
 }
