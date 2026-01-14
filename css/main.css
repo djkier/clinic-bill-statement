@@ -63,6 +63,10 @@ h3 {
     margin: 0;
 }
 
+h4 {
+    margin: 0;
+}
+
 label {
     display: block;
     color: oklch(0.145 0 0);
@@ -180,7 +184,7 @@ input[type="checkbox"] {
 
 #rual-pf, #dalire-pf {
     background-color: white;
-    width: calc(10rem - 12px);
+    width: calc(10rem - 24px);
 }
 
 #professional-fee {
@@ -295,19 +299,16 @@ img {
     background-color: white;
 }
 
-.other-card select {
-    padding: 12px;
-    height: auto;
-    width: auto;
-    min-width: 10rem;
+#discounts {
+    width: 10rem;
 }
 
 
-
-
-
-
-
+.other-card select {
+    padding: 12px;
+    height: auto;
+    width: 11.5rem;
+}
 
 
 
@@ -316,10 +317,8 @@ Preview
 */
 
 #preview-and-generate {
-    width: 8.5in;
-    margin-left: 2rem;
 
-    
+    margin-left: 2rem;
 }
 
 #bill-preview {
@@ -327,20 +326,167 @@ Preview
     /* min-height: 13in; */
     height: 13in;
     border-bottom: 1px solid cyan;
-
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    padding: 0 0.5in;
+
 }
 
 #bill-preview header {
-
+    margin-top: 0.2in;
 }
 
 #bill-preview header img {
     width: 8.5in;
-    margin-top: 0.25in;
+    margin-top: 0.1in;
 }
 
+#previewTitle {
+    margin: -20px auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#previewTitle h1 {
+    font-weight: 800;
+}
+
+.patient-info-preview {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+}
+
+.patient-info-preview p span{
+    font-weight: 600;
+}
+
+.dates-preview p {
+    width: 20rem;
+    text-align: left;
+
+}
+
+
+/* 
+TABLE 
+*/
+
+table {
+    margin-top: 8px;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+}
+
+thead tr {
+   background-color: rgb(224, 224, 224);
+   padding: 8px;
+   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+
+}
+
+thead th:first-child {
+    text-align: left;
+    width: 25rem;
+}
+
+th {
+    text-align: center;
+    padding: 4px;
+}
+
+th:nth-child(n+2) {
+    width: 10rem;
+}
+
+.item-name, .package-name {
+    text-align: left;
+}
+
+.item-name {
+    padding-left: 2rem;
+}
+
+td {
+    text-align: right;
+    padding: 0.25rem 2.5rem;
+}
+
+tbody tr {
+   border-bottom: 1px solid rgba(0, 0, 0, 0.15); 
+}
+
+.package-name {
+    padding: 4px;
+    font-weight: 600;
+    color: oklch(36.66% 0.10541 148.271);
+}
+
+.package-name-row {
+    background-color: oklch(94.614% 0.06994 156.246);
+    border-bottom: 2px solid oklch(66.966% 0.1542 151.284);
+}
+
+.professional-row .item-name {
+    padding-left: 4rem;
+    font-weight: 600;
+}
+
+.expanded {
+    background-color: oklch(94.989% 0.02467 251.989);
+    border-bottom: 2px solid oklch(0.882 0.059 254.128);
+}
+
+.expanded .package-name {
+    color: oklch(43.091% 0.17111 265.618);
+}
+
+/* 
+TOTAL AMOUNT 
+*/
+
+.totals {
+    margin-right: 2.5rem;
+    width: 20rem;
+    align-self: flex-end;
+}
+
+#subtotal, #discount, #total-amount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0;
+}
+
+#subtotal > :first-child, #discount > :first-child {
+    font-weight: 200;
+    font-size: 18px;
+}
+
+#total-amount {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid black;
+}
+
+/* 
+SIGNATURE SECTION
+*/
+
+#patient-signature, #prepared-signature {
+    
+}
+
+
+/* 
+PRINT PREVIEW
+ */
 #generate {
     display: flex;
     justify-content: center;
@@ -367,8 +513,40 @@ Preview
 
     #bill-preview , #bill-preview * {
         visibility: visible;
-        box-shadow: none;
+        /* box-shadow: none; */
+
+        
+     
     }
+
+    table {
+        border: 2px solid oklch(55.208% 0.00006 271.152);
+    }
+
+    thead tr {
+        border-bottom: 2px solid oklch(55.208% 0.00006 271.152);
+
+    }
+
+    .package-name-row {
+        border-bottom: 1px solid oklch(55.208% 0.00006 271.152);
+    }
+
+    .expanded {
+        border-top: 2px solid oklch(55.208% 0.00006 271.152);
+        border-bottom: 1px solid oklch(55.208% 0.00006 271.152);
+    }
+
+    .package-name {
+        color: black;
+    }
+
+    .expanded .package-name {
+        color: black;
+    }
+
+
+    
 
 
 }

@@ -32,7 +32,7 @@ const tableData = [
         ]
     },
     {
-        "Expanded Newborn Care" : [
+        "Expanded Newborn Care (ENCP)" : [
             {
                 name: "Expanded Newborn Screening",
                 amount: 2761.50
@@ -77,24 +77,35 @@ tableData.forEach( entry => {
     const packageName = Object.keys(entry)[0];
     const trPackageName = document.createElement("tr");
     const tdPackageName = document.createElement("td");
+    const packageType = packageName.split(" ")[0];
+
+
 
     tdPackageName.textContent = packageName;
     trPackageName.appendChild(tdPackageName);
 
+    for (let i = 0; i < 3; i++) {
+        const tdRowPackageName = document.createElement("td");
+        trPackageName.appendChild(tdRowPackageName);
+    }
+
+    tdPackageName.classList.add("package-name");
+    trPackageName.classList.add("package-name-row", packageType.toLowerCase());
+
+
     tbody.appendChild(trPackageName);
 
     entry[packageName].forEach(packageItem => {
-        console.log(packageItem.name);
         const trItem = document.createElement("tr");
         const tdItemName = document.createElement("td");
         const tdItemAmount = document.createElement("td");
         const tdItemPhil = document.createElement("td");
         const tdItemNet = document.createElement("td");
 
-        tdItemName.classList.add("itemName");
-        tdItemAmount.classList.add("itemAmount");
-        tdItemPhil.classList.add("itemPhil");
-        tdItemNet.classList.add("itemNet");
+        tdItemName.classList.add("item-name");
+        tdItemAmount.classList.add("item-amount");
+        tdItemPhil.classList.add("item-phil");
+        tdItemNet.classList.add("item-net");
 
         tdItemName.textContent = packageItem.name;
 
@@ -105,7 +116,7 @@ tableData.forEach( entry => {
         if (!(packageItem.amount == 0)) {
             tdItemAmount.textContent = numberFormat(packageItem.amount);
             tdItemPhil.textContent = numberFormat(packageItem.amount);
-            tdItemNet.textContent = numberFormat(0);
+            tdItemNet.textContent = numberFormat(123);
         }
 
         trItem.appendChild(tdItemName);

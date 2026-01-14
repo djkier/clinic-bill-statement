@@ -163,7 +163,7 @@
                     <img src="./assets/LETTERHEAD.jpg" alt="letterhead"/>
                 </header>
                 <!-- HEADER TEXT -->
-                <div>
+                <div id="previewTitle">
                     <h1>BILLING STATEMENT</h1>
                     <p>Statement Date: January 15, 2026</p>
                 </div>
@@ -171,12 +171,12 @@
                 <!-- PATIENT INFORMATION -->
                 <section>
                     <h4>PATIENT INFORMATION</h4>
-                    <div>
+                    <div class="patient-info-preview">
                         <div>
                             <p>Patient Name: <span>Don Justine Fontanilla</span></p>
                             <p>Age: <span>30</span></p>
                         </div>
-                        <div>
+                        <div class="dates-preview">
                             <p>Date of Admission: <span>January 12, 2026</span></p>
                             <p>Date of Discharge: <span>January 13, 2026</span></p>
                         </div>
@@ -187,44 +187,44 @@
                 <section>
                     <h4>SERVICES RENDERED</h4>
                     <table>
-                    <thead>
-                        <tr>
-                            <th>Service Description</th>
-                            <th>Amount</th>
-                            <th>PhilHealth</th>
-                            <th>Net Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
+                        <thead>
+                            <tr>
+                                <th >Service Description</th>
+                                <th>Amount</th>
+                                <th>PhilHealth</th>
+                                <th>Net Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
                     </table>
                 </section>
 
                 <!-- TOTAL AMOUNT -->
-                <section>
-                    <div>
-                        <p>Subtotal</p>
+                <section class="totals">
+                    <div id="subtotal">
+                        <p>Subtotal:</p>
                         <p>15,000.00</p>
                     </div>
-                    <div>
-                        <p>Discounts</p>
+                    <div id="discount">
+                        <p>Discounts:</p>
                         <p>123.00</p>
                     </div>
-                    <div>
+                    <div id="total-amount">
                         <h2>Total Amount</h2>
-                        <h2>12,000.00</h2>
+                        <h2>P 12,000.00</h2>
                     </div>
                 </section>
 
 
                 <!-- SIGNATURE SECTION -->
                 <section>
-                    <div>
+                    <div id="patient-signature">
                         <p>Kier Nikki H. Rual</p>
                         <p>Patient's Name and Signature</p>
                     </div>
 
-                    <div>
+                    <div id="prepared-signature">
                         <p>Don Justine Fontanilla</p>
                         <p>Prepared by</p>
                     </div>
