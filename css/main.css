@@ -295,6 +295,13 @@ img {
     background-color: white;
 }
 
+.other-card select {
+    padding: 12px;
+    height: auto;
+    width: auto;
+    min-width: 10rem;
+}
+
 
 
 
@@ -338,4 +345,30 @@ Preview
     display: flex;
     justify-content: center;
    
+}
+
+
+@media print {
+    body, main {
+        margin: 0;
+        padding: 0;
+    }
+    main * {
+        visibility: hidden;
+    }
+
+    #bill-information, #generate {
+        display: none;
+    }
+
+    #preview-and-generate {
+        margin: 0;
+    }
+
+    #bill-preview , #bill-preview * {
+        visibility: visible;
+        box-shadow: none;
+    }
+
+
 }
