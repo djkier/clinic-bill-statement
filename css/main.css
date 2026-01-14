@@ -52,6 +52,10 @@ h1 {
     margin: 0;
 }
 
+h2 {
+    margin: 0;
+}
+
 h3 {
     font-size: 1rem;
     font-weight: 500;
@@ -87,11 +91,11 @@ input:focus, select:focus {
     flex: 1;
     background-color: #fff;
     border: 2px solid rgba(0, 0, 0, 0.15);
-    padding: 1.5rem;
+    padding: 12px 1.5rem;
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    row-gap: 3rem;
+    row-gap: 2rem;
 }
 
 /* 
@@ -143,6 +147,8 @@ services and packages
 */
 
 #packages {
+    border-top: 2px solid rgba(0, 0, 0, 0.15);
+    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     row-gap: 1.5rem;
@@ -258,13 +264,36 @@ img {
 .total-delete-button img {
     padding: 10px;
     border-radius: 8px;
-    background-color: #ffffffb2;
+    /* background-color: #ffffffb2; */
 }
 
 .total-delete-button img:hover {
     background-color: rgb(255, 216, 223);
 }
 
+#other {
+    border-top: 2px solid rgba(0, 0, 0, 0.15);
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+}
+
+
+.other-card label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(238, 238, 238);
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+}
+
+.other-card input, .other-card select {
+    background-color: white;
+}
 
 
 
