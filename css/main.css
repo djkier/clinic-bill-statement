@@ -325,7 +325,7 @@ Preview
     width: 8.5in;
     /* min-height: 13in; */
     height: 13in;
-    border-bottom: 1px solid cyan;
+    /* border-bottom: 1px solid cyan; */
     /* margin-bottom: 1rem; */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     display: flex;
@@ -415,7 +415,7 @@ th:nth-child(n+2) {
 
 td {
     text-align: right;
-    padding: 0.25rem 2.5rem;
+    padding: 0.25rem 3.25rem;
 }
 
 tbody tr {
@@ -452,8 +452,8 @@ TOTAL AMOUNT
 */
 
 .totals {
-    margin-right: 2.5rem;
-    width: 20rem;
+    margin-right: 3.25rem;
+    width: 22rem;
     align-self: flex-end;
 }
 
@@ -462,26 +462,49 @@ TOTAL AMOUNT
     justify-content: space-between;
     align-items: center;
     padding: 0.25rem 0;
+    font-size: 18px;
 }
 
 #subtotal > :first-child, #discount > :first-child {
     font-weight: 200;
-    font-size: 18px;
+    
 }
 
 #total-amount {
     margin-top: 0.5rem;
     padding-top: 0.5rem;
     border-top: 1px solid black;
+    font-size: 1rem;
 }
 
 /* 
 SIGNATURE SECTION
 */
 
-#patient-signature, #prepared-signature {
-    
+#signature-section {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-around;
 }
+
+.sign {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 18rem;
+}
+
+.sign p {
+    padding: 2px;
+    font-weight: 600;;
+}
+
+.sign > :nth-child(2) {
+    border-top: 2px solid black;
+    width: 100%;
+    text-align: center;
+}
+
 
 
 /* 
@@ -513,7 +536,7 @@ PRINT PREVIEW
 
     #bill-preview , #bill-preview * {
         visibility: visible;
-        /* box-shadow: none; */
+        box-shadow: none;
 
         
      
