@@ -107,3 +107,46 @@ patientAgeInput.addEventListener("input", e => {
 // -----------------------------------------------------
 // FINAL DIAGNOSIS -------------------------------------
 // -----------------------------------------------------
+
+gravidaPreview.textContent = 0;
+paraPreview.textContent = 0;
+babyGender.textContent = genderEquiv(babyGenderSelection.value);
+
+function genderEquiv (gender) {
+    return gender === "male" ? "boy" : "girl";
+}
+
+gravidaInput.addEventListener("input", e => {
+    let g = Number(e.target.value);
+
+    if (g < 0) {
+        gravidaInput.value = 0;
+    }
+
+    if (g === "" || g < 0) {
+        g = 0;
+    }
+
+    gravidaPreview.textContent = g;
+});
+
+paraInput.addEventListener("input", e => {
+    let p = Number(e.target.value);
+
+    if (p > Number(gravidaInput.value)) {
+        p = Number(gravidaInput.value);
+        paraInput.value = p;
+    }
+
+
+    if (p < 0) {
+        paraInput.value = 0;
+    }
+
+    if (p === "" || p < 0) {
+        p = 0;
+    }
+
+    paraPreview.textContent = p;
+});
+
