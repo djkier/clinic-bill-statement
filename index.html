@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./css/main.css">
     <script src="./js/tableBuilder.js" defer></script>
     <script src="./js/script.js" defer></script>
+    <script src="./js/patienInfo.js" defer></script>
     <title>Clinic Bill Statement</title>
 </head>
 <body>
@@ -165,7 +166,7 @@
                 <!-- HEADER TEXT -->
                 <div id="previewTitle">
                     <h1>BILLING STATEMENT</h1>
-                    <p>Statement Date: January 15, 2026</p>
+                    <p>Statement Date: <span id="statement-date"></span></p>
                 </div>
 
                 <!-- PATIENT INFORMATION -->
@@ -173,12 +174,12 @@
                     <h4>PATIENT INFORMATION</h4>
                     <div class="patient-info-preview">
                         <div>
-                            <p>Patient Name: <span>Don Justine Fontanilla</span></p>
-                            <p>Age: <span>30</span></p>
+                            <p>Patient Name: <span id="patient-name-preview">Don Justine Fontanilla</span></p>
+                            <p>Age: <span id="patient-age-preview">30</span></p>
                         </div>
                         <div class="dates-preview">
-                            <p>Date of Admission: <span>January 12, 2026</span></p>
-                            <p>Date of Discharge: <span>January 13, 2026</span></p>
+                            <p>Date of Admission: <span id="admission-preview"></span></p>
+                            <p>Date of Discharge: <span id="discharge-preview"></span></p>
                         </div>
                     </div>
                     <p>Final Diagnosis: <span>G<span id="g">1</span>P<span id="p">1</span> Normal spontaneous delivery to an alive and term baby <span id="baby-gender">girl</span>.</span></p>
