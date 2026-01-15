@@ -169,17 +169,12 @@ input[type="checkbox"] {
     padding: 12px;
     border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.1);
-
-    /* blue version */
-    background-color: oklch(94.158% 0.02414 254.032);
-
     /* dark version */
-    /* background-color: oklch(0.985 0.002 247.839); */
+    background-color: oklch(0.985 0.002 247.839);
 }
 
 #packages>div>label {
     font-weight: 600;
-
 }
 
 #rual-pf, #dalire-pf {
