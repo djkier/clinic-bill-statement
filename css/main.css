@@ -359,8 +359,10 @@ Preview
 .patient-info-preview {
     display: flex;
     justify-content: space-between;
-    margin: 8px 0;
+    margin: 16px 0;
 }
+
+
 
 .patient-info-preview p span{
     font-weight: 600;
@@ -369,9 +371,12 @@ Preview
 .dates-preview p {
     width: 20rem;
     text-align: left;
-
 }
 
+.patient-info>p span {
+    font-weight: 600;
+    /* text-decoration: underline; */
+}
 
 /* 
 TABLE 

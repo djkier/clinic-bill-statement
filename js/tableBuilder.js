@@ -62,16 +62,6 @@ const tableData = [
 ]
 
 const tbody = document.querySelector("tbody");
-// const tr = document.createElement("tr");
-// const td1 = document.createElement("td");
-// const td2 = document.createElement("td");
-
-// td2.textContent = "21";
-
-// tr.appendChild(td1);
-// tr.appendChild(td2);
-
-// tbody.appendChild(tr);
 
 tableData.forEach( entry => {
     const packageName = Object.keys(entry)[0];
