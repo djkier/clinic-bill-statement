@@ -66,16 +66,44 @@ dischargeDateInput.addEventListener("change", e => {
 
 
 
-
-
-
-//default values
+// -----------------------------------------------------
+// NON DATES -------------------------------------------
+// -----------------------------------------------------
 const noEntryDefault = "&nbsp;&nbsp;&#8212;";
 
-inputToPreview(patientNameInput, patientNamePreview);
+noValueFormatter(patientNamePreview);
+noValueFormatter(patientAgePreview);
 
-function inputToPreview (input, preview) {
-    input.addEventListener("input", e => {
-        preview.textContent = e.target.value;
-    });
+function noValueFormatter(input) {
+    if (!input.value) {
+        input.innerHTML = noEntryDefault;
+    }
 }
+
+patientNameInput.addEventListener("input", e => {
+    let nameValue = e.target.value
+                        .trim()
+                        .split(" ")
+                        .filter(word => word)
+                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(" ");
+
+    if (nameValue.length === 0 ) {
+        nameValue = noEntryDefault;
+    }
+
+    patientNamePreview.innerHTML = nameValue;
+})
+
+patientAgeInput.addEventListener("input", e => {
+    let ageValue = Number(e.target.value);
+    if (ageValue < 10 || ageValue > 60) {
+        ageValue = noEntryDefault;
+    }
+    patientAgePreview.innerHTML = ageValue;
+})
+
+
+// -----------------------------------------------------
+// FINAL DIAGNOSIS -------------------------------------
+// -----------------------------------------------------
