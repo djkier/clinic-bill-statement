@@ -16,6 +16,7 @@ const dischargeDatePreview = document.querySelector("#discharge-preview");
 const gravidaPreview = document.querySelector("#g");
 const paraPreview = document.querySelector("#p");
 const babyGender = document.querySelector("#baby-gender");
+const patientNameAndSign = document.querySelector("#patient-signature p:first-child");
 
 
 
@@ -73,6 +74,7 @@ const noEntryDefault = "&nbsp;&nbsp;&#8212;";
 
 noValueFormatter(patientNamePreview);
 noValueFormatter(patientAgePreview);
+noValueFormatter(patientNameAndSign);
 
 function noValueFormatter(input) {
     if (!input.value) {
@@ -93,6 +95,7 @@ patientNameInput.addEventListener("input", e => {
     }
 
     patientNamePreview.innerHTML = nameValue;
+    patientNameAndSign.innerHTML = nameValue;
 })
 
 patientAgeInput.addEventListener("input", e => {
@@ -118,6 +121,11 @@ function genderEquiv (gender) {
 
 gravidaInput.addEventListener("input", e => {
     let g = Number(e.target.value);
+
+    if (g > 20) {
+        g = 20;
+        gravidaInput.value = g;
+    }
 
     if (g < 0) {
         gravidaInput.value = 0;
@@ -150,3 +158,6 @@ paraInput.addEventListener("input", e => {
     paraPreview.textContent = p;
 });
 
+babyGenderSelection.addEventListener("input", e => {
+    babyGender.textContent = genderEquiv(e.target.value);
+})
