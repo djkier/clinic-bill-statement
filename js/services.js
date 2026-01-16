@@ -5,7 +5,7 @@ const mcpData = {
             professionals: [
                 {
                     name: "Liza H. Rual, RM",
-                    amount: 15600,
+                    amount: 0,
                     philHealth: 6240
                 },
                 {
@@ -90,21 +90,24 @@ const newServiceData = {
     ]
 }
 
-let mcpNetAmount = 0;
-let encpNetAmount = 0;
-let additionalAmount = 0;
 
+
+let rualNetAmount = 0;
+let dalireNetAmount = 0;
+let serviceNetAmount = 0;
 
 const mcpCard = document.querySelector("#mcp");
 const mcpCheckBox = document.querySelector("#mcp-box");
 const profFeeCard = document.querySelector("#professional-fee");
+const rualCheckBox = document.querySelector("#rual-checkbox");
+const dalireCheckBox = document.querySelector("#dalire-checkbox");
 const encpCard = document.querySelector("#encp");
 const encpCheckBox = document.querySelector("#encp-box");
 const tbody = document.querySelector("tbody");
 
 const trCount = () => tbody.querySelectorAll("tr").length;
 // default
-profFeeCard.style.display = "none";
+// profFeeCard.style.display = "none";
 
 defaultRow();
 function defaultRow() {
@@ -120,17 +123,38 @@ function defaultRow() {
 
 }
 
-
-
 mcpCheckBox.addEventListener("change", e => {
     const rowClassName = "mcp";
     if (mcpCheckBox.checked) {
         mcpCard.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
         profFeeCard.style.display = "flex";
         mcpRow(rowClassName);
+
+        //professional checkbox
+        checkboxInputEvent(rualCheckBox, "rual", rualNetAmount);
     } else {
         mcpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
-        profFeeCard.style.display = "none";
+        // profFeeCard.style.display = "none";
+         
+        rualCheckBox.checked = false;
+        dalireCheckBox.checked = false;
+        
+        removeRowByClass(rowClassName);
+        trCount() < 1 && defaultRow();
+
+    }
+});
+
+
+encpCheckBox.addEventListener("change", e => {
+    const rowClassName = "encp";
+    if (encpCheckBox.checked) {
+        encpCard.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
+        encpRow(rowClassName);
+        console.log("Rual Net: " + rualNetAmount);
+        console.log("Dr Net: " + dalireNetAmount);
+    } else {
+        encpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
         removeRowByClass(rowClassName);
         trCount() < 1 && defaultRow();
     }
@@ -141,7 +165,7 @@ function mcpRow(rowClassName) {
     if (trCount() === 1) {
         tbody.innerHTML = "";
     }
-    tableBuilder(mcpData, mcpNetAmount, rowClassName);
+    tableBuilder(mcpData, rowClassName);
 }
 
 // encpRow();
@@ -150,24 +174,10 @@ function encpRow(rowClassName) {
         tbody.innerHTML = "";
     }
 
-    tableBuilder(encpData, encpNetAmount, rowClassName);
+    tableBuilder(encpData, rowClassName);
 }
 
-
-
-encpCheckBox.addEventListener("change", e => {
-    const rowClassName = "encp";
-    if (encpCheckBox.checked) {
-        encpCard.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
-        encpRow(rowClassName);
-    } else {
-        encpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
-        removeRowByClass(rowClassName);
-        trCount() < 1 && defaultRow();
-    }
-});
-
-function tableBuilder(data, netAmount, rowClass) {
+function tableBuilder(data, rowClass) {
     const packageName = Object.keys(data)[0];
     const trPackageName = document.createElement("tr");
     const tdPackageName = document.createElement("td");
@@ -207,41 +217,47 @@ function tableBuilder(data, netAmount, rowClass) {
             tbody.appendChild(trItem);
 
             item.professionals.forEach(prof => {
-                if (prof.amount) {
-                    const trProf = document.createElement("tr");
-                    const tdProfName = document.createElement("td");
-                    const tdProfAmount = document.createElement("td");
-                    const tdProfPhil = document.createElement("td");
-                    const tdProfNet = document.createElement("td");
+                const trProf = document.createElement("tr");
+                const tdProfName = document.createElement("td");
+                const tdProfAmount = document.createElement("td");
+                const tdProfPhil = document.createElement("td");
+                const tdProfNet = document.createElement("td");
 
-                    trProf.classList.add("professional-row", rowClass);
-                    tdProfName.classList.add("item-name");
+                const isLiza = prof.name.split(" ")[0].toLowerCase() === "liza";
+                trProf.id = isLiza ? "rual-row" : "dalire-row";
 
-                    const net = Number(prof.amount) - Number(prof.philHealth);
-                    netAmount += net;
-                    // console.log("Package Name: " + packageName + " Amount: " + netAmount);
 
-                    tdProfName.textContent = prof.name;
-                    tdProfAmount.textContent = numberFormat(prof.amount);
-                    tdProfPhil.textContent = numberFormat(prof.philHealth);
-                    tdProfNet.textContent = numberFormat(net);
+                trProf.classList.add("professional-row", rowClass);
+                
 
-                    trProf.appendChild(tdProfName);
-                    trProf.appendChild(tdProfAmount);
-                    trProf.appendChild(tdProfPhil);
-                    trProf.appendChild(tdProfNet);
-                    
-                    tbody.appendChild(trProf);
-                }
+                tdProfName.classList.add("item-name");
+                tdProfAmount.classList.add("item-amount");
+                tdProfPhil.classList.add("item-phil");
+                tdProfNet.classList.add("item-net");
+
+                const net = Number(prof.amount) - Number(prof.philHealth);
+
+                tdProfName.textContent = prof.name;
+                tdProfAmount.textContent = numberFormat(prof.amount);
+                tdProfPhil.textContent = numberFormat(prof.philHealth);
+                tdProfNet.textContent = numberFormat(net);
+
+                trProf.appendChild(tdProfName);
+                trProf.appendChild(tdProfAmount);
+                trProf.appendChild(tdProfPhil);
+                trProf.appendChild(tdProfNet);
+
+                trProf.style.display = Number(prof.amount) < 1 ? "none" : "table-row"; 
+                
+                tbody.appendChild(trProf);
+                
             });
 
             
         }
 
         if (item.amount && item.philHealth) {
-            const net = Number(item.amount) - Number(item.philHealth)
-            netAmount += net;
-            // console.log("Package Name: " + packageName + " Amount: " + netAmount);
+            const net = Number(item.amount) - Number(item.philHealth);
 
             tdItemAmount.textContent = numberFormat(item.amount);
             tdItemPhil.textContent = numberFormat(item.philHealth);
@@ -266,4 +282,37 @@ function numberFormat(amount) {
     return amount.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+function checkboxInputEvent(profCheckBox, profName, netAmount) {
+    const profRow = document.querySelector(`#${profName}-row`);
+    const profInput = document.querySelector(`#${profName}-pf`);
+    const profAmount = document.querySelector(`#${profName}-row .item-amount`);
+    const profNet = document.querySelector(`#${profName}-row .item-net`);
+
+    profInput.addEventListener("input", e => handleInputToPreview(profInput, profAmount, profNet, netAmount));
+
+    profCheckBox.addEventListener("change", e => {
+        
+        if (e.target.checked) {
+            profRow.style.display = "table-row";
+            profInput.disabled = false;
+            profAmount.textContent = numberFormat(Number(profInput.value));
+
+        } else {
+            profRow.style.display = "none";
+            profInput.disabled = true;
+            profInput.value = "";
+            profNet.textContent = numberFormat(-6240);
+            
+
+        }
+    });
+
+}
+
+
+function handleInputToPreview(profInput, previewAmount, previewNet, netAmount) {
+    netAmount = Number(profInput.value) - 6240;
+    previewAmount.textContent = numberFormat(netAmount + 6240);
+    previewNet.textContent = numberFormat(netAmount);
+}
 

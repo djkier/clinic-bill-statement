@@ -180,6 +180,11 @@ input[type="checkbox"] {
 #rual-pf, #dalire-pf {
     background-color: white;
     width: calc(10rem - 24px);
+
+}
+
+#rual-pf:disabled, #dalire-pf:disabled {
+    background-color: rgb(238, 238, 238);
 }
 
 #professional-fee {
