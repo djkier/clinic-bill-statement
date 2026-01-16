@@ -90,11 +90,20 @@ const newServiceData = {
     ]
 }
 
-
-
-let rualNetAmount = 0;
-let dalireNetAmount = 0;
-let serviceNetAmount = 0;
+const subTotalItem = {
+    rualNetAmount: {
+        value: 0,
+        isIncluded: false
+    },
+    dalireNetAmount : {
+        value: 0,
+        isIncluded: false
+    },
+    serviceNetAmount : {
+        value: 0,
+        isIncluded: false
+    }
+}
 
 const mcpCard = document.querySelector("#mcp");
 const mcpCheckBox = document.querySelector("#mcp-box");
@@ -107,7 +116,7 @@ const tbody = document.querySelector("tbody");
 
 const trCount = () => tbody.querySelectorAll("tr").length;
 // default
-// profFeeCard.style.display = "none";
+profFeeCard.style.display = "none";
 
 defaultRow();
 function defaultRow() {
@@ -131,13 +140,16 @@ mcpCheckBox.addEventListener("change", e => {
         mcpRow(rowClassName);
 
         //professional checkbox
-        checkboxInputEvent(rualCheckBox, "rual", rualNetAmount);
+        checkboxInputEvent(rualCheckBox, "rual", subTotalItem.rualNetAmount);
+        checkboxInputEvent(dalireCheckBox, "dalire", subTotalItem.dalireNetAmount);
     } else {
         mcpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
-        // profFeeCard.style.display = "none";
+        profFeeCard.style.display = "none";
          
         rualCheckBox.checked = false;
         dalireCheckBox.checked = false;
+        subTotalItem.rualNetAmount.isIncluded = false;
+        subTotalItem.dalireNetAmount.isIncluded = false;
         
         removeRowByClass(rowClassName);
         trCount() < 1 && defaultRow();
@@ -145,14 +157,16 @@ mcpCheckBox.addEventListener("change", e => {
     }
 });
 
-
 encpCheckBox.addEventListener("change", e => {
     const rowClassName = "encp";
     if (encpCheckBox.checked) {
         encpCard.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
         encpRow(rowClassName);
-        console.log("Rual Net: " + rualNetAmount);
-        console.log("Dr Net: " + dalireNetAmount);
+        
+        //tester for subtotal
+        console.log(`Rual Net: ${subTotalItem.rualNetAmount.value}`);
+        console.log(`Rual Net: ${subTotalItem.rualNetAmount.isIncluded ? subTotalItem.rualNetAmount.value : 0}`);
+        console.log(`Dalire Net: ${subTotalItem.dalireNetAmount.isIncluded ? subTotalItem.dalireNetAmount.value : 0}` );
     } else {
         encpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
         removeRowByClass(rowClassName);
@@ -296,23 +310,24 @@ function checkboxInputEvent(profCheckBox, profName, netAmount) {
             profRow.style.display = "table-row";
             profInput.disabled = false;
             profAmount.textContent = numberFormat(Number(profInput.value));
+            netAmount.isIncluded = true;
 
         } else {
             profRow.style.display = "none";
             profInput.disabled = true;
             profInput.value = "";
             profNet.textContent = numberFormat(-6240);
-            
+            netAmount.value = -6240;
+            netAmount.isIncluded = false;
 
         }
     });
 
 }
 
-
 function handleInputToPreview(profInput, previewAmount, previewNet, netAmount) {
-    netAmount = Number(profInput.value) - 6240;
-    previewAmount.textContent = numberFormat(netAmount + 6240);
-    previewNet.textContent = numberFormat(netAmount);
+    netAmount.value = Number(profInput.value) - 6240;
+    previewAmount.textContent = numberFormat(netAmount.value + 6240);
+    previewNet.textContent = numberFormat(netAmount.value);
 }
 
