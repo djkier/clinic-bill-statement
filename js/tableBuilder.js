@@ -109,6 +109,8 @@ tableData.forEach( entry => {
             tdItemNet.textContent = numberFormat(123);
         }
 
+        
+
         trItem.appendChild(tdItemName);
         trItem.appendChild(tdItemAmount);
         trItem.appendChild(tdItemPhil);

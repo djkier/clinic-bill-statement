@@ -422,20 +422,24 @@ tbody tr {
    border-bottom: 1px solid rgba(0, 0, 0, 0.15); 
 }
 
+.professional-row .item-name {
+    padding-left: 4rem;
+    font-weight: 600;
+}
+
 .package-name {
     padding: 4px;
     font-weight: 600;
-    color: oklch(36.66% 0.10541 148.271);
 }
 
-.package-name-row {
+.maternity {
     background-color: oklch(94.614% 0.06994 156.246);
     border-bottom: 2px solid oklch(66.966% 0.1542 151.284);
 }
 
-.professional-row .item-name {
-    padding-left: 4rem;
-    font-weight: 600;
+
+.maternity .package-name {
+    color: oklch(36.66% 0.10541 148.271);
 }
 
 .expanded {
