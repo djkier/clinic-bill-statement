@@ -132,6 +132,7 @@ mcpCheckBox.addEventListener("change", e => {
         mcpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
         profFeeCard.style.display = "none";
         removeRowByClass(rowClassName);
+        trCount() < 1 && defaultRow();
     }
 });
 
@@ -162,6 +163,7 @@ encpCheckBox.addEventListener("change", e => {
     } else {
         encpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
         removeRowByClass(rowClassName);
+        trCount() < 1 && defaultRow();
     }
 });
 
