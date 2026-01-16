@@ -5,12 +5,12 @@ const mcpData = {
             professionals: [
                 {
                     name: "Liza H. Rual, RM",
-                    amount: 123,
+                    amount: 15600,
                     philHealth: 6240
                 },
                 {
                     name: "Dr. Genevieve Mendoza-Dalire",
-                    amount: 31,
+                    amount: 0,
                     philHealth: 6240
                 }
             ]
@@ -123,44 +123,49 @@ function defaultRow() {
 
 
 mcpCheckBox.addEventListener("change", e => {
+    const rowClassName = "mcp";
     if (mcpCheckBox.checked) {
         mcpCard.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
         profFeeCard.style.display = "flex";
+        mcpRow(rowClassName);
     } else {
         mcpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
         profFeeCard.style.display = "none";
+        removeRowByClass(rowClassName);
     }
 });
 
-mcpRow();
-function mcpRow() {
+// mcpRow();
+function mcpRow(rowClassName) {
     if (trCount() === 1) {
         tbody.innerHTML = "";
     }
-
-    tableBuilder(mcpData, mcpNetAmount);
+    tableBuilder(mcpData, mcpNetAmount, rowClassName);
 }
 
-encpRow();
-function encpRow() {
+// encpRow();
+function encpRow(rowClassName) {
     if (trCount() === 1) {
         tbody.innerHTML = "";
     }
 
-    tableBuilder(encpData, encpNetAmount);
+    tableBuilder(encpData, encpNetAmount, rowClassName);
 }
 
 
 
 encpCheckBox.addEventListener("change", e => {
+    const rowClassName = "encp";
     if (encpCheckBox.checked) {
         encpCard.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
+        encpRow(rowClassName);
     } else {
         encpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
+        removeRowByClass(rowClassName);
     }
 });
 
-function tableBuilder(data, netAmount) {
+function tableBuilder(data, netAmount, rowClass) {
     const packageName = Object.keys(data)[0];
     const trPackageName = document.createElement("tr");
     const tdPackageName = document.createElement("td");
@@ -175,7 +180,7 @@ function tableBuilder(data, netAmount) {
     }
 
     tdPackageName.classList.add("package-name");
-    trPackageName.classList.add(packageType.toLowerCase());
+    trPackageName.classList.add(packageType.toLowerCase(), rowClass);
 
     tbody.appendChild(trPackageName);
 
@@ -192,6 +197,8 @@ function tableBuilder(data, netAmount) {
         tdItemNet.classList.add("item-net");
 
         tdItemName.textContent = item.name;
+
+        trItem.classList.add(rowClass);
         trItem.appendChild(tdItemName);
 
         if (item.professionals) {
@@ -205,12 +212,12 @@ function tableBuilder(data, netAmount) {
                     const tdProfPhil = document.createElement("td");
                     const tdProfNet = document.createElement("td");
 
-                    trProf.classList.add("professional-row");
+                    trProf.classList.add("professional-row", rowClass);
                     tdProfName.classList.add("item-name");
 
-                    let net = Number(prof.amount) - Number(prof.philHealth);
-                    console.log(net);
-                    // netAmount += net;
+                    const net = Number(prof.amount) - Number(prof.philHealth);
+                    netAmount += net;
+                    // console.log("Package Name: " + packageName + " Amount: " + netAmount);
 
                     tdProfName.textContent = prof.name;
                     tdProfAmount.textContent = numberFormat(prof.amount);
@@ -230,9 +237,9 @@ function tableBuilder(data, netAmount) {
         }
 
         if (item.amount && item.philHealth) {
-            let net = Number(item.amount) - Number(item.philHealth)
-            console.log(net);
-            // netAmount += net;
+            const net = Number(item.amount) - Number(item.philHealth)
+            netAmount += net;
+            // console.log("Package Name: " + packageName + " Amount: " + netAmount);
 
             tdItemAmount.textContent = numberFormat(item.amount);
             tdItemPhil.textContent = numberFormat(item.philHealth);
@@ -247,6 +254,14 @@ function tableBuilder(data, netAmount) {
     });
 }
 
+function removeRowByClass (rowClassName) {
+    tbody.querySelectorAll("tr."+rowClassName).forEach(tr => {
+            tr.remove();
+    })
+}
+
 function numberFormat(amount) {
     return amount.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
+
+
