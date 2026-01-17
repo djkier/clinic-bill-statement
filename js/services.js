@@ -13,7 +13,8 @@ const mcpData = {
                     amount: 0,
                     philHealth: 6240
                 }
-            ]
+            ],
+            philHealth: 6240
         },
         {
             name: "Nursing Service Fee",
@@ -195,12 +196,6 @@ addServiceBtn.addEventListener("click", e => {
     createServiceCard(cardIdNum);
     serviceRowTable("services");
 
-    //testing array from dictionary
-    const arr = newServiceData[serviceFirstKey];
-
-    arr.forEach(item => {
-        console.log (`id: ${item.id}, desc:${item.description}, quantity:${item.quantity}, unit price: ${item.unitPrice}, net: ${item.netAmount}`);
-    })
 })
 
 // mcpRow();
@@ -221,6 +216,7 @@ function encpRow(rowClassName) {
 }
 
 function tableBuilder(data, rowClass) {
+    
     const packageName = Object.keys(data)[0];
     const trPackageName = document.createElement("tr");
     const tdPackageName = document.createElement("td");
@@ -257,6 +253,7 @@ function tableBuilder(data, rowClass) {
         trItem.appendChild(tdItemName);
 
         if (item.professionals) {
+            trItem.append(tdItemAmount, tdItemPhil, tdItemNet);
             tbody.appendChild(trItem);
 
             item.professionals.forEach(prof => {
@@ -550,8 +547,18 @@ function createTdWithClass(tdClassName) {
 }
 
 function deleteEquivRow(idNum) {
+    //delete row
     const serviceRow = document.querySelector(`#service-${idNum}`);
     serviceRow.remove();
+
+    //delete service header if there is no service
+    const serviceRowCount = document.querySelectorAll(".services");
+    if (serviceRowCount.length === 1) {
+        serviceRowCount.forEach(item => item.remove());
+    }
+    
+    //default
+    trCount() < 1 && defaultRow();
 }
 
 
