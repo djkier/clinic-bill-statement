@@ -146,6 +146,8 @@ function defaultRow() {
 
 }
 
+// mcp professionals should deduct only on 6240 as a whole not per each professional
+
 mcpCheckBox.addEventListener("change", e => {
     const rowClassName = "mcp";
     if (mcpCheckBox.checked) {
