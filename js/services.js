@@ -128,7 +128,7 @@ const addServiceCard = document.querySelector("#additional-generated-services");
 
 const trCount = () => tbody.querySelectorAll("tr").length;
 // default
-const noEntryDefault = "&nbsp;&nbsp;&#8212;";
+const nonEntry = "&nbsp;&nbsp;&#8212;";
 profFeeCard.style.display = "none";
 
 defaultRow();
@@ -459,7 +459,23 @@ function inputListener(inputTag, modifier, totalTag, parentTag, idNum) {
                 if (modifier !== "description") {
                     item.netAmount = item.quantity * item.unitPrice;
                     totalTag.textContent = numberFormat(item.netAmount);
+
+                    const tdItemAmount = document.querySelector(`#service-${item.id} .item-amount`);
+                    const tdNetAmount = document.querySelector(`#service-${item.id} .item-net`);
+                    tdItemAmount.textContent = numberFormat(item.netAmount);
+                    tdNetAmount.textContent = numberFormat(item.netAmount);
                 }
+
+                // row ui
+                const tdItemName = document.querySelector(`#service-${item.id} .item-name`);
+                tdItemName.innerHTML = `${item.description} x${item.quantity} x &#8369;${numberFormat(item.unitPrice)}`;
+                
+
+                // if (modifier === "quantity") {
+                    
+                // }
+
+
 
                 if (item.description && item.quantity > 0 && item.unitPrice > 0) {
                     parentTag.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
@@ -477,6 +493,7 @@ function inputListener(inputTag, modifier, totalTag, parentTag, idNum) {
 function deleteParent(imgTag, parentTag, idNum) {
     imgTag.addEventListener("click", e => {
         newServiceData[serviceFirstKey] = newServiceData[serviceFirstKey].filter(item => item.id !== Number(idNum));
+        deleteEquivRow(idNum);
         parentTag.remove();
     })
 }
@@ -514,7 +531,7 @@ function serviceRowTable(rowClassName) {
             trItem.id = `service-${item.id}`;
 
 
-            tdItemDesc.innerHTML = noEntryDefault;
+            tdItemDesc.innerHTML = nonEntry;
             tdItemAmount.textContent = numberFormat(item.unitPrice);
             tdItemPhil.textContent = numberFormat(0);
             tdItemNet.textContent = numberFormat(item.netAmount);
@@ -530,6 +547,11 @@ function createTdWithClass(tdClassName) {
     td.className = tdClassName;
 
     return td;
+}
+
+function deleteEquivRow(idNum) {
+    const serviceRow = document.querySelector(`#service-${idNum}`);
+    serviceRow.remove();
 }
 
 
