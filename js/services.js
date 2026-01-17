@@ -193,6 +193,7 @@ addServiceBtn.addEventListener("click", e => {
     addNewEntry(cardIdNum);
     createServiceCard(cardIdNum);
 
+    //testing array from dictionary
     const arr = newServiceData[serviceFirstKey];
 
     arr.forEach(item => {
@@ -402,30 +403,47 @@ function createServiceCard(serviceNum) {
     labelPrice.appendChild(inputPrice);
     divQuantityPrice.append(labelQuantity, labelPrice);
 
-    pTotal.innerHTML = "Total: &#8369;";
+    pTotal.innerHTML = "Total: &#8369; ";
     pTotal.appendChild(spanTotal);
     imgDelete.src = "./assets/trash.svg";
     imgDelete.alt = "delete button"
     divTotalDelete.append(pTotal, imgDelete);
 
-    
-
     // adding tags
     divParent.append(labelDesc, divQuantityPrice, divTotalDelete);
 
     //listeners
-    // imgDelete.addEventListener("click", divParent.remove);
-    deleteParent(imgDelete, divParent);
+    inputListener(inputDesc, "description", spanTotal, serviceNum);
+    inputListener(inputQuantity, "quantity", spanTotal, serviceNum);
+    inputListener(inputPrice, "unitPrice", spanTotal, serviceNum);
+    
+    deleteParent(imgDelete, divParent, serviceNum);
 
     addServiceCard.appendChild(divParent);
 
 }
 
-function deleteParent(imgTag, parentTag) {
-    imgTag.addEventListener("click", e => {
-        const idNum = parentTag.id.split("-")[1];
-        newServiceData[serviceFirstKey] = newServiceData[serviceFirstKey].filter(item => item.id !== Number(idNum));
+function inputListener(inputTag, modifier, totalTag, idNum) {
+    inputTag.addEventListener("input", e => {
+        newServiceData[serviceFirstKey].forEach(item => {
+            if (item.id === idNum) {
+                item[modifier] = modifier === "description" ? e.target.value : Number(e.target.value);
+                
+                if (modifier !== "description") {
+                    item.netAmount = item.quantity * item.unitPrice;
+                    totalTag.textContent = numberFormat(item.netAmount);
+                }
+                
+                
+                console.log (`id: ${item.id}, desc:${item.description}, quantity:${item.quantity}, unit price: ${item.unitPrice}, net: ${item.netAmount}`);
+            }
+        })
+    });
+}
 
+function deleteParent(imgTag, parentTag, idNum) {
+    imgTag.addEventListener("click", e => {
+        newServiceData[serviceFirstKey] = newServiceData[serviceFirstKey].filter(item => item.id !== Number(idNum));
         parentTag.remove();
     })
 }
@@ -442,5 +460,4 @@ function addNewEntry(serviceNum) {
     }
 
     newServiceData[serviceFirstKey].push(service);
-
 }

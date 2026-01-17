@@ -210,6 +210,12 @@ input[type="checkbox"] {
     row-gap: 1.5rem;
 }
 
+#additional-generated-services {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
 .additional-header {
     display: flex;
     justify-content: space-between;
