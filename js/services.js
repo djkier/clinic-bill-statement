@@ -114,6 +114,8 @@ const encpCard = document.querySelector("#encp");
 const encpCheckBox = document.querySelector("#encp-box");
 const tbody = document.querySelector("tbody");
 
+const addServiceBtn = document.querySelector("#add-service-btn");
+
 const trCount = () => tbody.querySelectorAll("tr").length;
 // default
 profFeeCard.style.display = "none";
@@ -164,15 +166,19 @@ encpCheckBox.addEventListener("change", e => {
         encpRow(rowClassName);
         
         //tester for subtotal
-        console.log(`Rual Net: ${subTotalItem.rualNetAmount.value}`);
-        console.log(`Rual Net: ${subTotalItem.rualNetAmount.isIncluded ? subTotalItem.rualNetAmount.value : 0}`);
-        console.log(`Dalire Net: ${subTotalItem.dalireNetAmount.isIncluded ? subTotalItem.dalireNetAmount.value : 0}` );
+        // console.log(`Rual Net: ${subTotalItem.rualNetAmount.value}`);
+        // console.log(`Rual Net: ${subTotalItem.rualNetAmount.isIncluded ? subTotalItem.rualNetAmount.value : 0}`);
+        // console.log(`Dalire Net: ${subTotalItem.dalireNetAmount.isIncluded ? subTotalItem.dalireNetAmount.value : 0}` );
     } else {
         encpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
         removeRowByClass(rowClassName);
         trCount() < 1 && defaultRow();
     }
 });
+
+addServiceBtn.addEventListener("click", e => {
+    console.log("Hello World");
+})
 
 // mcpRow();
 function mcpRow(rowClassName) {
@@ -329,5 +335,65 @@ function handleInputToPreview(profInput, previewAmount, previewNet, netAmount) {
     netAmount.value = Number(profInput.value) - 6240;
     previewAmount.textContent = numberFormat(netAmount.value + 6240);
     previewNet.textContent = numberFormat(netAmount.value);
+}
+
+const addServiceCard = document.querySelector("#additional-generated-services");
+addServiceCard.appendChild(createServiceCard(0));
+
+
+function createServiceCard(serviceNum) {
+    const divParent = document.createElement("div");
+    const labelDesc = document.createElement("label");
+    const inputDesc = document.createElement("input");
+
+    const divQuantityPrice = document.createElement("div");
+    const labelQuantity = document.createElement("label");
+    const inputQuantity = document.createElement("input");
+    const labelPrice = document.createElement("label");
+    const inputPrice = document.createElement("input");
+
+    const divTotalDelete = document.createElement("div");
+    const pTotal = document.createElement("p");
+    const spanTotal = document.createElement("span");
+    const imgDelete = document.createElement ("img");
+
+    // type, class and id delegation
+    divParent.className = "service-card";
+    divParent.id = serviceNum;
+    
+    inputDesc.className = "desc";
+    inputDesc.type = "text";
+
+    divQuantityPrice.className = "quantity-unit-price";
+    inputQuantity.className = "quantity";
+    inputQuantity.type = "number";
+    inputPrice.className = "unit-price";
+    inputPrice.type = "number";
+
+    divTotalDelete.className = "total-delete-button";
+    spanTotal.className = "subtotal-per-card";
+    imgDelete.className = "delete-button";
+
+    //context delegation
+    labelDesc.textContent = "Description";
+    labelDesc.appendChild(inputDesc);
+
+    labelQuantity.textContent = "Quantity";
+    labelQuantity.appendChild(inputQuantity);
+    labelPrice.textContent = "Unit Price";
+    labelPrice.appendChild(inputPrice);
+    divQuantityPrice.append(labelQuantity, labelPrice);
+
+    pTotal.innerHTML = "Total: &#8369;";
+    pTotal.appendChild(spanTotal);
+    imgDelete.src = "./assets/trash.svg";
+    imgDelete.alt = "delete button"
+    divTotalDelete.append(pTotal, imgDelete);
+
+    // adding tags
+    divParent.append(labelDesc, divQuantityPrice, divTotalDelete);
+
+    return divParent;
+
 }
 

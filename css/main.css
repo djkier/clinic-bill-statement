@@ -228,7 +228,12 @@ img {
     font-size: 0.9rem;
     font-weight: 600;
     column-gap: 4px;
-    
+}
+
+#add-service-btn:hover {
+    background-color: oklch(94.158% 0.02414 254.032);
+    cursor: pointer;
+    transform: scale(1.02);
 }
 
 .service-card {
