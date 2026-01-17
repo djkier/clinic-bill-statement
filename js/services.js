@@ -86,9 +86,18 @@ const encpData = {
 };
 const newServiceData = {
     "Additional Services / Medications" : [
-
-    ]
+        // {
+        //     id: 1,
+        //     description: "xxx",
+        //     quantity: 1,
+        //     unitPrice: 123,
+        //     netAmount: 123
+        // }
+    ],
+    serviceCounter: 0,
 }
+const serviceFirstKey = Object.keys(newServiceData)[0];
+
 
 const subTotalItem = {
     rualNetAmount: {
@@ -115,6 +124,7 @@ const encpCheckBox = document.querySelector("#encp-box");
 const tbody = document.querySelector("tbody");
 
 const addServiceBtn = document.querySelector("#add-service-btn");
+const addServiceCard = document.querySelector("#additional-generated-services");
 
 const trCount = () => tbody.querySelectorAll("tr").length;
 // default
@@ -177,7 +187,17 @@ encpCheckBox.addEventListener("change", e => {
 });
 
 addServiceBtn.addEventListener("click", e => {
-    console.log("Hello World");
+    const cardIdNum = newServiceData.serviceCounter;
+    newServiceData.serviceCounter ++;
+
+    addNewEntry(cardIdNum);
+    createServiceCard(cardIdNum);
+
+    const arr = newServiceData[serviceFirstKey];
+
+    arr.forEach(item => {
+        console.log (`id: ${item.id}, desc:${item.description}, quantity:${item.quantity}, unit price: ${item.unitPrice}, net: ${item.netAmount}`);
+    })
 })
 
 // mcpRow();
@@ -337,10 +357,8 @@ function handleInputToPreview(profInput, previewAmount, previewNet, netAmount) {
     previewNet.textContent = numberFormat(netAmount.value);
 }
 
-const addServiceCard = document.querySelector("#additional-generated-services");
-addServiceCard.appendChild(createServiceCard(0));
 
-
+//service card input ui
 function createServiceCard(serviceNum) {
     const divParent = document.createElement("div");
     const labelDesc = document.createElement("label");
@@ -359,7 +377,7 @@ function createServiceCard(serviceNum) {
 
     // type, class and id delegation
     divParent.className = "service-card";
-    divParent.id = serviceNum;
+    divParent.id = `card-${serviceNum}`;
     
     inputDesc.className = "desc";
     inputDesc.type = "text";
@@ -390,10 +408,39 @@ function createServiceCard(serviceNum) {
     imgDelete.alt = "delete button"
     divTotalDelete.append(pTotal, imgDelete);
 
+    
+
     // adding tags
     divParent.append(labelDesc, divQuantityPrice, divTotalDelete);
 
-    return divParent;
+    //listeners
+    // imgDelete.addEventListener("click", divParent.remove);
+    deleteParent(imgDelete, divParent);
+
+    addServiceCard.appendChild(divParent);
 
 }
 
+function deleteParent(imgTag, parentTag) {
+    imgTag.addEventListener("click", e => {
+        const idNum = parentTag.id.split("-")[1];
+        newServiceData[serviceFirstKey] = newServiceData[serviceFirstKey].filter(item => item.id !== Number(idNum));
+
+        parentTag.remove();
+    })
+}
+
+
+//service card add entry on the dictionary
+function addNewEntry(serviceNum) { 
+    const service = {
+        id: serviceNum,
+        description: "",
+        quantity: 0,
+        unitPrice: 0,
+        netAmount: 0
+    }
+
+    newServiceData[serviceFirstKey].push(service);
+
+}
