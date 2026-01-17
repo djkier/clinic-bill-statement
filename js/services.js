@@ -128,6 +128,7 @@ const addServiceCard = document.querySelector("#additional-generated-services");
 
 const trCount = () => tbody.querySelectorAll("tr").length;
 // default
+const noEntryDefault = "&nbsp;&nbsp;&#8212;";
 profFeeCard.style.display = "none";
 
 defaultRow();
@@ -192,6 +193,7 @@ addServiceBtn.addEventListener("click", e => {
 
     addNewEntry(cardIdNum);
     createServiceCard(cardIdNum);
+    serviceRowTable("services");
 
     //testing array from dictionary
     const arr = newServiceData[serviceFirstKey];
@@ -366,6 +368,18 @@ function handleInputToPreview(profInput, previewAmount, previewNet, netAmount) {
     previewNet.textContent = numberFormat(netAmount.value);
 }
 
+//service card add entry on the dictionary
+function addNewEntry(serviceNum) { 
+    const service = {
+        id: serviceNum,
+        description: "",
+        quantity: 0,
+        unitPrice: 0,
+        netAmount: 0
+    }
+
+    newServiceData[serviceFirstKey].push(service);
+}
 
 //service card input ui
 function createServiceCard(serviceNum) {
@@ -467,16 +481,59 @@ function deleteParent(imgTag, parentTag, idNum) {
     })
 }
 
-
-//service card add entry on the dictionary
-function addNewEntry(serviceNum) { 
-    const service = {
-        id: serviceNum,
-        description: "",
-        quantity: 0,
-        unitPrice: 0,
-        netAmount: 0
+//service row builder
+function serviceRowTable(rowClassName) {
+    if (trCount() === 1) {
+        tbody.innerHTML = "";
     }
 
-    newServiceData[serviceFirstKey].push(service);
+    if (newServiceData[serviceFirstKey].length <= 1) {
+        const trPackageName = document.createElement("tr");
+        trPackageName.className = rowClassName;
+        for (let i = 0; i < 4; i++) {
+            const tdPackage = document.createElement("td");
+            if (i === 0) {
+                tdPackage.textContent = serviceFirstKey;
+                tdPackage.className = "package-name";
+            }
+            trPackageName.appendChild(tdPackage);
+        }
+        tbody.appendChild(trPackageName);
+    }
+
+    newServiceData[serviceFirstKey].forEach(item => {
+        const isItemRowExisting = document.querySelector(`#service-${item.id}`) !== null;
+        if (!isItemRowExisting) {
+            const trItem = document.createElement("tr");
+            const tdItemDesc = createTdWithClass("item-name");
+            const tdItemAmount = createTdWithClass("item-amount");
+            const tdItemPhil = createTdWithClass("item-phil");
+            const tdItemNet = createTdWithClass("item-net");
+
+            trItem.className = rowClassName;
+            trItem.id = `service-${item.id}`;
+
+
+            tdItemDesc.innerHTML = noEntryDefault;
+            tdItemAmount.textContent = numberFormat(item.unitPrice);
+            tdItemPhil.textContent = numberFormat(0);
+            tdItemNet.textContent = numberFormat(item.netAmount);
+
+            trItem.append(tdItemDesc, tdItemAmount, tdItemPhil, tdItemNet);
+            tbody.appendChild(trItem);
+            }
+    }); 
 }
+
+function createTdWithClass(tdClassName) {
+    const td = document.createElement("td");
+    td.className = tdClassName;
+
+    return td;
+}
+
+
+
+
+
+
