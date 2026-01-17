@@ -323,6 +323,14 @@ function numberFormat(amount) {
     return amount.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+function textTrimmerFirstCap(str) {
+    str = str.trim();
+    
+    if (!str) return "";
+
+    return str[0].toUpperCase() + str.slice(1);
+}
+
 function checkboxInputEvent(profCheckBox, profName, netAmount) {
     const profRow = document.querySelector(`#${profName}-row`);
     const profInput = document.querySelector(`#${profName}-pf`);
@@ -404,6 +412,7 @@ function createServiceCard(serviceNum) {
     divQuantityPrice.append(labelQuantity, labelPrice);
 
     pTotal.innerHTML = "Total: &#8369; ";
+    spanTotal.textContent = numberFormat(0);
     pTotal.appendChild(spanTotal);
     imgDelete.src = "./assets/trash.svg";
     imgDelete.alt = "delete button"
@@ -413,9 +422,9 @@ function createServiceCard(serviceNum) {
     divParent.append(labelDesc, divQuantityPrice, divTotalDelete);
 
     //listeners
-    inputListener(inputDesc, "description", spanTotal, serviceNum);
-    inputListener(inputQuantity, "quantity", spanTotal, serviceNum);
-    inputListener(inputPrice, "unitPrice", spanTotal, serviceNum);
+    inputListener(inputDesc, "description", spanTotal, divParent, serviceNum);
+    inputListener(inputQuantity, "quantity", spanTotal, divParent, serviceNum);
+    inputListener(inputPrice, "unitPrice", spanTotal, divParent, serviceNum);
     
     deleteParent(imgDelete, divParent, serviceNum);
 
@@ -423,15 +432,25 @@ function createServiceCard(serviceNum) {
 
 }
 
-function inputListener(inputTag, modifier, totalTag, idNum) {
+function inputListener(inputTag, modifier, totalTag, parentTag, idNum) {
     inputTag.addEventListener("input", e => {
+        if (modifier !== "description" && Number(e.target.value) < 0) {
+            e.target.value = 0;
+        }
+
         newServiceData[serviceFirstKey].forEach(item => {
             if (item.id === idNum) {
-                item[modifier] = modifier === "description" ? e.target.value : Number(e.target.value);
+                item[modifier] = modifier === "description" ? textTrimmerFirstCap(e.target.value) : Number(e.target.value);
                 
                 if (modifier !== "description") {
                     item.netAmount = item.quantity * item.unitPrice;
                     totalTag.textContent = numberFormat(item.netAmount);
+                }
+
+                if (item.description && item.quantity > 0 && item.unitPrice > 0) {
+                    parentTag.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
+                } else {
+                    parentTag.style.backgroundColor = "rgb(238, 238, 238)";
                 }
                 
                 
