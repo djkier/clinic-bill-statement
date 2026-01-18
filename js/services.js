@@ -14,7 +14,9 @@ const mcpData = {
                     philHealth: 6240
                 }
             ],
+            amount: 0,
             philHealth: 6240
+
         },
         {
             name: "Nursing Service Fee",
@@ -44,7 +46,8 @@ const mcpData = {
             philHealth: 1360
 
         }, 
-    ]
+    ],
+    subTotal: 0
 };
 const encpData = {
     "Expanded Newborn Care Package (ENCP)" : [
@@ -83,7 +86,8 @@ const encpData = {
             amount: 978,
             philHealth: 978
         }
-    ]
+    ],
+    subTotal: 0
 };
 const newServiceData = {
     "Additional Services / Medications" : [
@@ -96,24 +100,10 @@ const newServiceData = {
         // }
     ],
     serviceCounter: 0,
+    subTotal: 0
 }
 const serviceFirstKey = Object.keys(newServiceData)[0];
 
-
-const subTotalItem = {
-    rualNetAmount: {
-        value: 0,
-        isIncluded: false
-    },
-    dalireNetAmount : {
-        value: 0,
-        isIncluded: false
-    },
-    serviceNetAmount : {
-        value: 0,
-        isIncluded: false
-    }
-}
 
 const mcpCard = document.querySelector("#mcp");
 const mcpCheckBox = document.querySelector("#mcp-box");
@@ -148,24 +138,28 @@ function defaultRow() {
 
 // mcp professionals should deduct only on 6240 as a whole not per each professional
 
+const blueColor = "oklch(94.158% 0.02414 254.032)";
+const darkColor = "oklch(0.985 0.002 247.839)";
+
 mcpCheckBox.addEventListener("change", e => {
     const rowClassName = "mcp";
     if (mcpCheckBox.checked) {
-        mcpCard.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
+        mcpCard.style.backgroundColor = blueColor;
         profFeeCard.style.display = "flex";
-        mcpRow(rowClassName);
+        
+        tableBuilder(mcpData, rowClassName);
 
         //professional checkbox
-        checkboxInputEvent(rualCheckBox, "rual", subTotalItem.rualNetAmount);
-        checkboxInputEvent(dalireCheckBox, "dalire", subTotalItem.dalireNetAmount);
+        // checkboxInputEvent(rualCheckBox, "rual", subTotalItem.rualNetAmount);
+        // checkboxInputEvent(dalireCheckBox, "dalire", subTotalItem.dalireNetAmount);
     } else {
-        mcpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
+        mcpCard.style.backgroundColor = darkColor;
         profFeeCard.style.display = "none";
          
         rualCheckBox.checked = false;
         dalireCheckBox.checked = false;
-        subTotalItem.rualNetAmount.isIncluded = false;
-        subTotalItem.dalireNetAmount.isIncluded = false;
+        // subTotalItem.rualNetAmount.isIncluded = false;
+        // subTotalItem.dalireNetAmount.isIncluded = false;
         
         removeRowByClass(rowClassName);
         trCount() < 1 && defaultRow();
@@ -176,15 +170,11 @@ mcpCheckBox.addEventListener("change", e => {
 encpCheckBox.addEventListener("change", e => {
     const rowClassName = "encp";
     if (encpCheckBox.checked) {
-        encpCard.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
-        encpRow(rowClassName);
+        encpCard.style.backgroundColor = blueColor;
+        tableBuilder(encpData, rowClassName);
         
-        //tester for subtotal
-        // console.log(`Rual Net: ${subTotalItem.rualNetAmount.value}`);
-        // console.log(`Rual Net: ${subTotalItem.rualNetAmount.isIncluded ? subTotalItem.rualNetAmount.value : 0}`);
-        // console.log(`Dalire Net: ${subTotalItem.dalireNetAmount.isIncluded ? subTotalItem.dalireNetAmount.value : 0}` );
     } else {
-        encpCard.style.backgroundColor = "oklch(0.985 0.002 247.839)";
+        encpCard.style.backgroundColor = darkColor;
         removeRowByClass(rowClassName);
         trCount() < 1 && defaultRow();
     }
@@ -200,117 +190,44 @@ addServiceBtn.addEventListener("click", e => {
 
 })
 
-// mcpRow();
-function mcpRow(rowClassName) {
+function tableBuilder(data, rowClassName) {
     if (trCount() === 1) {
         tbody.innerHTML = "";
     }
-    tableBuilder(mcpData, rowClassName);
-}
-
-// encpRow();
-function encpRow(rowClassName) {
-    if (trCount() === 1) {
-        tbody.innerHTML = "";
-    }
-
-    tableBuilder(encpData, rowClassName);
-}
-
-function tableBuilder(data, rowClass) {
     
+    //package name row
     const packageName = Object.keys(data)[0];
     const trPackageName = document.createElement("tr");
-    const tdPackageName = document.createElement("td");
-    const packageType = packageName.split(" ")[0];
-
-    tdPackageName.textContent = packageName;
-    trPackageName.appendChild(tdPackageName);
-
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
         const tdRowPackageName = document.createElement("td");
+        if (i === 0) {
+            tdRowPackageName.textContent = packageName;
+            tdRowPackageName.classList.add("package-name");
+        }
         trPackageName.appendChild(tdRowPackageName);
     }
-
-    tdPackageName.classList.add("package-name");
-    trPackageName.classList.add(packageType.toLowerCase(), rowClass);
-
+    trPackageName.classList.add(packageName.split(" ")[0].toLowerCase(), rowClassName);
     tbody.appendChild(trPackageName);
 
+    //items from the package
     data[packageName].forEach(item => {
         const trItem = document.createElement("tr");
-        const tdItemName = document.createElement("td");
-        const tdItemAmount = document.createElement("td");
-        const tdItemPhil = document.createElement("td");
-        const tdItemNet = document.createElement("td");
-
-        tdItemName.classList.add("item-name");
-        tdItemAmount.classList.add("item-amount");
-        tdItemPhil.classList.add("item-phil");
-        tdItemNet.classList.add("item-net");
+        const tdItemName = createTdWithClass("item-name");
+        const tdItemAmount = createTdWithClass("item-amount");
+        const tdItemPhil = createTdWithClass("item-phil");
+        const tdItemNet = createTdWithClass("item-net")
+        trItem.classList.add(rowClassName);
 
         tdItemName.textContent = item.name;
+        tdItemAmount.textContent = numberFormat(item.amount);
+        tdItemPhil.textContent = numberFormat(item.philHealth);
+        tdItemNet.textContent = numberFormat(Number(item.amount) - Number(item.philHealth));
 
-        trItem.classList.add(rowClass);
-        trItem.appendChild(tdItemName);
-
-        if (item.professionals) {
-            trItem.append(tdItemAmount, tdItemPhil, tdItemNet);
-            tbody.appendChild(trItem);
-
-            item.professionals.forEach(prof => {
-                const trProf = document.createElement("tr");
-                const tdProfName = document.createElement("td");
-                const tdProfAmount = document.createElement("td");
-                const tdProfPhil = document.createElement("td");
-                const tdProfNet = document.createElement("td");
-
-                const isLiza = prof.name.split(" ")[0].toLowerCase() === "liza";
-                trProf.id = isLiza ? "rual-row" : "dalire-row";
-
-
-                trProf.classList.add("professional-row", rowClass);
-                
-
-                tdProfName.classList.add("item-name");
-                tdProfAmount.classList.add("item-amount");
-                tdProfPhil.classList.add("item-phil");
-                tdProfNet.classList.add("item-net");
-
-                const net = Number(prof.amount) - Number(prof.philHealth);
-
-                tdProfName.textContent = prof.name;
-                tdProfAmount.textContent = numberFormat(prof.amount);
-                tdProfPhil.textContent = numberFormat(prof.philHealth);
-                tdProfNet.textContent = numberFormat(net);
-
-                trProf.appendChild(tdProfName);
-                trProf.appendChild(tdProfAmount);
-                trProf.appendChild(tdProfPhil);
-                trProf.appendChild(tdProfNet);
-
-                trProf.style.display = Number(prof.amount) < 1 ? "none" : "table-row"; 
-                
-                tbody.appendChild(trProf);
-                
-            });
-
-            
-        }
-
-        if (item.amount && item.philHealth) {
-            const net = Number(item.amount) - Number(item.philHealth);
-
-            tdItemAmount.textContent = numberFormat(item.amount);
-            tdItemPhil.textContent = numberFormat(item.philHealth);
-            tdItemNet.textContent = numberFormat(net);
-
-            trItem.appendChild(tdItemAmount);
-            trItem.appendChild(tdItemPhil);
-            trItem.appendChild(tdItemNet);
-
-            tbody.appendChild(trItem);
-        }
+        //hide the amount for the professional row
+        item.professionals && tdItemAmount.classList.add("hidden-td")
+  
+        trItem.append(tdItemName, tdItemAmount, tdItemPhil, tdItemNet);
+        tbody.appendChild(trItem);
     });
 }
 
@@ -483,7 +400,7 @@ function inputListener(inputTag, modifier, totalTag, parentTag, idNum) {
 }
 
 function deleteParent(imgTag, parentTag, idNum) {
-    imgTag.addEventListener("click", e => {
+    imgTag.addEventListener("click", () => {
         newServiceData[serviceFirstKey] = newServiceData[serviceFirstKey].filter(item => item.id !== Number(idNum));
         deleteEquivRow(idNum);
         parentTag.remove();

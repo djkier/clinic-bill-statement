@@ -438,6 +438,9 @@ tbody tr {
    border-bottom: 1px solid rgba(0, 0, 0, 0.15); 
 }
 
+.hidden-td {
+    visibility: hidden;
+}
 .professional-row .item-name {
     padding-left: 4rem;
     font-weight: 600;
