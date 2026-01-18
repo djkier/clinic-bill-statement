@@ -106,6 +106,8 @@ const serviceFirstKey = Object.keys(newServiceData)[0];
 const mcpFirstKey = Object.keys(mcpData)[0];
 const profArr = mcpData[mcpFirstKey][0].professionals;
 
+const profCheckBox = document.querySelectorAll(`.pf input[type="checkbox"]`);
+const profInput = document.querySelectorAll(`.pf input[type="number"]`);
 const mcpCard = document.querySelector("#mcp");
 const mcpCheckBox = document.querySelector("#mcp-box");
 const profFeeCard = document.querySelector("#professional-fee");
@@ -140,6 +142,8 @@ function defaultRow() {
 }
 
 // mcp professionals should deduct only on 6240 as a whole not per each professional
+checkboxInputEvent(rualCheckBox, "rual");
+checkboxInputEvent(dalireCheckBox, "dalire");
 
 mcpCheckBox.addEventListener("change", e => {
     const rowClassName = "mcp";
@@ -150,18 +154,31 @@ mcpCheckBox.addEventListener("change", e => {
         tableBuilder(mcpData, rowClassName);
 
         //professional checkbox
-        checkboxInputEvent(rualCheckBox, "rual");
-        checkboxInputEvent(dalireCheckBox, "dalire");
+        
     } else {
         mcpCard.style.backgroundColor = darkColor;
         profFeeCard.style.display = "none";
          
-        rualCheckBox.checked = false;
-        dalireCheckBox.checked = false;
-        // subTotalItem.rualNetAmount.isIncluded = false;
-        // subTotalItem.dalireNetAmount.isIncluded = false;
         
+        profCheckBox.forEach(node => {
+            node.checked = false;
+        })
+
+        profInput.forEach(node => {
+            node.disabled = true;
+            node.value = "";
+        })
+
+        profArr.forEach(prof => {
+            prof.amount = 0;
+        })
+
+        updateProfAmount();
+
+        removeRowByClass("prof-fee");
         removeRowByClass(rowClassName);
+        
+
         trCount() < 1 && defaultRow();
 
     }
@@ -261,10 +278,13 @@ function textTrimmerFirstCap(str) {
 }
 
 function checkboxInputEvent(profCheckBox, profName) {
+    
+
     const inputProf = document.querySelector(`#${profName}-pf`);
     const [trProf, tdProfName, tdProfAmount] = trFactory();
     trProf.append(tdProfName, tdProfAmount);
-    trProf.classList.add("professional-row", "prof-fee");
+    trProf.id = `${profName}-row`
+    trProf.classList.add("prof-fee");
 
     profCheckBox.addEventListener("change", e => {
         if (e.target.checked) {
@@ -278,7 +298,6 @@ function checkboxInputEvent(profCheckBox, profName) {
             updateProfAmount();
 
             trProf.remove();
-            updateProfAmount();
 
         }
     });
@@ -423,6 +442,8 @@ function inputListener(inputTag, modifier, totalTag, parentTag, idNum) {
                 
                 if (modifier !== "description") {
                     item.netAmount = item.quantity * item.unitPrice;
+                    
+
                     totalTag.textContent = numberFormat(item.netAmount);
 
                     const tdItemAmount = document.querySelector(`#service-${item.id} .item-amount`);
@@ -436,13 +457,10 @@ function inputListener(inputTag, modifier, totalTag, parentTag, idNum) {
                 tdItemName.innerHTML = `${item.description} x${item.quantity} x &#8369;${numberFormat(item.unitPrice)}`;
                 
                 if (item.description && item.quantity > 0 && item.unitPrice > 0) {
-                    parentTag.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
+                    parentTag.style.backgroundColor = blueColor;
                 } else {
-                    parentTag.style.backgroundColor = "rgb(238, 238, 238)";
+                    parentTag.style.backgroundColor = darkColor;
                 }
-                
-                
-                console.log (`id: ${item.id}, desc:${item.description}, quantity:${item.quantity}, unit price: ${item.unitPrice}, net: ${item.netAmount}`);
             }
         })
     });

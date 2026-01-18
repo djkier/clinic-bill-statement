@@ -443,7 +443,7 @@ tbody tr {
     /* font-weight: 600; */
 }
 
-.professional-row .item-name {
+#rual-row .item-name, #dalire-row .item-name {
     padding-left: 4rem;
     font-weight: 600;
 }
