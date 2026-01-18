@@ -498,7 +498,7 @@ function serviceRowTable(rowClassName) {
 
     if (newServiceData[serviceFirstKey].length <= 1) {
         const trPackageName = document.createElement("tr");
-        trPackageName.className = rowClassName;
+        trPackageName.classList.add(rowClassName, serviceFirstKey.split(" ")[0].toLowerCase());
         for (let i = 0; i < 4; i++) {
             const tdPackage = document.createElement("td");
             if (i === 0) {

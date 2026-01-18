@@ -467,6 +467,15 @@ tbody tr {
     color: oklch(43.091% 0.17111 265.618);
 }
 
+.additional {
+    background-color: oklch(91.505% 0.05366 308.316);
+    border-bottom: 2px solid oklch(79.436% 0.13218 306.029);
+}
+
+.additional .package-name {
+    color: rgb(170, 4, 162);
+}
+
 /* 
 TOTAL AMOUNT 
 */
@@ -575,7 +584,7 @@ PRINT PREVIEW
         border-bottom: 1px solid oklch(55.208% 0.00006 271.152);
     }
 
-    .expanded {
+    .expanded, .additional {
         border-top: 2px solid oklch(55.208% 0.00006 271.152);
         border-bottom: 1px solid oklch(55.208% 0.00006 271.152);
     }
