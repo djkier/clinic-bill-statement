@@ -116,6 +116,8 @@ const dalireCheckBox = document.querySelector("#dalire-checkbox");
 const encpCard = document.querySelector("#encp");
 const encpCheckBox = document.querySelector("#encp-box");
 const tbody = document.querySelector("tbody");
+const subTotalP = document.querySelector("#subtotal p:nth-of-type(2)");
+
 
 const addServiceBtn = document.querySelector("#add-service-btn");
 const addServiceCard = document.querySelector("#additional-generated-services");
@@ -152,6 +154,7 @@ mcpCheckBox.addEventListener("change", e => {
         profFeeCard.style.display = "flex";
 
         tableBuilder(mcpData, rowClassName);
+        updateProfAmount();
 
         //professional checkbox
         
@@ -176,7 +179,10 @@ mcpCheckBox.addEventListener("change", e => {
             prof.amount = 0;
         })
 
-        updateProfAmount();
+        // updateProfAmount();
+        mcpData.subTotal = 0;
+        updateSubTotal();
+        
 
         removeRowByClass("prof-fee");
         removeRowByClass(rowClassName);
@@ -295,7 +301,7 @@ function checkboxInputEvent(profCheckBox, profName) {
             inputProf.disabled = true;
             inputProf.value = "";
             profItem(profName).amount = 0;
-            updateProfAmount();
+            updateProfAmountUI();
 
             trProf.remove();
 
@@ -314,7 +320,7 @@ function checkboxInputEvent(profCheckBox, profName) {
         tdProfAmount.textContent = numberFormat(prof.amount);
 
         //professioanl fee row update
-        updateProfAmount();
+        updateProfAmountUI();
     });
 }
 
@@ -524,6 +530,23 @@ function deleteEquivRow(idNum) {
     trCount() < 1 && defaultRow();
 }
 
+function updateProfAmountUI() {
+
+    updateProfAmount();
+    const tdAmountHidden = document.querySelector("#hidden-td");
+    const tdProfNet = document.querySelector("#prof-net");
+
+    tdAmountHidden.textContent = mcpData[mcpFirstKey][0].amount;
+    tdProfNet.textContent = numberFormat(mcpData.subTotal);
+}
+
+
+function updateProfAmount() {
+    const profTotal = profArr.reduce((sum, item) => sum + Number(item.amount), 0);
+    mcpData[mcpFirstKey][0].amount = profTotal;
+    mcpData.subTotal = profTotal - mcpData[mcpFirstKey][0].philHealth;
+    updateSubTotal();
+}
 
 function updateServSubTotal() {
     let serviceArr = newServiceData[serviceFirstKey];
@@ -531,23 +554,18 @@ function updateServSubTotal() {
                                 serviceArr.reduce((sum, item) => sum + item.netAmount, 0) :
                                 0;
 
+    updateSubTotal();
+
     console.log(`Service SubTotal: ${newServiceData.subTotal}`);
 }
 
-function updateProfAmount() {
-    const tdAmountHidden = document.querySelector("#hidden-td");
-    const tdProfNet = document.querySelector("#prof-net");
+//default check
 
-    let total = 0;
-    profArr.forEach(item => {
-        total+= Number(item.amount);
-    });
+updateSubTotal();
+function updateSubTotal() {
+    const dataArr = [mcpData, encpData, newServiceData];
 
-    mcpData[mcpFirstKey][0].amount = total;
-    tdAmountHidden.textContent = numberFormat(total);
-
-    mcpData.subTotal = total - 6240;
-    tdProfNet.textContent = numberFormat(mcpData.subTotal);
+    const subTotal = dataArr.reduce((sum, item) => sum + item.subTotal, 0);
+    subTotalP.textContent = numberFormat(subTotal);
 }
-
 
