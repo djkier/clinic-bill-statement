@@ -280,8 +280,6 @@ function textTrimmerFirstCap(str) {
 }
 
 function checkboxInputEvent(profCheckBox, profName) {
-    
-
     const inputProf = document.querySelector(`#${profName}-pf`);
     const [trProf, tdProfName, tdProfAmount] = trFactory();
     trProf.append(tdProfName, tdProfAmount);
@@ -317,27 +315,8 @@ function checkboxInputEvent(profCheckBox, profName) {
 
         //professioanl fee row update
         updateProfAmount();
-
     });
-
 }
-
-function updateProfAmount() {
-    const tdAmountHidden = document.querySelector("#hidden-td");
-    const tdProfNet = document.querySelector("#prof-net");
-
-    let total = 0;
-    profArr.forEach(item => {
-        total+= Number(item.amount);
-    });
-
-    mcpData[mcpFirstKey][0].amount = total;
-    tdAmountHidden.textContent = numberFormat(total);
-
-    mcpData.subTotal = total - 6240;
-    tdProfNet.textContent = numberFormat(mcpData.subTotal);
-}
-
 
 function profItem(key) {
     return profArr.find(item => item.key === key);
@@ -444,7 +423,7 @@ function inputListener(inputTag, modifier, totalTag, parentTag, idNum) {
                 
                 if (modifier !== "description") {
                     item.netAmount = item.quantity * item.unitPrice;
-                    
+                    updateServSubTotal();
 
                     totalTag.textContent = numberFormat(item.netAmount);
 
@@ -475,6 +454,8 @@ function deleteParent(imgTag, parentTag, idNum) {
         parentTag.remove();
     })
 }
+
+
 
 //service row builder
 function serviceRowTable(rowClassName) {
@@ -539,11 +520,34 @@ function deleteEquivRow(idNum) {
     }
     
     //default
+    updateServSubTotal();
     trCount() < 1 && defaultRow();
 }
 
 
+function updateServSubTotal() {
+    let serviceArr = newServiceData[serviceFirstKey];
+    newServiceData.subTotal = serviceArr.length > 0 ?
+                                serviceArr.reduce((sum, item) => sum + item.netAmount, 0) :
+                                0;
 
+    console.log(`Service SubTotal: ${newServiceData.subTotal}`);
+}
 
+function updateProfAmount() {
+    const tdAmountHidden = document.querySelector("#hidden-td");
+    const tdProfNet = document.querySelector("#prof-net");
+
+    let total = 0;
+    profArr.forEach(item => {
+        total+= Number(item.amount);
+    });
+
+    mcpData[mcpFirstKey][0].amount = total;
+    tdAmountHidden.textContent = numberFormat(total);
+
+    mcpData.subTotal = total - 6240;
+    tdProfNet.textContent = numberFormat(mcpData.subTotal);
+}
 
 
