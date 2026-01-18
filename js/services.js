@@ -119,6 +119,7 @@ const tbody = document.querySelector("tbody");
 const subTotalP = document.querySelector("#subtotal p:nth-of-type(2)");
 const discountInput = document.querySelector("#discounts");
 const discountP = document.querySelector("#discount-prev p:nth-of-type(2)");
+const totalh2 = document.querySelector("#total-value");
 
 const addServiceBtn = document.querySelector("#add-service-btn");
 const addServiceCard = document.querySelector("#additional-generated-services");
@@ -144,9 +145,10 @@ function defaultRow() {
 
 }
 
-defaultDiscount()
-function defaultDiscount() {
-    discountP.textContent = numberFormat(0);
+defaultTotals();
+function defaultTotals() {
+    discountP.textContent = `- ${numberFormat(0)}`;
+    totalh2.textContent = numberFormat(0);
 }
 
 // mcp professionals should deduct only on 6240 as a whole not per each professional
@@ -225,7 +227,9 @@ discountInput.addEventListener("input", e => {
     if (Number(e.target.value) <= 0) {
         e.target.value = 0;
     } 
-    discountP.textContent = numberFormat(Number(e.target.value));
+    discountP.textContent = "- " + numberFormat(Number(e.target.value));
+
+    updateSubTotal();
 })
 
 function tableBuilder(data, rowClassName) {
@@ -582,5 +586,9 @@ function updateSubTotal() {
 
     const subTotal = dataArr.reduce((sum, item) => sum + item.subTotal, 0);
     subTotalP.textContent = numberFormat(subTotal);
+
+    totalh2.textContent = numberFormat(subTotal - Number(discountInput.value));
 }
+
+
 
