@@ -6,12 +6,12 @@ const mcpData = {
                 {
                     name: "Liza H. Rual, RM",
                     amount: 0,
-                    philHealth: 6240
+                    key: "rual"
                 },
                 {
                     name: "Dr. Genevieve Mendoza-Dalire",
                     amount: 0,
-                    philHealth: 6240
+                    key: "dalire"
                 }
             ],
             amount: 0,
@@ -103,7 +103,8 @@ const newServiceData = {
     subTotal: 0
 }
 const serviceFirstKey = Object.keys(newServiceData)[0];
-
+const mcpFirstKey = Object.keys(mcpData)[0];
+const profArr = mcpData[mcpFirstKey][0].professionals;
 
 const mcpCard = document.querySelector("#mcp");
 const mcpCheckBox = document.querySelector("#mcp-box");
@@ -119,6 +120,8 @@ const addServiceCard = document.querySelector("#additional-generated-services");
 
 const trCount = () => tbody.querySelectorAll("tr").length;
 // default
+const blueColor = "oklch(94.158% 0.02414 254.032)";
+const darkColor = "oklch(0.985 0.002 247.839)";
 const nonEntry = "&nbsp;&nbsp;&#8212;";
 profFeeCard.style.display = "none";
 
@@ -138,20 +141,17 @@ function defaultRow() {
 
 // mcp professionals should deduct only on 6240 as a whole not per each professional
 
-const blueColor = "oklch(94.158% 0.02414 254.032)";
-const darkColor = "oklch(0.985 0.002 247.839)";
-
 mcpCheckBox.addEventListener("change", e => {
     const rowClassName = "mcp";
     if (mcpCheckBox.checked) {
         mcpCard.style.backgroundColor = blueColor;
         profFeeCard.style.display = "flex";
-        
+
         tableBuilder(mcpData, rowClassName);
 
         //professional checkbox
-        // checkboxInputEvent(rualCheckBox, "rual", subTotalItem.rualNetAmount);
-        // checkboxInputEvent(dalireCheckBox, "dalire", subTotalItem.dalireNetAmount);
+        checkboxInputEvent(rualCheckBox, "rual");
+        checkboxInputEvent(dalireCheckBox, "dalire");
     } else {
         mcpCard.style.backgroundColor = darkColor;
         profFeeCard.style.display = "none";
@@ -211,11 +211,8 @@ function tableBuilder(data, rowClassName) {
 
     //items from the package
     data[packageName].forEach(item => {
-        const trItem = document.createElement("tr");
-        const tdItemName = createTdWithClass("item-name");
-        const tdItemAmount = createTdWithClass("item-amount");
-        const tdItemPhil = createTdWithClass("item-phil");
-        const tdItemNet = createTdWithClass("item-net")
+        const [trItem, tdItemName, tdItemAmount, tdItemPhil, tdItemNet] = trFactory();
+
         trItem.classList.add(rowClassName);
 
         tdItemName.textContent = item.name;
@@ -224,7 +221,11 @@ function tableBuilder(data, rowClassName) {
         tdItemNet.textContent = numberFormat(Number(item.amount) - Number(item.philHealth));
 
         //hide the amount for the professional row
-        item.professionals && tdItemAmount.classList.add("hidden-td")
+        if (item.professionals) {
+            tdItemAmount.id = "hidden-td";
+            tdItemNet.id = "prof-net";
+            trItem.classList.add("prof-fee");
+        }
   
         trItem.append(tdItemName, tdItemAmount, tdItemPhil, tdItemNet);
         tbody.appendChild(trItem);
@@ -235,6 +236,16 @@ function removeRowByClass (rowClassName) {
     tbody.querySelectorAll("tr."+rowClassName).forEach(tr => {
             tr.remove();
     })
+}
+
+function trFactory() {
+    const trItem = document.createElement("tr");
+    const tdItemDesc = createTdWithClass("item-name");
+    const tdItemAmount = createTdWithClass("item-amount");
+    const tdItemPhil = createTdWithClass("item-phil");
+    const tdItemNet = createTdWithClass("item-net");
+
+    return [trItem, tdItemDesc, tdItemAmount, tdItemPhil, tdItemNet];
 }
 
 function numberFormat(amount) {
@@ -249,39 +260,77 @@ function textTrimmerFirstCap(str) {
     return str[0].toUpperCase() + str.slice(1);
 }
 
-function checkboxInputEvent(profCheckBox, profName, netAmount) {
-    const profRow = document.querySelector(`#${profName}-row`);
-    const profInput = document.querySelector(`#${profName}-pf`);
-    const profAmount = document.querySelector(`#${profName}-row .item-amount`);
-    const profNet = document.querySelector(`#${profName}-row .item-net`);
-
-    profInput.addEventListener("input", e => handleInputToPreview(profInput, profAmount, profNet, netAmount));
+function checkboxInputEvent(profCheckBox, profName) {
+    const inputProf = document.querySelector(`#${profName}-pf`);
+    const [trProf, tdProfName, tdProfAmount] = trFactory();
+    trProf.append(tdProfName, tdProfAmount);
+    trProf.classList.add("professional-row", "prof-fee");
 
     profCheckBox.addEventListener("change", e => {
-        
         if (e.target.checked) {
-            profRow.style.display = "table-row";
-            profInput.disabled = false;
-            profAmount.textContent = numberFormat(Number(profInput.value));
-            netAmount.isIncluded = true;
+            inputProf.disabled = false;
+            addProfRow(profName, tdProfName, tdProfAmount, trProf);
 
         } else {
-            profRow.style.display = "none";
-            profInput.disabled = true;
-            profInput.value = "";
-            profNet.textContent = numberFormat(-6240);
-            netAmount.value = -6240;
-            netAmount.isIncluded = false;
+            inputProf.disabled = true;
+            inputProf.value = "";
+            profItem(profName).amount = 0;
+            updateProfAmount();
+
+            trProf.remove();
+            updateProfAmount();
 
         }
     });
 
+    //input should be seperated as it will produce multiple event listener per check done.
+    inputProf.addEventListener("input", e => {
+        if (Number(e.target.value) <= 0) {
+            e.target.value = 0;
+        }
+        const prof = profItem(profName);
+
+        //per professional row update
+        prof.amount = Number(e.target.value);
+        tdProfAmount.textContent = numberFormat(prof.amount);
+
+        //professioanl fee row update
+        updateProfAmount();
+
+    });
+
 }
 
-function handleInputToPreview(profInput, previewAmount, previewNet, netAmount) {
-    netAmount.value = Number(profInput.value) - 6240;
-    previewAmount.textContent = numberFormat(netAmount.value + 6240);
-    previewNet.textContent = numberFormat(netAmount.value);
+function updateProfAmount() {
+    const tdAmountHidden = document.querySelector("#hidden-td");
+    const tdProfNet = document.querySelector("#prof-net");
+
+    let total = 0;
+    profArr.forEach(item => {
+        total+= Number(item.amount);
+    });
+
+    mcpData[mcpFirstKey][0].amount = total;
+    tdAmountHidden.textContent = numberFormat(total);
+
+    mcpData.subTotal = total - 6240;
+    tdProfNet.textContent = numberFormat(mcpData.subTotal);
+}
+
+
+function profItem(key) {
+    return profArr.find(item => item.key === key);
+}
+
+function addProfRow(profName, tdName, tdAmount, trProf) {
+    const item = profItem(profName);
+    tdName.textContent = item.name;
+    tdAmount.textContent = numberFormat(item.amount);
+
+    const profFeeClasses = document.querySelectorAll(".prof-fee");
+    const lastProfFeeClass = profFeeClasses[profFeeClasses.length - 1];
+    lastProfFeeClass.after(trProf);
+    
 }
 
 //service card add entry on the dictionary
@@ -430,15 +479,10 @@ function serviceRowTable(rowClassName) {
     newServiceData[serviceFirstKey].forEach(item => {
         const isItemRowExisting = document.querySelector(`#service-${item.id}`) !== null;
         if (!isItemRowExisting) {
-            const trItem = document.createElement("tr");
-            const tdItemDesc = createTdWithClass("item-name");
-            const tdItemAmount = createTdWithClass("item-amount");
-            const tdItemPhil = createTdWithClass("item-phil");
-            const tdItemNet = createTdWithClass("item-net");
+            const [trItem, tdItemDesc, tdItemAmount, tdItemPhil, tdItemNet] = trFactory();
 
             trItem.className = rowClassName;
             trItem.id = `service-${item.id}`;
-
 
             tdItemDesc.innerHTML = nonEntry;
             tdItemAmount.textContent = numberFormat(item.unitPrice);
