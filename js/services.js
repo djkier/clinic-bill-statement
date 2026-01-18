@@ -156,19 +156,22 @@ mcpCheckBox.addEventListener("change", e => {
         //professional checkbox
         
     } else {
+        //card inactive
         mcpCard.style.backgroundColor = darkColor;
         profFeeCard.style.display = "none";
          
-        
+        //uncheck all professional check
         profCheckBox.forEach(node => {
             node.checked = false;
         })
 
+        //reset input into its default mode
         profInput.forEach(node => {
             node.disabled = true;
             node.value = "";
         })
-
+    
+        //reset professional amount 
         profArr.forEach(prof => {
             prof.amount = 0;
         })
@@ -178,7 +181,6 @@ mcpCheckBox.addEventListener("change", e => {
         removeRowByClass("prof-fee");
         removeRowByClass(rowClassName);
         
-
         trCount() < 1 && defaultRow();
 
     }
