@@ -478,8 +478,6 @@ function deleteParent(imgTag, parentTag, idNum) {
     })
 }
 
-
-
 //service row builder
 function serviceRowTable(rowClassName) {
     if (trCount() === 1) {
@@ -547,8 +545,6 @@ function deleteEquivRow(idNum) {
     trCount() < 1 && defaultRow();
 }
 
-
-
 function updateProfAmountUI() {
 
     updateProfAmount();
@@ -558,7 +554,6 @@ function updateProfAmountUI() {
     tdAmountHidden.textContent = mcpData[mcpFirstKey][0].amount;
     tdProfNet.textContent = numberFormat(mcpData.subTotal);
 }
-
 
 function updateProfAmount() {
     const profTotal = profArr.reduce((sum, item) => sum + Number(item.amount), 0);
@@ -579,7 +574,6 @@ function updateServSubTotal() {
 }
 
 //default check
-
 updateSubTotal();
 function updateSubTotal() {
     const dataArr = [mcpData, encpData, newServiceData];
