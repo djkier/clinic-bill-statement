@@ -491,7 +491,7 @@ TOTAL AMOUNT
     align-self: flex-end;
 }
 
-#subtotal, #discount, #total-amount {
+#subtotal, #discount-prev, #total-amount {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -499,7 +499,7 @@ TOTAL AMOUNT
     font-size: 18px;
 }
 
-#subtotal > :first-child, #discount > :first-child {
+#subtotal > :first-child, #discount-prev > :first-child {
     font-weight: 200;
     
 }

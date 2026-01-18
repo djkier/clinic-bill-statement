@@ -117,7 +117,8 @@ const encpCard = document.querySelector("#encp");
 const encpCheckBox = document.querySelector("#encp-box");
 const tbody = document.querySelector("tbody");
 const subTotalP = document.querySelector("#subtotal p:nth-of-type(2)");
-
+const discountInput = document.querySelector("#discounts");
+const discountP = document.querySelector("#discount-prev p:nth-of-type(2)");
 
 const addServiceBtn = document.querySelector("#add-service-btn");
 const addServiceCard = document.querySelector("#additional-generated-services");
@@ -141,6 +142,11 @@ function defaultRow() {
     tr.appendChild(td);;
     tbody.appendChild(tr);
 
+}
+
+defaultDiscount()
+function defaultDiscount() {
+    discountP.textContent = numberFormat(0);
 }
 
 // mcp professionals should deduct only on 6240 as a whole not per each professional
@@ -192,7 +198,7 @@ mcpCheckBox.addEventListener("change", e => {
     }
 });
 
-encpCheckBox.addEventListener("change", e => {
+encpCheckBox.addEventListener("change", () => {
     const rowClassName = "encp";
     if (encpCheckBox.checked) {
         encpCard.style.backgroundColor = blueColor;
@@ -205,7 +211,7 @@ encpCheckBox.addEventListener("change", e => {
     }
 });
 
-addServiceBtn.addEventListener("click", e => {
+addServiceBtn.addEventListener("click", () => {
     const cardIdNum = newServiceData.serviceCounter;
     newServiceData.serviceCounter ++;
 
@@ -213,6 +219,13 @@ addServiceBtn.addEventListener("click", e => {
     createServiceCard(cardIdNum);
     serviceRowTable("services");
 
+})
+
+discountInput.addEventListener("input", e => {
+    if (Number(e.target.value) <= 0) {
+        e.target.value = 0;
+    } 
+    discountP.textContent = numberFormat(Number(e.target.value));
 })
 
 function tableBuilder(data, rowClassName) {
@@ -529,6 +542,8 @@ function deleteEquivRow(idNum) {
     updateServSubTotal();
     trCount() < 1 && defaultRow();
 }
+
+
 
 function updateProfAmountUI() {
 
