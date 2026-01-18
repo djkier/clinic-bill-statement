@@ -469,13 +469,6 @@ function inputListener(inputTag, modifier, totalTag, parentTag, idNum) {
                 const tdItemName = document.querySelector(`#service-${item.id} .item-name`);
                 tdItemName.innerHTML = `${item.description} x${item.quantity} x &#8369;${numberFormat(item.unitPrice)}`;
                 
-
-                // if (modifier === "quantity") {
-                    
-                // }
-
-
-
                 if (item.description && item.quantity > 0 && item.unitPrice > 0) {
                     parentTag.style.backgroundColor = "oklch(94.158% 0.02414 254.032)";
                 } else {
@@ -536,8 +529,13 @@ function serviceRowTable(rowClassName) {
             tdItemNet.textContent = numberFormat(item.netAmount);
 
             trItem.append(tdItemDesc, tdItemAmount, tdItemPhil, tdItemNet);
-            tbody.appendChild(trItem);
-            }
+
+            // get the last service row
+            const allServicesRow = document.querySelectorAll(`tr.${rowClassName}`);
+            const lastServiceRow = allServicesRow[allServicesRow.length - 1];
+
+            lastServiceRow.after(trItem);
+        }
     }); 
 }
 
