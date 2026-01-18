@@ -6,6 +6,8 @@ const dischargeDateInput = document.querySelector("#discharge-date");
 const gravidaInput = document.querySelector("#gravida");
 const paraInput = document.querySelector("#para");
 const babyGenderSelection = document.querySelector("#gender");
+const prepareSelect = document.querySelector(".other-card select");
+const printBtn = document.querySelector(".generate-box");
 
 // preview selector
 const statementDate = document.querySelector("#statement-date");
@@ -17,6 +19,8 @@ const gravidaPreview = document.querySelector("#g");
 const paraPreview = document.querySelector("#p");
 const babyGender = document.querySelector("#baby-gender");
 const patientNameAndSign = document.querySelector("#patient-signature p:first-child");
+const preparePara = document.querySelector("#prepared-signature p:first-child");
+
 
 
 
@@ -75,6 +79,7 @@ const noEntryDefault = "&nbsp;&nbsp;&#8212;";
 noValueFormatter(patientNamePreview);
 noValueFormatter(patientAgePreview);
 noValueFormatter(patientNameAndSign);
+
 
 function noValueFormatter(input) {
     if (!input.value) {
@@ -160,4 +165,14 @@ paraInput.addEventListener("input", e => {
 
 babyGenderSelection.addEventListener("input", e => {
     babyGender.textContent = genderEquiv(e.target.value);
+})
+
+
+preparePara.textContent = prepareSelect.value;
+prepareSelect.addEventListener("change", e => {
+    preparePara.textContent = e.target.value;
+})
+
+printBtn.addEventListener("click", () => {
+    window.print();
 })

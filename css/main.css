@@ -544,10 +544,27 @@ SIGNATURE SECTION
 /* 
 PRINT PREVIEW
  */
-#generate {
+#print {
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
-   
+}
+
+.generate-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16px;
+    border-radius: 12px;
+    color: white;
+    background-color: rgb(3, 2, 19);
+    height: 40px;
+    font-weight: 600;
+}
+
+.generate-box:hover {
+    background-color: rgba(3, 2, 19, 0.85);
+    cursor: pointer;
 }
 
 
@@ -560,7 +577,7 @@ PRINT PREVIEW
         visibility: hidden;
     }
 
-    #bill-information, #generate {
+    #bill-information, #print {
         display: none;
     }
 
@@ -571,9 +588,10 @@ PRINT PREVIEW
     #bill-preview , #bill-preview * {
         visibility: visible;
         box-shadow: none;
+    }
 
-        
-     
+    #hidden-td {
+        visibility: hidden;
     }
 
     table {
@@ -586,24 +604,18 @@ PRINT PREVIEW
     }
 
     .package-name-row {
-        border-bottom: 1px solid oklch(55.208% 0.00006 271.152);
+        border-bottom: 2px solid oklch(55.208% 0.00006 271.152);
     }
 
-    .expanded, .additional {
+    .expanded, .additional, .maternity {
         border-top: 2px solid oklch(55.208% 0.00006 271.152);
         border-bottom: 1px solid oklch(55.208% 0.00006 271.152);
     }
 
-    .package-name {
+    .expanded .package-name, .additional .package-name, .maternity .package-name {
         color: black;
     }
 
-    .expanded .package-name {
-        color: black;
-    }
-
-
-    
 
 
 }
