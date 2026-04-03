@@ -567,6 +567,11 @@ PRINT PREVIEW
     cursor: pointer;
 }
 
+#preview-and-generate {
+    display: none;
+}
+
+
 
 @media print {
     body, main {
