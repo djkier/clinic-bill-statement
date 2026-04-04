@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/toggle-switch.css">
     <!-- <script src="./js/tableBuilder.js" defer></script> -->
-    <script src="./js/services.js" defer></script>
-    <script src="./js/patienInfo.js" defer></script>
+    <!-- <script src="./js/services.js" defer></script>
+    <script src="./js/patienInfo.js" defer></script> -->
     <title>Clinic Bill Statement</title>
 </head>
 <body>
@@ -17,8 +18,6 @@
                 <div id="load-info-btn" class="buttons"> 
                     <p>Load Bill</p>
                 </div>
-
-
             </div>
             
 
@@ -29,7 +28,7 @@
                 <label for="patient-name">Patient Name</label>
                 <input type="text" id="patient-name" name="patientName" placeholder="Enter patient name">
 
-                <div class="patient-date-info">
+                <div class="patient-info">
                     <label>Date of Admission
                         <input type="date" id="admission-date" name="admissionDate">
                     </label>   
@@ -37,12 +36,17 @@
                     <label>Date of Discharge
                         <input type="date" id="discharge-date" name="dischargeDate">
                     </label>
-                </div>
 
-                <div class="patient-baby-info">
                     <label>Age
                         <input type="number" id="patient-age" name="patientAge" placeholder="Age">
                     </label>  
+
+                    <label>Baby's Gender
+                        <select name="gender" id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </label>
 
                     <label>Pregnancy Count
                         <input type="number" id="gravida" name="gravida" placeholder="Gravida">
@@ -52,12 +56,7 @@
                         <input type="number" id="para" name="para" placeholder="Para">
                     </label>
 
-                    <label>Baby's Gender
-                        <select name="gender" id="gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </label>
+                    
                 </div>
             </section>
 
@@ -90,6 +89,18 @@
                         </div>
 
                     </div>
+
+                    <div class="service-price">
+                        <p>Use default service price</p>
+                        <div class="toggle-button-cover">
+                            <div id="button-3" class="button r">
+                                <input class="checkbox" type="checkbox">
+                                <div class="knobs"></div>
+                                <div class="layer"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <div id="encp">
@@ -99,41 +110,43 @@
                     </label>
                 </div>
 
-                <div id="additional">
-                    <div class="additional-header">
-                        <h3>Additional Services / Medications</h3>
-                        <div id="add-service-btn" class="buttons"> 
-                            <img src="./assets/plus.svg" alt="Add" />
-                            <p>Add Service</p>
-                        </div>
-                    </div>
 
-                    <div id="additional-generated-services"></div>
-                </div>
-
-                <div id="other">
-                    <h3>Others</h3>
-                    <div class="other-card">
-                        <label>
-                            Discount Amount
-                            <input type="number" id="discounts">
-                        </label>
-                    </div>
-                    <div class="other-card">
-                        <label>
-                            Prepared by
-                            <select>
-                                <option value="Liza H. Rual, RM">Liza H. Rual, RM</option>
-                                <option value="Mar Angelo H. Ignacio">Mar Angelo H. Ignacio</option>
-                                <option value="Cherish Paggad">Cherish Paggad</option>
-                                <option value="Don Justine Fontanilla">Don Justine Fontanilla</option>
-                            </select>
-                        </label>
-                    </div>
-
-                </div>
 
             </section>
+
+            <div id="additional">
+                <div class="additional-header">
+                    <h3>Additional Services / Medications</h3>
+                    <div id="add-service-btn" class="buttons"> 
+                        <img src="./assets/plus.svg" alt="Add" />
+                        <p>Add Service</p>
+                    </div>
+                </div>
+
+                <div id="additional-generated-services"></div>
+            </div>
+
+            <div id="other">
+                <h3>Others</h3>
+                <div class="other-card">
+                    <label>
+                        Discount Amount
+                        <input type="number" id="discounts">
+                    </label>
+                </div>
+                <div class="other-card">
+                    <label>
+                        Prepared by
+                        <select>
+                            <option value="Liza H. Rual, RM">Liza H. Rual, RM</option>
+                            <option value="Mar Angelo H. Ignacio">Mar Angelo H. Ignacio</option>
+                            <option value="Cherish Paggad">Cherish Paggad</option>
+                            <option value="Don Justine Fontanilla">Don Justine Fontanilla</option>
+                        </select>
+                    </label>
+                </div>
+
+            </div>
 
 
         </section>
