@@ -1,371 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/toggle-switch.css">
-    <script src="./js/tableBuilder.js" defer></script>
-    <script src="./js/services.js" defer></script>
-    <script src="./js/patienInfo.js" defer></script>
-    <title>Clinic Bill Statement</title>
-</head>
-<body>
-    <main><!-- BILL INFORMATION -->
-        <section id="bill-information">
-            <div id="header">
-                <h1>Billing Details</h1>
-                <div id="load-info-btn" class="buttons"> 
-                    <p>Load Bill</p>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/toggle-switch.css">
+        <!-- <script src="./js/tableBuilder.js" defer></script> -->
+        <script src="./js/services.js" defer></script>
+        <script src="./js/patientInfo.js" defer></script>
+        <title>Clinic Bill Statement</title>
+    </head>
+    <body>
+        <main><!-- BILL INFORMATION -->
+            <section id="bill-information">
+                <div id="header">
+                    <h1>Billing Details</h1>
+                    <div id="load-info-btn" class="buttons"> 
+                        <p>Load Bill</p>
+                    </div>
                 </div>
-            </div>
-            
-
-            <!-- PATIENT DETAILS -->
-            <section id="patient-details">
-                <h3>Patient Details</h3>
                 
-                <label for="patient-name">Patient Name</label>
-                <input type="text" id="patient-name" name="patientName" placeholder="Enter patient name">
 
-                <div class="patient-info">
-                    <label>Date of Admission
-                        <input type="date" id="admission-date" name="admissionDate">
-                    </label>   
-
-                    <label>Date of Discharge
-                        <input type="date" id="discharge-date" name="dischargeDate">
-                    </label>
-
-                    <label>Age
-                        <input type="number" id="patient-age" name="patientAge" placeholder="Age">
-                    </label>  
-
-                    <label>Baby's Gender
-                        <select name="gender" id="gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </label>
-
-                    <label>Pregnancy Count
-                        <input type="number" id="gravida" name="gravida" placeholder="Gravida">
-                    </label>
-
-                    <label>Parity
-                        <input type="number" id="para" name="para" placeholder="Para">
-                    </label>
-
+                <!-- PATIENT DETAILS -->
+                <section id="patient-details">
+                    <h3>Patient Details</h3>
                     
-                </div>
-            </section>
+                    <label for="patient-name">Patient Name</label>
+                    <input type="text" id="patient-name" name="patientName" placeholder="Enter patient name">
 
-            <!-- SERVICES AND PACKAGES -->
-            <section id="packages">
-                <h3>Services & Packages</h3>
-                <div id="mcp">
-                    <label>
-                        <input type="checkbox" name="mcp" value="mcp" id="mcp-box">
-                        Maternity Care Package (MCP)
-                    </label>
+                    <div class="patient-info">
+                        <label>Date of Admission
+                            <input type="date" id="admission-date" name="admissionDate">
+                        </label>   
 
-                    <div id="professional-fee" class="package-spacing package-gap">
-                        <p class="emphasize">Professional Fee</p>
+                        <label>Date of Discharge
+                            <input type="date" id="discharge-date" name="dischargeDate">
+                        </label>
+
+                        <label>Age
+                            <input type="number" id="patient-age" name="patientAge" placeholder="Age">
+                        </label>  
+
+                        <label>Baby's Gender
+                            <select name="gender" id="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </label>
+
+                        <label>Pregnancy Count
+                            <input type="number" id="gravida" name="gravida" placeholder="Gravida">
+                        </label>
+
+                        <label>Parity
+                            <input type="number" id="para" name="para" placeholder="Para">
+                        </label>
+
                         
-                        <div class="pf">
-                            <label>
-                                <input type="checkbox" name="rual" value="rual" id="rual-checkbox">
-                                Liza H. Rual, RM
-                            </label>
-                            <input type="number" name="rual-pf" id="rual-pf" disabled>
-                        </div>
-
-                        <div class="pf">
-                            <label>
-                                <input type="checkbox" name="dalire" value="dalire" id="dalire-checkbox">
-                                Dr. Genevieve Mendoza-Dalire
-                            </label>
-                            <input type="number" name="dalire-pf" id="dalire-pf" disabled>
-                        </div>
-
                     </div>
-                    
-                    <div class="package-spacing package-gap">
-                        <div class="service-row">
-                            <p class="emphasize">Use Default Pricing</p>
-                            <div class="toggle-button-cover">
-                                <div id="button-3" class="button r">
-                                    <input id="mcp-service-checkbox" class="checkbox" type="checkbox">
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
+                </section>
+
+                <!-- SERVICES AND PACKAGES -->
+                <section id="packages">
+                    <h3>Services & Packages</h3>
+                    <div id="mcp">
+                        <label>
+                            <input type="checkbox" name="mcp" value="mcp" id="mcp-box">
+                            Maternity Care Package (MCP)
+                        </label>
+
+                        <div id="professional-fee" class="package-spacing package-gap">
+                            <p class="emphasize">Professional Fee</p>
+                            
+                            <div class="pf">
+                                <label>
+                                    <input type="checkbox" name="rual" value="rual" id="rual-checkbox">
+                                    Liza H. Rual, RM
+                                </label>
+                                <input type="number" name="rual-pf" id="rual-pf" disabled>
+                            </div>
+
+                            <div class="pf">
+                                <label>
+                                    <input type="checkbox" name="dalire" value="dalire" id="dalire-checkbox">
+                                    Dr. Genevieve Mendoza-Dalire
+                                </label>
+                                <input type="number" name="dalire-pf" id="dalire-pf" disabled>
+                            </div>
+
+                        </div>
+                        
+                        <div id="mcp-service" class="package-spacing package-gap">
+                            <div class="service-row">
+                                <p class="emphasize">Use Default Pricing</p>
+                                <div class="toggle-button-cover">
+                                    <div id="button-3" class="button r">
+                                        <input id="mcp-service-checkbox" class="checkbox" type="checkbox">
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
+                                    </div>
                                 </div>
                             </div>
+
+                            <section id="mcp-service" class="package-gap">
+                                <div class="service-row service-row-space">
+                                    <p>Nursing Service Fee</p>
+                                    <input type="number" name="nursing-service-fee" id="nursing-fee" disabled>
+                                </div>
+
+                                <div class="service-row service-row-space">
+                                    <p>Recovery Room</p>
+                                    <input type="number" name="recovery-room" id="recovery-fee" disabled>
+                                </div>
+
+                                <div class="service-row service-row-space">
+                                    <p>Prenatal and Postanatal Fee</p>
+                                    <input type="number" name="prenatal-and-postnatal-fee" id="check-up-fee" disabled>
+                                </div>
+
+                                <div class="service-row service-row-space">
+                                    <p>Medications</p>
+                                    <input type="number" name="medications" id="meds-fee" disabled>
+                                </div>
+
+                                <div class="service-row service-row-space">
+                                    <p>Miscellaneous Fee</p>
+                                    <input type="number" name="miscellaneous-fee" id="misc-fee" disabled>
+                                </div>
+                            </section>
+                            
                         </div>
-
-                        <section id="mcp-service" class="package-gap">
-                            <div class="service-row service-row-space">
-                                <p>Nursing Service Fee</p>
-                                <input type="number" name="nursing-service-fee" id="nursing-fee" disabled>
-                            </div>
-
-                            <div class="service-row service-row-space">
-                                <p>Recovery Room</p>
-                                <input type="number" name="recovery-room" id="recovery-fee" disabled>
-                            </div>
-
-                            <div class="service-row service-row-space">
-                                <p>Prenatal and Postanatal Fee</p>
-                                <input type="number" name="prenatal-and-postnatal-fee" id="check-up-fee" disabled>
-                            </div>
-
-                            <div class="service-row service-row-space">
-                                <p>Medications</p>
-                                <input type="number" name="medications" id="meds-fee" disabled>
-                            </div>
-
-                            <div class="service-row service-row-space">
-                                <p>Miscellaneous Fee</p>
-                                <input type="number" name="miscellaneous-fee" id="misc-fee" disabled>
-                            </div>
-                        </section>
                         
                     </div>
-                    
-                </div>
 
-                <div id="encp">
-                    <label>
-                        <input type="checkbox" name="encp" value="encp" id="encp-box">
-                        Expanded Newborn Care Package (ENCP)
-                    </label>
+                    <div id="encp">
+                        <label>
+                            <input type="checkbox" name="encp" value="encp" id="encp-box">
+                            Expanded Newborn Care Package (ENCP)
+                        </label>
 
-                    <div class="package-spacing package-gap">
-                        <div class="service-row">
-                            <p class="emphasize">Use Default Pricing</p>
-                            <div class="toggle-button-cover">
-                                <div id="button-3" class="button r">
-                                    <input id="encp-service-checkbox" class="checkbox" type="checkbox">
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
+                        <div class="package-spacing package-gap">
+                            <div class="service-row">
+                                <p class="emphasize">Use Default Pricing</p>
+                                <div class="toggle-button-cover">
+                                    <div id="button-3" class="button r">
+                                        <input id="encp-service-checkbox" class="checkbox" type="checkbox">
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
+                                    </div>
                                 </div>
                             </div>
+
+                            <section id="encp-service" class="package-gap">
+                                <div class="service-row service-row-space">
+                                    <p>Professional Fee</p>
+                                    <input type="number" name="encp-professional-fee" id="prof-fee" disabled>
+                                </div>
+
+                                <div class="service-row service-row-space">
+                                    <p>Expanded Newborn Screening</p>
+                                    <input type="number" name="expanded-newborn-screening" id="ens" disabled>
+                                </div>
+
+                                <div class="service-row service-row-space">
+                                    <p>BCG Vaccine</p>
+                                    <input type="number" name="bcg-vaccine" id="bcg" disabled>
+                                </div>
+
+                                <div class="service-row service-row-space">
+                                    <p>Vitamin K</p>
+                                    <input type="number" name="vitamin-k" id="vit-k" disabled>
+                                </div>
+
+                                <div class="service-row service-row-space">
+                                    <p>Hepatitis B Vaccine</p>
+                                    <input type="number" name="hepatitis-b-vaccine" id="hepa-b" disabled>
+                                </div>
+
+                                <div class="service-row service-row-space">
+                                    <p>Erythromycin Eye Prophylaxis</p>
+                                    <input type="number" name="erythromycin" id="erythromycin" disabled>
+                                </div>
+
+                                <div class="service-row service-row-space">
+                                    <p>Cord Clamp</p>
+                                    <input type="number" name="cord-clamp" id="cord-clamp" disabled>
+                                </div>
+                            </section>
+                            
                         </div>
-
-                        <section id="encp-service" class="package-gap">
-                            <div class="service-row service-row-space">
-                                <p>Professional Fee</p>
-                                <input type="number" name="encp-professional-fee" id="prof-fee" disabled>
-                            </div>
-
-                            <div class="service-row service-row-space">
-                                <p>Expanded Newborn Screening</p>
-                                <input type="number" name="expanded-newborn-screening" id="ens" disabled>
-                            </div>
-
-                            <div class="service-row service-row-space">
-                                <p>BCG Vaccine</p>
-                                <input type="number" name="bcg-vaccine" id="bcg" disabled>
-                            </div>
-
-                            <div class="service-row service-row-space">
-                                <p>Vitamin K</p>
-                                <input type="number" name="vitamin-k" id="vit-k" disabled>
-                            </div>
-
-                            <div class="service-row service-row-space">
-                                <p>Hepatitis B Vaccine</p>
-                                <input type="number" name="hepatitis-b-vaccine" id="hepa-b" disabled>
-                            </div>
-
-                            <div class="service-row service-row-space">
-                                <p>Erythromycin Eye Prophylaxis</p>
-                                <input type="number" name="erythromycin" id="erythromycin" disabled>
-                            </div>
-
-                            <div class="service-row service-row-space">
-                                <p>Cord Clamp</p>
-                                <input type="number" name="cord-clamp" id="cord-clamp" disabled>
-                            </div>
-                        </section>
-                        
                     </div>
+
+
+
+                </section>
+
+                <div id="additional">
+                    <div class="additional-header">
+                        <h3>Additional Services / Medications</h3>
+                        <div id="add-service-btn" class="buttons"> 
+                            <img src="./assets/plus.svg" alt="Add" />
+                            <p>Add Service</p>
+                        </div>
+                    </div>
+
+                    <div id="additional-generated-services"></div>
                 </div>
 
+                <div id="other">
+                    <h3>Others</h3>
+                    <div class="other-card">
+                        <label>
+                            Discount Amount
+                            <input type="number" id="discounts">
+                        </label>
+                    </div>
+                    <div class="other-card">
+                        <label>
+                            Prepared by
+                            <select>
+                                <option value="Liza H. Rual, RM">Liza H. Rual, RM</option>
+                                <option value="Mar Angelo H. Ignacio">Mar Angelo H. Ignacio</option>
+                                <option value="Cherish Paggad">Cherish Paggad</option>
+                                <option value="Don Justine Fontanilla">Don Justine Fontanilla</option>
+                            </select>
+                        </label>
+                    </div>
+
+                </div>
 
 
             </section>
 
-            <div id="additional">
-                <div class="additional-header">
-                    <h3>Additional Services / Medications</h3>
-                    <div id="add-service-btn" class="buttons"> 
-                        <img src="./assets/plus.svg" alt="Add" />
-                        <p>Add Service</p>
+
+            <!-- RIGHT SIDE-->
+            <section id="preview-and-generate">
+                <!-- BILL PREVIEW -->
+                <section id="bill-preview">
+                    <header>
+                        <img src="./assets/LETTERHEAD.jpg" alt="letterhead"/>
+                    </header>
+                    <!-- HEADER TEXT -->
+                    <div id="previewTitle">
+                        <h1>BILLING STATEMENT</h1>
+                        <p>Statement Date: <span id="statement-date"></span></p>
                     </div>
-                </div>
 
-                <div id="additional-generated-services"></div>
-            </div>
-
-            <div id="other">
-                <h3>Others</h3>
-                <div class="other-card">
-                    <label>
-                        Discount Amount
-                        <input type="number" id="discounts">
-                    </label>
-                </div>
-                <div class="other-card">
-                    <label>
-                        Prepared by
-                        <select>
-                            <option value="Liza H. Rual, RM">Liza H. Rual, RM</option>
-                            <option value="Mar Angelo H. Ignacio">Mar Angelo H. Ignacio</option>
-                            <option value="Cherish Paggad">Cherish Paggad</option>
-                            <option value="Don Justine Fontanilla">Don Justine Fontanilla</option>
-                        </select>
-                    </label>
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- RIGHT SIDE-->
-        <section id="preview-and-generate">
-            <!-- BILL PREVIEW -->
-            <section id="bill-preview">
-                <header>
-                    <img src="./assets/LETTERHEAD.jpg" alt="letterhead"/>
-                </header>
-                <!-- HEADER TEXT -->
-                <div id="previewTitle">
-                    <h1>BILLING STATEMENT</h1>
-                    <p>Statement Date: <span id="statement-date"></span></p>
-                </div>
-
-                <!-- PATIENT INFORMATION -->
-                <section class="patient-info">
-                    <h4>PATIENT INFORMATION</h4>
-                    <div class="patient-info-preview">
-                        <div>
-                            <p>Patient Name: <span id="patient-name-preview"></span></p>
-                            <p>Age: <span id="patient-age-preview"></span></p>
+                    <!-- PATIENT INFORMATION -->
+                    <section class="patient-info">
+                        <h4>PATIENT INFORMATION</h4>
+                        <div class="patient-info-preview">
+                            <div>
+                                <p>Patient Name: <span id="patient-name-preview"></span></p>
+                                <p>Age: <span id="patient-age-preview"></span></p>
+                            </div>
+                            <div class="dates-preview">
+                                <p>Date of Admission: <span id="admission-preview"></span></p>
+                                <p>Date of Discharge: <span id="discharge-preview"></span></p>
+                            </div>
                         </div>
-                        <div class="dates-preview">
-                            <p>Date of Admission: <span id="admission-preview"></span></p>
-                            <p>Date of Discharge: <span id="discharge-preview"></span></p>
+                        <p>Final Diagnosis: <span>G<span id="g">1</span>P<span id="p">1</span> Normal spontaneous delivery to an alive and term baby <span id="baby-gender">girl</span>.</span></p>
+                    </section>
+
+                    <!-- SERVICES RENDERED -->
+                    <section>
+                        <h4>SERVICES RENDERED</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Service Description</th>
+                                    <th>Amount</th>
+                                    <th>PhilHealth</th>
+                                    <th>Net Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </section>
+
+                    <!-- TOTAL AMOUNT -->
+                    <section class="totals">
+                        <div id="subtotal">
+                            <p>Subtotal:</p>
+                            <p></p>
                         </div>
-                    </div>
-                    <p>Final Diagnosis: <span>G<span id="g">1</span>P<span id="p">1</span> Normal spontaneous delivery to an alive and term baby <span id="baby-gender">girl</span>.</span></p>
+                        <div id="discount-prev">
+                            <p>Discounts:</p>
+                            <p></p>
+                        </div>
+                        <div id="total-amount">
+                            <h2>Total Amount</h2>
+                            <h2>&#8369; <span id="total-value"></span></h2>
+                        </div>
+                    </section>
+
+
+                    <!-- SIGNATURE SECTION -->
+                    <section id="signature-section">
+                        <div id="patient-signature" class="sign">
+                            <p></p>
+                            <p>Patient's Name and Signature</p>
+                        </div>
+
+                        <div id="prepared-signature" class="sign">
+                            <p></p>
+                            <p>Prepared by</p>
+                        </div>
+                    </section>
+                    <!-- NOTE? -->
                 </section>
 
-                <!-- SERVICES RENDERED -->
-                <section>
-                    <h4>SERVICES RENDERED</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Service Description</th>
-                                <th>Amount</th>
-                                <th>PhilHealth</th>
-                                <th>Net Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </section>
-
-                <!-- TOTAL AMOUNT -->
-                <section class="totals">
-                    <div id="subtotal">
-                        <p>Subtotal:</p>
-                        <p></p>
-                    </div>
-                    <div id="discount-prev">
-                        <p>Discounts:</p>
-                        <p></p>
-                    </div>
-                    <div id="total-amount">
-                        <h2>Total Amount</h2>
-                        <h2>&#8369; <span id="total-value"></span></h2>
-                    </div>
-                </section>
-
-
-                <!-- SIGNATURE SECTION -->
-                <section id="signature-section">
-                    <div id="patient-signature" class="sign">
-                        <p></p>
-                        <p>Patient's Name and Signature</p>
-                    </div>
-
-                    <div id="prepared-signature" class="sign">
-                        <p></p>
-                        <p>Prepared by</p>
-                    </div>
-                </section>
-                <!-- NOTE? -->
+                <!-- GENERATE BUTTON -->
+                <div id="print">
+                    <div class="generate-box">Generate PDF / Print</div>
+                </div>
             </section>
+        </main>
 
-            <!-- GENERATE BUTTON -->
-            <div id="print">
-                <div class="generate-box">Generate PDF / Print</div>
-            </div>
-        </section>
-    </main>
+        <!-- 
+        NOTES: 
+        SUGGESTED LAYOUT FOR Services and Packages
 
-    <!-- 
-    NOTES: 
-    SUGGESTED LAYOUT FOR Services and Packages
+        Package A  ✓
+        -------------------------
+        Professional Fee
+        [ ] Person A   [ amount ]
+        [ ] Person B   [ amount ]
 
-    Package A  ✓
-    -------------------------
-    Professional Fee
-    [ ] Person A   [ amount ]
-    [ ] Person B   [ amount ]
+        --------------------------------
+        Pricing
+        Use default pricing  [ YES ]
 
-    --------------------------------
-    Pricing
-    Use default pricing  [ YES ]
+        (when NO)
 
-    (when NO)
+        Service Breakdown:
+        Service 1   [ amount ]
+        Service 2   [ amount ]
+        Service 3   [ amount ]
 
-    Service Breakdown:
-    Service 1   [ amount ]
-    Service 2   [ amount ]
-    Service 3   [ amount ]
+        -make sure the services are pre-filled
+        -add reset to default option
 
-    -make sure the services are pre-filled
-    -add reset to default option
+        ===================================================
+        
+        FOR PREVIEW AND PRINT
+        EDITING SCREEN
+        [ Form Fields ]
 
-    ===================================================
-    
-    FOR PREVIEW AND PRINT
-    EDITING SCREEN
-    [ Form Fields ]
-
-    --------------------------------
-    [ Preview ]   [ Save ]
+        --------------------------------
+        [ Preview ]   [ Save ]
 
 
-    PREVIEW SCREEN
-    [ Bill Preview ]
+        PREVIEW SCREEN
+        [ Bill Preview ]
 
-    --------------------------------
-    [ Back to Edit ]   [ Print ]
+        --------------------------------
+        [ Back to Edit ]   [ Print ]
 
-    ===================================================
+        ===================================================
 
-    -make the additional services a table type to make it more easier with plus to add a new row
-    -add new names on the prepared by card
+        -make the additional services a table type to make it more easier with plus to add a new row
+        -add new names on the prepared by card
 
-    -save it on browser memory and also make it savable as json
+        -save it on browser memory and also make it savable as json
 
 
-    
-    -->
-</body>
+        
+        -->
+    </body>
 </html>

@@ -167,6 +167,10 @@ input[type="checkbox"] {
     background-color: oklch(0.985 0.002 247.839);
 }
 
+#professional-fee {
+    display: none;
+}
+
 #packages>div>label {
     font-weight: 600;
 }
