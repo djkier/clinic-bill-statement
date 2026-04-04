@@ -114,12 +114,16 @@ const profFeeCard = document.querySelector("#professional-fee");
 const mcpServiceCard = document.querySelector("#mcp-service");
 const mcpServiceBox = document.querySelector("#mcp-service-checkbox");
 const mcpServicePricing = document.querySelector("#mcp-service-pricing");
-
-
 const rualCheckBox = document.querySelector("#rual-checkbox");
 const dalireCheckBox = document.querySelector("#dalire-checkbox");
+
 const encpCard = document.querySelector("#encp");
 const encpCheckBox = document.querySelector("#encp-box");
+const encpServiceCard = document.querySelector("#encp-service");
+const encpServiceBox = document.querySelector("#encp-service-checkbox");
+const encpServicePricing = document.querySelector("#encp-service-pricing");
+
+
 const tbody = document.querySelector("tbody");
 const subTotalP = document.querySelector("#subtotal p:nth-of-type(2)");
 const discountInput = document.querySelector("#discounts");
@@ -140,6 +144,12 @@ function defaultMcpUI() {
     profFeeCard.style.display = "none";
     mcpServiceCard.style.display = "none";
     mcpServicePricing.style.display = "none";
+}
+
+defaultEncpUI();
+function defaultEncpUI() {
+    encpServiceCard.style.display = "none";
+    encpServicePricing.style.display = "none";
 }
 
 
@@ -167,14 +177,7 @@ function defaultTotals() {
 checkboxInputEvent(rualCheckBox, "rual");
 checkboxInputEvent(dalireCheckBox, "dalire");
 
-mcpServiceBox.addEventListener("change", e => {
-    if (mcpServiceBox.checked) {
-        mcpServicePricing.style.display = "flex";
-    } else {
-        mcpServicePricing.style.display = "none";
-        //add event that will enable the textfields
-    }
-});
+
 
 mcpCheckBox.addEventListener("change", e => {
     const rowClassName = "mcp";
@@ -192,6 +195,8 @@ mcpCheckBox.addEventListener("change", e => {
         //card inactive
         mcpCard.style.backgroundColor = darkColor;
         defaultMcpUI();
+        mcpServiceBox.checked = false;
+
          
         //uncheck all professional check
         profCheckBox.forEach(node => {
@@ -222,16 +227,39 @@ mcpCheckBox.addEventListener("change", e => {
     }
 });
 
+mcpServiceBox.addEventListener("change", e => {
+    if (mcpServiceBox.checked) {
+        mcpServicePricing.style.display = "flex";
+    } else {
+        mcpServicePricing.style.display = "none";
+        //add event that will enable the textfields
+    }
+});
+
 encpCheckBox.addEventListener("change", () => {
     const rowClassName = "encp";
     if (encpCheckBox.checked) {
         encpCard.style.backgroundColor = blueColor;
+        encpServiceCard.style.display = "flex";
+
+
         tableBuilder(encpData, rowClassName);
         
     } else {
         encpCard.style.backgroundColor = darkColor;
+        defaultEncpUI();
+        encpServiceBox.checked = false;
+        
         removeRowByClass(rowClassName);
         trCount() < 1 && defaultRow();
+    }
+});
+
+encpServiceBox.addEventListener("change", e => {
+    if (encpServiceBox.checked) {
+        encpServicePricing.style.display = "flex";
+    } else {
+        encpServicePricing.style.display = "none";
     }
 });
 
