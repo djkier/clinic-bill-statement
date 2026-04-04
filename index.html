@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./css/main.css">
         <link rel="stylesheet" href="./css/toggle-switch.css">
-        <!-- <script src="./js/tableBuilder.js" defer></script> -->
+        <!-- <script src="./js/tableBuilder.js" defer></script> -->  
+        <!-- table builder is a template and can be use as a future module -->
         <script src="./js/services.js" defer></script>
         <script src="./js/patientInfo.js" defer></script>
         <title>Clinic Bill Statement</title>
@@ -28,7 +29,7 @@
                     <label for="patient-name">Patient Name</label>
                     <input type="text" id="patient-name" name="patientName" placeholder="Enter patient name">
 
-                    <div class="patient-info">
+                    <div class="patient-info-form">
                         <label>Date of Admission
                             <input type="date" id="admission-date" name="admissionDate">
                         </label>   
@@ -102,7 +103,7 @@
                                 </div>
                             </div>
 
-                            <section id="mcp-service" class="package-gap">
+                            <section id="mcp-service-pricing" class="package-gap">
                                 <div class="service-row service-row-space">
                                     <p>Nursing Service Fee</p>
                                     <input type="number" name="nursing-service-fee" id="nursing-fee" disabled>

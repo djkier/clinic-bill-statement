@@ -128,13 +128,13 @@ patient details
 }
 
 
-.patient-info {
+.patient-info-form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 20px;
 }
 
-.patient-info label{
+.patient-info-form label{
     display: flex;
     flex-direction: column;
 }
@@ -167,9 +167,7 @@ input[type="checkbox"] {
     background-color: oklch(0.985 0.002 247.839);
 }
 
-#professional-fee {
-    display: none;
-}
+
 
 #packages>div>label {
     font-weight: 600;

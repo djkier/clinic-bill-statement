@@ -111,6 +111,11 @@ const profInput = document.querySelectorAll(`.pf input[type="number"]`);
 const mcpCard = document.querySelector("#mcp");
 const mcpCheckBox = document.querySelector("#mcp-box");
 const profFeeCard = document.querySelector("#professional-fee");
+const mcpServiceCard = document.querySelector("#mcp-service");
+const mcpServiceBox = document.querySelector("#mcp-service-checkbox");
+const mcpServicePricing = document.querySelector("#mcp-service-pricing");
+
+
 const rualCheckBox = document.querySelector("#rual-checkbox");
 const dalireCheckBox = document.querySelector("#dalire-checkbox");
 const encpCard = document.querySelector("#encp");
@@ -129,7 +134,14 @@ const trCount = () => tbody.querySelectorAll("tr").length;
 const blueColor = "oklch(94.158% 0.02414 254.032)";
 const darkColor = "oklch(0.985 0.002 247.839)";
 const nonEntry = "&nbsp;&nbsp;&#8212;";
-profFeeCard.style.display = "none";
+
+defaultMcpUI();
+function defaultMcpUI() {
+    profFeeCard.style.display = "none";
+    mcpServiceCard.style.display = "none";
+    mcpServicePricing.style.display = "none";
+}
+
 
 defaultRow();
 function defaultRow() {
@@ -155,11 +167,21 @@ function defaultTotals() {
 checkboxInputEvent(rualCheckBox, "rual");
 checkboxInputEvent(dalireCheckBox, "dalire");
 
+mcpServiceBox.addEventListener("change", e => {
+    if (mcpServiceBox.checked) {
+        mcpServicePricing.style.display = "flex";
+    } else {
+        mcpServicePricing.style.display = "none";
+        //add event that will enable the textfields
+    }
+});
+
 mcpCheckBox.addEventListener("change", e => {
     const rowClassName = "mcp";
     if (mcpCheckBox.checked) {
         mcpCard.style.backgroundColor = blueColor;
         profFeeCard.style.display = "flex";
+        mcpServiceCard.style.display = "flex";
 
         tableBuilder(mcpData, rowClassName);
         updateProfAmount();
@@ -169,7 +191,7 @@ mcpCheckBox.addEventListener("change", e => {
     } else {
         //card inactive
         mcpCard.style.backgroundColor = darkColor;
-        profFeeCard.style.display = "none";
+        defaultMcpUI();
          
         //uncheck all professional check
         profCheckBox.forEach(node => {
