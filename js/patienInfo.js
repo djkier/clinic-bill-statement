@@ -1,11 +1,11 @@
 // input selector
 const patientNameInput = document.querySelector("#patient-name");
-const patientAgeInput = document.querySelector("#patient-age");
 const admissionDateInput = document.querySelector("#admission-date");
 const dischargeDateInput = document.querySelector("#discharge-date");
+const patientAgeInput = document.querySelector("#patient-age");
+const babyGenderSelection = document.querySelector("#gender");
 const gravidaInput = document.querySelector("#gravida");
 const paraInput = document.querySelector("#para");
-const babyGenderSelection = document.querySelector("#gender");
 const prepareSelect = document.querySelector(".other-card select");
 const printBtn = document.querySelector(".generate-box");
 

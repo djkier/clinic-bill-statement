@@ -90,6 +90,9 @@ input:focus, select:focus {
     outline: 4px solid oklab(0.708 0 0 / 0.5);
 }
 
+.emphasize {
+    font-weight: 600;
+}
 
 #bill-information {
     width: 540px;
@@ -168,8 +171,8 @@ input[type="checkbox"] {
     font-weight: 600;
 }
 
-#rual-pf, #dalire-pf {
-    background-color: white;
+#mcp input[type="number"], #encp input[type="number"] {
+
     width: calc(10rem - 24px);
 
 }
@@ -178,12 +181,16 @@ input[type="checkbox"] {
     background-color: rgb(238, 238, 238);
 }
 
-#professional-fee {
+.package-spacing {
     margin-left: 1.5rem;
     margin-top: 1rem;
+}
+
+.package-gap {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
+    
 }
 
 .pf {
@@ -193,13 +200,15 @@ input[type="checkbox"] {
     align-items: center;
 }
 
-.service-price {
-    margin-left: 1.5rem;
-    margin-top: 0.5rem;
+.service-row {
     display: flex;
     align-items: center;
-    /* column-gap: 1rem; */
     justify-content: space-between;
+    
+}
+
+.service-row-space {
+    margin-left: 12px;
 }
 
 #additional {
@@ -346,7 +355,7 @@ Preview
 */
 
 #preview-and-generate {
-    display: none;
+    /* display: none; */
     margin-left: 2rem;
 }
 
