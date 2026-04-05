@@ -130,7 +130,7 @@ const discountInput = document.querySelector("#discounts");
 const discountP = document.querySelector("#discount-prev p:nth-of-type(2)");
 const totalh2 = document.querySelector("#total-value");
 
-const addServiceBtn = document.querySelector("#add-service-btn");
+
 const addServiceCard = document.querySelector("#additional-generated-services");
 
 const trCount = () => tbody.querySelectorAll("tr").length;
@@ -263,15 +263,7 @@ encpServiceBox.addEventListener("change", e => {
     }
 });
 
-addServiceBtn.addEventListener("click", () => {
-    const cardIdNum = newServiceData.serviceCounter;
-    newServiceData.serviceCounter ++;
 
-    addNewEntry(cardIdNum);
-    createServiceCard(cardIdNum);
-    serviceRowTable("services");
-
-})
 
 discountInput.addEventListener("input", e => {
     if (Number(e.target.value) <= 0) {

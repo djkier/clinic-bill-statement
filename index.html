@@ -5,10 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./css/main.css">
         <link rel="stylesheet" href="./css/toggle-switch.css">
+        <script type="module" src="./js/main.js"></script>
+
+
         <!-- <script src="./js/tableBuilder.js" defer></script> -->  
         <!-- table builder is a template and can be use as a future module -->
-        <script src="./js/services.js" defer></script>
-        <script src="./js/patientInfo.js" defer></script>
+        <!-- <script src="./js/services.js" defer></script> -->
+        <!-- <script src="./js/patientInfo.js" defer></script>  -->
+
         <title>Clinic Bill Statement</title>
     </head>
     <body>
@@ -105,27 +109,27 @@
 
                             <section id="mcp-service-pricing" class="package-gap">
                                 <div class="service-row service-row-space">
-                                    <label for="nursing-service-fee">Nursing Service Fee</label>
+                                    <label for="nursing-fee">Nursing Service Fee</label>
                                     <input type="number" name="nursing-service-fee" id="nursing-fee" disabled>
                                 </div>
 
                                 <div class="service-row service-row-space">
-                                    <label for="recovery-room">Recovery Room</label>
+                                    <label for="recovery-fee">Recovery Room</label>
                                     <input type="number" name="recovery-room" id="recovery-fee" disabled>
                                 </div>
 
                                 <div class="service-row service-row-space">
-                                    <label for="prenatal-and-postnatal-fee">Prenatal and Postanatal Fee</label>
+                                    <label for="check-up-fee">Prenatal and Postanatal Fee</label>
                                     <input type="number" name="prenatal-and-postnatal-fee" id="check-up-fee" disabled>
                                 </div>
 
-                                <div for="medications" class="service-row service-row-space">
-                                    <label>Medications</label>
+                                <div class="service-row service-row-space">
+                                    <label for="meds-fee">Medications</label>
                                     <input type="number" name="medications" id="meds-fee" disabled>
                                 </div>
 
-                                <div for="miscellaneous-fee" class="service-row service-row-space">
-                                    <label>Miscellaneous Fee</label>
+                                <div class="service-row service-row-space">
+                                    <label for="misc-fee">Miscellaneous Fee</label>
                                     <input type="number" name="miscellaneous-fee" id="misc-fee" disabled>
                                 </div>
                             </section>
@@ -154,27 +158,27 @@
 
                             <section id="encp-service-pricing" class="package-gap">
                                 <div class="service-row service-row-space">
-                                    <label for="encp-professional-fee">Professional Fee</label>
+                                    <label for="prof-fee">Professional Fee</label>
                                     <input type="number" name="encp-professional-fee" id="prof-fee" disabled>
                                 </div>
 
                                 <div class="service-row service-row-space">
-                                    <label for="expanded-newborn-screening">Expanded Newborn Screening</label>
+                                    <label for="ens">Expanded Newborn Screening</label>
                                     <input type="number" name="expanded-newborn-screening" id="ens" disabled>
                                 </div>
 
                                 <div class="service-row service-row-space">
-                                    <label for="bcg-vaccine">BCG Vaccine</label>
+                                    <label for="bcg">BCG Vaccine</label>
                                     <input type="number" name="bcg-vaccine" id="bcg" disabled>
                                 </div>
 
                                 <div class="service-row service-row-space">
-                                    <label for="vitamin-k">Vitamin K</label>
+                                    <label for="vit-k">Vitamin K</label>
                                     <input type="number" name="vitamin-k" id="vit-k" disabled>
                                 </div>
 
                                 <div class="service-row service-row-space">
-                                    <label for="hepatitis-b-vaccine">Hepatitis B Vaccine</label>
+                                    <label for="hepa-b">Hepatitis B Vaccine</label>
                                     <input type="number" name="hepatitis-b-vaccine" id="hepa-b" disabled>
                                 </div>
 
@@ -191,19 +195,19 @@
                             
                         </div>
                     </div>
-
-
-
                 </section>
 
                 <div id="additional">
-                    <div class="additional-header">
-                        <h3>Additional Services / Medications</h3>
-                        <div id="add-service-btn" class="buttons"> 
-                            <img src="./assets/plus.svg" alt="Add" />
-                            <p>Add Service</p>
-                        </div>
-                    </div>
+                    <h3>Additional Services / Medications</h3>
+                    <table>
+                        <thead>
+                            <tr>Name</tr>
+                            <tr>Quantity</tr>
+                            <tr>Unit Price</tr>
+                            <tr>Total</tr>
+                        </thead>
+                    </table>
+                    
 
                     <div id="additional-generated-services"></div>
                 </div>
@@ -219,7 +223,7 @@
                     <div class="other-card">
                         <label>
                             Prepared by
-                            <select>
+                            <select id="prepared-selection">
                                 <option value="Liza H. Rual, RM">Liza H. Rual, RM</option>
                                 <option value="Mar Angelo H. Ignacio">Mar Angelo H. Ignacio</option>
                                 <option value="Cherish Paggad">Cherish Paggad</option>

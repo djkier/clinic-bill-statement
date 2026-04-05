@@ -222,10 +222,10 @@ input[type="checkbox"] {
 
 #additional {
     border-top: 2px solid rgba(0, 0, 0, 0.15);
-    padding-top: 2rem;
+    padding-top: 1.5rem;
     display: flex;
     flex-direction: column;
-    row-gap: 1.5rem;
+    
 }
 
 #additional-generated-services {

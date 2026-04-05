@@ -6,6 +6,8 @@ const patientAgeInput = document.querySelector("#patient-age");
 const babyGenderSelection = document.querySelector("#gender");
 const gravidaInput = document.querySelector("#gravida");
 const paraInput = document.querySelector("#para");
+
+
 const prepareSelect = document.querySelector(".other-card select");
 const printBtn = document.querySelector(".generate-box");
 
