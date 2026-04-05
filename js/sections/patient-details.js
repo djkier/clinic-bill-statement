@@ -7,14 +7,22 @@ const genderSelect = document.querySelector("#gender");
 const gravidaInput = document.querySelector("#gravida");
 const paraInput = document.querySelector("#para");
 
+const today = new Date();
+const yesterday = (new Date()).setDate(today.getDate() - 1);
+
+// -----------------------------------------------------
+// DEFAULTS    -----------------------------------------
+// -----------------------------------------------------
+defaultDate(admissionDateInput, new Date(yesterday));
+defaultDate(dischargeDateInput, new Date());
+
+
+//Patient name has no constraints
 
 // -----------------------------------------------------
 // DATE FORMATS-----------------------------------------
 // -----------------------------------------------------
-const today = new Date();
-const yesterday = (new Date()).setDate(today.getDate() - 1);
-
-function inputDateFormatter(input, date) {
+function defaultDate(input, date) {
     const yyyy = date.getFullYear();
     const mm = String(date.getMonth() + 1).padStart(2, "0");
     const dd = String(date.getDate()).padStart(2, "0");
@@ -29,42 +37,24 @@ const dateFormat = date =>
         year: "numeric"
 });
 
-
-// Bill information date input default
-inputDateFormatter(admissionDateInput, new Date(yesterday));
-inputDateFormatter(dischargeDateInput, new Date());
-
-
-
-
-admissionDateInput.addEventListener("change", e => {
-
-});
-
+//Constraints
 dischargeDateInput.addEventListener("change", e => {
     // automatic admission when changing discharge value
     const dateOfDischarge= new Date(e.target.value);
     const possibleDateOfAdmission = (dateOfDischarge.setDate(dateOfDischarge.getDate() - 1));
     inputDateFormatter(admissionDateInput, new Date(possibleDateOfAdmission));
-
 });
 
 
 
 // -----------------------------------------------------
-// NON DATES -------------------------------------------
+// Age       -------------------------------------------
 // -----------------------------------------------------
-const noEntryDefault = "&nbsp;&nbsp;&#8212;";
 
 
 
 
 
-function noValueFormatter(input) {
-    if (!input.value) {
-        input.innerHTML = noEntryDefault;
-    }
-}
 
 patientNameInput.addEventListener("input", e => {
     let nameValue = e.target.value
