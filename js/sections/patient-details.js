@@ -46,88 +46,76 @@ dischargeDateInput.addEventListener("change", e => {
 });
 
 
-
 // -----------------------------------------------------
 // Age       -------------------------------------------
 // -----------------------------------------------------
-
-
-
-
-
-
-patientNameInput.addEventListener("input", e => {
-    let nameValue = e.target.value
-                        .trim()
-                        .split(" ")
-                        .filter(word => word)
-                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                        .join(" ");
-
-    if (nameValue.length === 0 ) {
-        nameValue = noEntryDefault;
-    }
-
-
-})
-
+//Constraints
 patientAgeInput.addEventListener("input", e => {
     let ageValue = Number(e.target.value);
-    if (ageValue < 10 || ageValue > 60) {
-        ageValue = noEntryDefault;
+    if (ageValue < 0) {
+        patientAgeInput.value = 0;
+    } 
+
+    if (ageValue > 100) {
+        patientAgeInput.value = 100;
     }
 
 })
 
 
-
-
-
-
-function genderEquiv (gender) {
-    return gender === "male" ? "boy" : "girl";
-}
-
+// -----------------------------------------------------
+// Pregnancy Count--------------------------------------
+// -----------------------------------------------------
+//Constraints
 gravidaInput.addEventListener("input", e => {
     let g = Number(e.target.value);
 
     if (g > 20) {
         g = 20;
-        gravidaInput.value = g;
-    }
-
-    if (g < 0) {
-        gravidaInput.value = 0;
     }
 
     if (g === "" || g < 0) {
         g = 0;
     }
 
-
+    gravidaInput.value = g;
 });
 
+// -----------------------------------------------------
+// Parity Count   --------------------------------------
+// -----------------------------------------------------
+//Constraints
 paraInput.addEventListener("input", e => {
     let p = Number(e.target.value);
 
     if (p > Number(gravidaInput.value)) {
         p = Number(gravidaInput.value);
-        paraInput.value = p;
-    }
-
-
-    if (p < 0) {
-        paraInput.value = 0;
     }
 
     if (p === "" || p < 0) {
         p = 0;
     }
 
+    paraInput.value = p;
+
 
 });
 
-genderSelect.addEventListener("input", e => {
 
-})
+
+
+// for later use
+// patientNameInput.addEventListener("input", e => {
+//     let nameValue = e.target.value
+//                         .trim()
+//                         .split(" ")
+//                         .filter(word => word)
+//                         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+//                         .join(" ");
+
+//     if (nameValue.length === 0 ) {
+
+//     }
+// })
+
 
