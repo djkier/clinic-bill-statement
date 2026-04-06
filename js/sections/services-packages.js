@@ -1,4 +1,4 @@
-import { displayFlex, displayNone, enableInput, disableInput } from "../util.js";
+import { viewDisplay, hideDisplay, enableInput, disableInput } from "../util.js";
 
 const mcpCheckBox = document.querySelector("#mcp-box");
 const mcpCard = document.querySelector("#mcp");
@@ -30,19 +30,19 @@ function initMcp() {
 }
 
 function defaultMcp() {
-    displayNone(profFeeCard);
-    displayNone(mcpServiceCard);
+    hideDisplay(profFeeCard);
+    hideDisplay(mcpServiceCard);
 }
 
 function defaultPricing() {
     mcpServiceBox.checked = false;
-    displayNone(mcpServicePricing);
+    hideDisplay(mcpServicePricing);
 }
 
 mcpCheckBox.addEventListener("change", e => {
     if (e.target.checked) {
-        displayFlex(profFeeCard);
-        displayFlex(mcpServiceCard);
+        viewDisplay(profFeeCard);
+        viewDisplay(mcpServiceCard);
     } else {
         defaultMcp();
         defaultPricing();
@@ -67,7 +67,7 @@ dalireCheckBox.addEventListener("change", e => {
 
 mcpServiceBox.addEventListener("change", e => {
     if (e.target.checked) {
-        displayFlex(mcpServicePricing);
+        viewDisplay(mcpServicePricing);
     } else {
         defaultPricing();
     }

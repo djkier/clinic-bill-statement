@@ -1,13 +1,10 @@
-function displayStyle(card, opt) {
-    card.style.display = opt;
+
+export function viewDisplay(card) {
+    card.classList.remove("hidden");
 }
 
-export function displayFlex(card) {
-    displayStyle(card, "flex");
-}
-
-export function displayNone(card) {
-    displayStyle(card, "none");
+export function hideDisplay(card) {
+    card.classList.add("hidden");
 }
 
 export function enableInput(input) {

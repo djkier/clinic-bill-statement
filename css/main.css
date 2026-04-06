@@ -101,6 +101,7 @@ input:focus, select:focus {
     outline: 4px solid oklab(0.708 0 0 / 0.5);
 }
 
+
 .emphasize {
     font-weight: 600;
 }
@@ -662,4 +663,11 @@ PRINT PREVIEW
 
 
 
+}
+
+
+
+/* toggle classes */
+.hidden {
+    display: none;
 }
