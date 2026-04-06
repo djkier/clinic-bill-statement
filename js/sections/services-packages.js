@@ -20,7 +20,7 @@ const mcpServiceInputs = document.querySelectorAll("#mcp-service-pricing input")
 initMcp();
 
 //constraints
-nonNegativeInput(packageInputs);
+nonNegativeMultipleInput(packageInputs);
 
 
 

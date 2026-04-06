@@ -13,6 +13,11 @@ export function enableInput(input) {
 
 export function disableInput(input) {
     input.disabled = true;
+    clearInput(input);
+}
+
+function clearInput(input) {
+    input.value = "";
 }
 
 export function nonNegativeMultipleInput(inputArr) {
