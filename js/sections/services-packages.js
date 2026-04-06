@@ -1,9 +1,8 @@
-import { viewDisplay, hideDisplay, enableInput, disableInput } from "../util.js";
+import { viewDisplay, hideDisplay, enableInput, disableInput, nonNegativeMultipleInput } from "../util.js";
 
+const packageInputs = document.querySelectorAll("#packages input[type='number']");
 const mcpCheckBox = document.querySelector("#mcp-box");
 const mcpCard = document.querySelector("#mcp");
-const profCheckBox = document.querySelectorAll(`.pf input[type="checkbox"]`);
-const profInput = document.querySelectorAll(`.pf input[type="number"]`);
 const profFeeCard = document.querySelector("#professional-fee");
 const mcpServiceBox = document.querySelector("#mcp-service-checkbox");
 const mcpServiceCard = document.querySelector("#mcp-service");
@@ -12,20 +11,25 @@ const rualCheckBox = document.querySelector("#rual-checkbox");
 const rualInput = document.querySelector("#rual-pf")
 const dalireCheckBox = document.querySelector("#dalire-checkbox");
 const dalireInput = document.querySelector("#dalire-pf");
+const mcpServiceInputs = document.querySelectorAll("#mcp-service-pricing input");
+
 
 // -----------------------------------------------------
 // DEFAULTS    -----------------------------------------
 // -----------------------------------------------------
 initMcp();
 
+//constraints
+nonNegativeInput(packageInputs);
 
 
 
 // -----------------------------------------------------
-// Pricing checkbox    ---------------------------------
+// MCP CARD            ---------------------------------
 // -----------------------------------------------------
 function initMcp() {
     defaultMcp();
+    defaultProfFee();
     defaultPricing();
 }
 
@@ -34,9 +38,29 @@ function defaultMcp() {
     hideDisplay(mcpServiceCard);
 }
 
+function defaultProfFee() {
+    rualCheckBox.checked = false;
+    disableInput(rualInput);
+    dalireCheckBox.checked = false;
+    disableInput(dalireInput);
+}
+
+function disableAllServiceInput() {
+    mcpServiceInputs.forEach(input => {
+        disableInput(input);
+    });
+}
+
+function enableAllServiceInput() {
+    mcpServiceInputs.forEach(input => {
+        enableInput(input);
+    });
+}
+
 function defaultPricing() {
     mcpServiceBox.checked = false;
     hideDisplay(mcpServicePricing);
+    disableAllServiceInput();
 }
 
 mcpCheckBox.addEventListener("change", e => {
@@ -44,8 +68,7 @@ mcpCheckBox.addEventListener("change", e => {
         viewDisplay(profFeeCard);
         viewDisplay(mcpServiceCard);
     } else {
-        defaultMcp();
-        defaultPricing();
+        initMcp();
     }
 });
 
@@ -68,10 +91,13 @@ dalireCheckBox.addEventListener("change", e => {
 mcpServiceBox.addEventListener("change", e => {
     if (e.target.checked) {
         viewDisplay(mcpServicePricing);
+        enableAllServiceInput();
     } else {
         defaultPricing();
     }
 });
+
+
 
 
 

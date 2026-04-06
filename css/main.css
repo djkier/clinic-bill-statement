@@ -192,10 +192,6 @@ input[type="checkbox"] {
 
 }
 
-#rual-pf:disabled, #dalire-pf:disabled {
-    background-color: rgb(238, 238, 238);
-}
-
 .package-spacing {
     margin-left: 1.5rem;
     margin-top: 1rem;
@@ -670,4 +666,10 @@ PRINT PREVIEW
 /* toggle classes */
 .hidden {
     display: none;
+}
+
+input:disabled {
+  background-color: #f9fde3;
+  color: #888;     
+  cursor: not-allowed;
 }

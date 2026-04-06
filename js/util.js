@@ -14,3 +14,19 @@ export function enableInput(input) {
 export function disableInput(input) {
     input.disabled = true;
 }
+
+export function nonNegativeMultipleInput(inputArr) {
+    inputArr.forEach(input => {
+        nonNegativeInput(input);
+    });
+}
+
+export function nonNegativeInput(input) {
+    input.addEventListener("input", e => {
+        let inputValue = Number(e.target.value);
+
+        if (inputValue < 0) {
+            e.target.value = 0;
+        }
+    });
+}
