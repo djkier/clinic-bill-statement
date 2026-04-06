@@ -35,3 +35,15 @@ export function nonNegativeInput(input) {
         }
     });
 }
+
+export function disableAllServiceInput(inputArr) {
+    inputArr.forEach(input => {
+        disableInput(input);
+    });
+}
+
+export function enableAllServiceInput(inputArr) {
+    inputArr.forEach(input => {
+        enableInput(input);
+    });
+}

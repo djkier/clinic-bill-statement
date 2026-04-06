@@ -1,6 +1,7 @@
-import { viewDisplay, hideDisplay, enableInput, disableInput, nonNegativeMultipleInput } from "../util.js";
+import { viewDisplay, hideDisplay, enableInput, disableInput, nonNegativeMultipleInput, enableAllServiceInput, disableAllServiceInput } from "../util.js";
 
 const packageInputs = document.querySelectorAll("#packages input[type='number']");
+
 const mcpCheckBox = document.querySelector("#mcp-box");
 const mcpCard = document.querySelector("#mcp");
 const profFeeCard = document.querySelector("#professional-fee");
@@ -13,11 +14,16 @@ const dalireCheckBox = document.querySelector("#dalire-checkbox");
 const dalireInput = document.querySelector("#dalire-pf");
 const mcpServiceInputs = document.querySelectorAll("#mcp-service-pricing input");
 
-
+const encpCheckBox = document.querySelector("#encp-box");
+const encpServiceCard = document.querySelector("#encp-service");
+const encpServicePricing = document.querySelector("#encp-service-pricing");
+const encpServiceBox = document.querySelector("#encp-service-checkbox");
+const encpServiceInputs = document.querySelectorAll("#encp-service-pricing input");
 // -----------------------------------------------------
 // DEFAULTS    -----------------------------------------
 // -----------------------------------------------------
 initMcp();
+initEncp();
 
 //constraints
 nonNegativeMultipleInput(packageInputs);
@@ -45,22 +51,12 @@ function defaultProfFee() {
     disableInput(dalireInput);
 }
 
-function disableAllServiceInput() {
-    mcpServiceInputs.forEach(input => {
-        disableInput(input);
-    });
-}
 
-function enableAllServiceInput() {
-    mcpServiceInputs.forEach(input => {
-        enableInput(input);
-    });
-}
 
 function defaultPricing() {
     mcpServiceBox.checked = false;
     hideDisplay(mcpServicePricing);
-    disableAllServiceInput();
+    disableAllServiceInput(mcpServiceInputs);
 }
 
 mcpCheckBox.addEventListener("change", e => {
@@ -91,12 +87,45 @@ dalireCheckBox.addEventListener("change", e => {
 mcpServiceBox.addEventListener("change", e => {
     if (e.target.checked) {
         viewDisplay(mcpServicePricing);
-        enableAllServiceInput();
+        enableAllServiceInput(mcpServiceInputs);
     } else {
         defaultPricing();
     }
 });
 
+
+// -----------------------------------------------------
+// ENCP CARD           ---------------------------------
+// -----------------------------------------------------
+
+function initEncp() {
+    hideDisplay(encpServiceCard);    
+    defaultEncpService();
+}
+
+function defaultEncpService() {
+    hideDisplay(encpServicePricing);
+    disableAllServiceInput(encpServiceInputs);
+}
+
+
+
+encpCheckBox.addEventListener("change", e => {
+    if (e.target.checked) {
+        viewDisplay(encpServiceCard);
+    } else {
+        hideDisplay(encpServiceCard);
+    }
+})
+
+encpServiceBox.addEventListener("change", e => {
+    if (e.target.checked) {
+        viewDisplay(encpServicePricing);
+        enableAllServiceInput(encpServiceInputs);
+    } else {
+        defaultEncpService();
+    }
+})
 
 
 
