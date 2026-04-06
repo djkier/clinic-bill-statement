@@ -28,6 +28,11 @@ html {
     font-family: "Arimo", sans-serif;
 }
 
+input[type="date"] {
+    font-size: 14px;
+    font-family: "Arimo", sans-serif;
+}
+
 p {
     margin: 0;
 }
