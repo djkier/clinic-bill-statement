@@ -42,7 +42,7 @@ dischargeDateInput.addEventListener("change", e => {
     // automatic admission when changing discharge value
     const dateOfDischarge= new Date(e.target.value);
     const possibleDateOfAdmission = (dateOfDischarge.setDate(dateOfDischarge.getDate() - 1));
-    inputDateFormatter(admissionDateInput, new Date(possibleDateOfAdmission));
+    defaultDate(admissionDateInput, new Date(possibleDateOfAdmission));
 });
 
 

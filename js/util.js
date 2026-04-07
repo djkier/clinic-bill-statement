@@ -47,3 +47,7 @@ export function enableAllServiceInput(inputArr) {
         enableInput(input);
     });
 }
+
+export function formatMoney(money) {
+    
+}

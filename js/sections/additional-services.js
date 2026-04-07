@@ -3,6 +3,7 @@ import { nonNegativeInput } from "../util.js";
 const table = document.querySelector("#additional table");
 const tbody = document.querySelector("#additional tbody");
 const rows = document.querySelectorAll("#additional tbody tr");
+const amtInputs = document.querySelectorAll("#additional tbody tr td:nth-child(3) input")
 const trashBtns = document.querySelectorAll("#additional .trash-btn");
 const addRowBtn = document.querySelector("#add-row-btn");
 
@@ -22,7 +23,26 @@ addRowBtn.addEventListener("click", handleNewRow);
 // Rows Actions ----------------------------------------
 // -----------------------------------------------------
 
-// const firstInput = parentTr.children[0].querySelector("input");
+function amountAction(qtyInput, unitInput, amtInput) {
+    inputChange(qtyInput, () => handleAmountInput(qtyInput, unitInput, amtInput));
+    inputChange(unitInput, () => handleAmountInput(qtyInput, unitInput, amtInput));
+}
+
+function handleAmountInput(qtyInput, unitInput, amtInput) {
+
+    const qtyVal = Number(qtyInput.value) || 0;
+    const unitVal = Number(unitInput.value) || 0;
+    const amtValue = Number(qtyVal * unitVal).toFixed(2);
+
+    amtInput.value = amtValue;
+}
+
+function inputChange(input, fn) {
+    input.addEventListener("input", fn)
+};
+
+
+
 function handleTrashAction(btn) {
     btn.addEventListener("click",  e => {
         const parentTr = e.target.closest("tr");
@@ -75,6 +95,12 @@ function handleNewRow() {
         newTr.appendChild(newTd);
     }
 
+    amountAction(
+        getInputFromTr(newTr, 1), //quantity input
+        getInputFromTr(newTr, 2), //unit price input
+        getInputFromTr(newTr, 3)  // amount input
+    );
+
     tbody.appendChild(newTr);
 }
 
@@ -102,6 +128,11 @@ function createTrashBtn() {
 
     return newDiv;
 }
+
+function getInputFromTr(row, index) {
+    return row.children[index].querySelector("input");
+}
+
 
 
 
