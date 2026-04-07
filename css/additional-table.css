@@ -72,7 +72,7 @@
     align-items: center;
 }
 
-#add-row-btn {
+#add-row-btn, #generate-preview-btn {
     cursor: pointer;
     background-color: #007BFF;
     border: 0;
@@ -81,13 +81,27 @@
     font: "Arimo", sans-serif;
     font-size: 14px;
     font-weight: 700;
-    /* width: 7rem; */
+   
     width: 100%;
 
 }
 
-#add-row-btn:hover {
+#add-row-btn:hover, #generate-preview-btn:hover {
     background-color: #0c72df;
+}
+
+#generate-preview-btn {
+    width: 6.5rem;
+    height: 34px;
+}
+
+/* Preview Button */
+#generate-preview {
+    /* border: 1px solid red; */
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 

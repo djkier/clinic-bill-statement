@@ -1,0 +1,184 @@
+const billInfo = {
+    patientDetails: {
+        patientName: "",
+        dateOfAdmission: new Date(),
+        dateOfDischarge: new Date(),
+        age: 0,
+        babyGender: "",
+        pregnancyCount: 0,
+        parity: 0
+    },
+    servicesPackages: {
+        mcp: {
+            profFee: {
+                amount: {
+                    rual: 0,
+                    dalire: 0
+                },
+                philHealth: 6240 
+            },
+            nursingService: {
+                amount: 0,
+                philHealth: 1500
+            },
+            recoveryRoom: {
+                amount: 0,
+                philHealth: 1000
+            },
+            prenatalAndPost: {
+                amount: 0,
+                philHealth: 2000
+            },
+            medication: {
+                amount: 0,
+                philHealth: 3500
+            },
+            miscellaneous: {
+                amount: 0,
+                philHealth: 1360
+            }
+        },
+        encp: {
+            profFee: {
+                amount: 0,
+                philHealth: 978
+            },
+            ens: {
+                amount: 0,
+                philHealth: 2761.50
+            },
+            bcgVaccine: {
+                amount: 0,
+                philHealth: 500
+            },
+            vitK: {
+                amount: 0,
+                philHealth: 200
+            },
+            hepaBVaccine: {
+                amount: 0,
+                philHealth: 500
+            },
+            erythromycin: {
+                amount: 0,
+                philHealth: 130
+            },
+            cordClamp: {
+                amount: 0,
+                philHealth: 50
+            }
+        } 
+    },
+    additionalServices: [],
+    others: {
+        discountAmount: 0,
+        preparedBy: ""
+    }
+};
+
+const noEntryDefault = "&nbsp;&nbsp;&#8212;";
+
+export function setPatientName(name) {
+    billInfo.patientDetails.patientName = name;
+}
+
+export function setDateOfAdmission(date) {
+    billInfo.patientDetails.dateOfAdmission = date;
+}
+
+export function setDateOfDischarge(date) {
+    billInfo.patientDetails.dateOfDischarge = date;
+}
+
+export function setAge(age) {
+    billInfo.patientDetails.age = age;
+}
+
+export function setBabyGender(gender) {
+    billInfo.patientDetails.babyGender = gender;
+}
+
+export function setPregnancyCount(count) {
+    billInfo.patientDetails.pregnancyCount = count;
+}
+
+export function setParity(count) {
+    billInfo.patientDetails.parity = count;
+}
+
+export function setLizaAmount(amount) {
+    billInfo.servicesPackages.mcp.profFee.amount.liza = amount;
+}
+
+export function setDalireAmount(amount) {
+    billInfo.servicesPackages.mcp.profFee.amount.dalire = amount;
+}
+
+export function setNursingService(amount) {
+    billInfo.servicesPackages.mcp.nursingService.amount = amount;
+}
+
+export function setRecoveryRoom(amount) {
+    billInfo.servicesPackages.mcp.recoveryRoom.amount = amount;
+}
+
+export function setPreAndPostNatal(amount) {
+    billInfo.servicesPackages.mcp.prenatalAndPost.amount = amount;
+}
+
+export function setMedication(amount) {
+    billInfo.servicesPackages.mcp.medication.amount = amount;
+}
+
+export function setMiscellaneous(amount) {
+    billInfo.servicesPackages.mcp.miscellaneous.amount = amount;
+}
+
+export function setEncpProfFee(amount) {
+    billInfo.servicesPackages.encp.profFee.amount = amount;
+}
+
+export function setEns(amount) {
+    billInfo.servicesPackages.encp.ens.amount = amount;
+}
+
+export function setBcgVaccine(amount) {
+    billInfo.servicesPackages.encp.bcgVaccine.amount = amount;
+}
+
+export function setVitK(amount) {
+    billInfo.servicesPackages.encp.vitK.amount = amount;
+}
+
+export function setHepaBVaccine(amount) {
+    billInfo.servicesPackages.encp.hepaBVaccine.amount = amount;
+}
+
+export function setErythromycin(amount) {
+    billInfo.servicesPackages.encp.erythromycin.amount = amount;
+}
+
+export function setCordClamp(amount) {
+    billInfo.servicesPackages.encp.cordClamp.amount = amount;
+}
+
+export function createNewService(nameVal, qtyVal, unitVal, amountVal) {
+    return {
+        name: nameVal,
+        qty: qtyVal,
+        unit: unitVal,
+        amount: amountVal
+    }
+}
+
+export function addNewAdditionalServices(newService) {
+    billInfo.additionalServices.push(newService);
+}
+
+export function setDiscount(amount) {
+    billInfo.others.discountAmount = amount;
+}
+
+export function setPreparedBy(name) {
+    billInfo.others.preparedBy = name;
+}

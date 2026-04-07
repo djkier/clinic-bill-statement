@@ -6,6 +6,7 @@ const patientAgeInput = document.querySelector("#patient-age");
 const genderSelect = document.querySelector("#gender");
 const gravidaInput = document.querySelector("#gravida");
 const paraInput = document.querySelector("#para");
+const generatePreview = document.querySelector("#generate-preview-btn");
 
 const today = new Date();
 const yesterday = (new Date()).setDate(today.getDate() - 1);

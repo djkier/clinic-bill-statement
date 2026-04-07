@@ -7,13 +7,6 @@
         <link rel="stylesheet" href="./css/toggle-switch.css">
         <link rel="stylesheet" href="./css/additional-table.css">
         <script type="module" src="./js/main.js"></script>
-
-
-        <!-- <script src="./js/tableBuilder.js" defer></script> -->  
-        <!-- table builder is a template and can be use as a future module -->
-        <!-- <script src="./js/services.js" defer></script> -->
-        <!-- <script src="./js/patientInfo.js" defer></script>  -->
-
         <title>Clinic Bill Statement</title>
     </head>
     <body>
@@ -237,6 +230,10 @@
 
                 </section>
 
+                <section id="generate-preview">
+                    <button id="generate-preview-btn" class="buttons">Preview</button>
+                </section>
+
 
             </section>
 
@@ -327,28 +324,6 @@
 
         <!-- 
         NOTES: 
-        SUGGESTED LAYOUT FOR Services and Packages
-
-        Package A  ✓
-        -------------------------
-        Professional Fee
-        [ ] Person A   [ amount ]
-        [ ] Person B   [ amount ]
-
-        --------------------------------
-        Pricing
-        Use default pricing  [ YES ]
-
-        (when NO)
-
-        Service Breakdown:
-        Service 1   [ amount ]
-        Service 2   [ amount ]
-        Service 3   [ amount ]
-
-        -make sure the services are pre-filled
-        -add reset to default option
-
         ===================================================
         
         FOR PREVIEW AND PRINT
