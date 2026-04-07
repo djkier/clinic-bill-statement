@@ -1,3 +1,5 @@
+import { setPatientName, setDateOfAdmission, setDateOfDischarge, setAge, setBabyGender, setPregnancyCount, setParity } from "../state.js";
+
 // input selector
 const patientNameInput = document.querySelector("#patient-name");
 const admissionDateInput = document.querySelector("#admission-date");
@@ -6,7 +8,6 @@ const patientAgeInput = document.querySelector("#patient-age");
 const genderSelect = document.querySelector("#gender");
 const gravidaInput = document.querySelector("#gravida");
 const paraInput = document.querySelector("#para");
-const generatePreview = document.querySelector("#generate-preview-btn");
 
 const today = new Date();
 const yesterday = (new Date()).setDate(today.getDate() - 1);
@@ -119,4 +120,22 @@ paraInput.addEventListener("input", e => {
 //     }
 // })
 
+function formatName(input){
+    return input.value
+                .trim()
+                .split(" ")
+                .filter(word => word)
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ");
+}
+
+export function handlePatientDetailsState() {
+    setPatientName(formatName(patientNameInput));
+    setDateOfAdmission(admissionDateInput.value);
+    setDateOfDischarge(dischargeDateInput.value);
+    setAge(patientAgeInput.value);
+    setBabyGender(genderSelect.value);
+    setPregnancyCount(gravidaInput.value);
+    setParity(paraInput.value); 
+}
 

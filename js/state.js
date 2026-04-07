@@ -78,32 +78,49 @@ const billInfo = {
 
 const noEntryDefault = "&nbsp;&nbsp;&#8212;";
 
+function getValueOrDefault(value, def) {
+    return (value === "" || value === null || value === undefined) ? def : value; 
+}
+
+function defaultEmptyText(value) {
+    return getValueOrDefault(value, noEntryDefault);
+}
+
+function defaultEmptyNumber(value) {
+    return getValueOrDefault(value, 0);
+}
+
+function defaultEmptyDate(value) {
+    return getValueOrDefault(value, "2000-01-01");
+}
+
+
 export function setPatientName(name) {
-    billInfo.patientDetails.patientName = name;
+    billInfo.patientDetails.patientName = defaultEmptyText(name)
 }
 
 export function setDateOfAdmission(date) {
-    billInfo.patientDetails.dateOfAdmission = date;
+    billInfo.patientDetails.dateOfAdmission = defaultEmptyDate(date);
 }
 
 export function setDateOfDischarge(date) {
-    billInfo.patientDetails.dateOfDischarge = date;
+    billInfo.patientDetails.dateOfDischarge = defaultEmptyDate(date);
 }
 
 export function setAge(age) {
-    billInfo.patientDetails.age = age;
+    billInfo.patientDetails.age = defaultEmptyNumber(age);
 }
 
 export function setBabyGender(gender) {
-    billInfo.patientDetails.babyGender = gender;
+    billInfo.patientDetails.babyGender = defaultEmptyText(gender);
 }
 
 export function setPregnancyCount(count) {
-    billInfo.patientDetails.pregnancyCount = count;
+    billInfo.patientDetails.pregnancyCount = defaultEmptyNumber(count);
 }
 
 export function setParity(count) {
-    billInfo.patientDetails.parity = count;
+    billInfo.patientDetails.parity = defaultEmptyNumber(count);
 }
 
 export function setLizaAmount(amount) {
@@ -181,4 +198,8 @@ export function setDiscount(amount) {
 
 export function setPreparedBy(name) {
     billInfo.others.preparedBy = name;
+}
+
+export function getPatientDetails() {
+    return billInfo.patientDetails;
 }
