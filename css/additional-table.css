@@ -27,7 +27,7 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    border: none;
+
     margin: 0;
 }
 
@@ -41,11 +41,30 @@
     background-color: white;
 }
 
+#additional tr:hover input, #additional tr:focus-within input{
+    border: 1px solid #0c72df;
+}
+
+.trash-btn{
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+
+}
+
+.trash-btn:hover {
+    background-color: rgb(252, 218, 218);
+    cursor: pointer;
+}
+
 #add-new-row {
     /* border: 1px solid red; */
     /* background-color: #a8d2ff; */
     margin-left: 4px;
-    width: calc(100% - 28px);
+    width: calc(100% - 36px);
     height: 34px;
     display: flex;
     justify-content: center;
@@ -69,4 +88,6 @@
 #add-row-btn:hover {
     background-color: #0c72df;
 }
+
+
 
