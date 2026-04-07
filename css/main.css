@@ -249,7 +249,7 @@ img {
 
 
 .buttons {
-    display: flex;
+
     padding: 8px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 12px;
@@ -257,12 +257,12 @@ img {
     font-weight: 600;
     column-gap: 4px;
     width: 6.5rem;
-    transition: 0.2s ease all;
+
 }
 
 
 .buttons:hover {
-    background-color: oklch(94.158% 0.02414 254.032);
+    /* background-color: #0c72df; */
     cursor: pointer;
     transform: scale(1.02);
 }
@@ -432,31 +432,31 @@ Preview
 TABLE 
 */
 
-table {
+.services-rendered table {
     margin-top: 8px;
     border-collapse: collapse;
     width: 100%;
     font-size: 14px;
 }
 
-thead tr {
+.services-rendered thead tr {
    background-color: rgb(224, 224, 224);
    padding: 8px;
    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 
 }
 
-thead th:first-child {
+.services-rendered thead th:first-child {
     text-align: left;
     width: 25rem;
 }
 
-th {
+.services-rendered th {
     text-align: center;
     padding: 4px;
 }
 
-th:nth-child(n+2) {
+.services-rendered th:nth-child(n+2) {
     width: 10rem;
 }
 
@@ -468,12 +468,12 @@ th:nth-child(n+2) {
     padding-left: 2rem;
 }
 
-td {
+.services-rendered td {
     text-align: right;
     padding: 0.25rem 3.25rem;
 }
 
-tbody tr {
+.services-rendered tbody tr {
    border-bottom: 1px solid rgba(0, 0, 0, 0.15); 
 }
 

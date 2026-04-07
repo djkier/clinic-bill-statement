@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./css/main.css">
         <link rel="stylesheet" href="./css/toggle-switch.css">
+        <link rel="stylesheet" href="./css/additional-table.css">
         <script type="module" src="./js/main.js"></script>
 
 
@@ -197,20 +198,61 @@
                     </div>
                 </section>
 
-                <div id="additional">
+                <section id="additional">
                     <h3>Additional Services / Medications</h3>
                     <table>
                         <thead>
-                            <tr>Name</tr>
-                            <tr>Quantity</tr>
-                            <tr>Unit Price</tr>
-                            <tr>Total</tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Amount</th>
+                                <th></th>
+                            </tr>
                         </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text">
+                                </td>
+                                <td>
+                                    <input type="number">
+                                </td>
+                                <td>
+                                    <input type="number">
+                                </td>
+                                <td>
+                                    <input type="number" disabled>
+                                </td>
+                                <td>
+                                    <img src="./assets/trash.svg" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text">
+                                </td>
+                                <td>
+                                    <input type="number">
+                                </td>
+                                <td>
+                                    <input type="number">
+                                </td>
+                                <td>
+                                    <input type="number" disabled>
+                                </td>
+                                <td>
+                                    <img src="./assets/trash.svg" />
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                     
 
-                    <div id="additional-generated-services"></div>
-                </div>
+                    <div id="add-new-row">
+                        <button id="add-row-btn" class="buttons">+ Add Row</button>
+                    </div>
+                </section>
 
                 <div id="other">
                     <h3>Others</h3>
@@ -268,7 +310,7 @@
                     </section>
 
                     <!-- SERVICES RENDERED -->
-                    <section>
+                    <section class="services-rendered">
                         <h4>SERVICES RENDERED</h4>
                         <table>
                             <thead>
