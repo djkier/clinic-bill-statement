@@ -115,6 +115,8 @@ encpCheckBox.addEventListener("change", e => {
         viewDisplay(encpServiceCard);
     } else {
         hideDisplay(encpServiceCard);
+        encpServiceBox.checked = false;
+        defaultEncpService();
     }
 })
 

@@ -366,11 +366,12 @@ Preview
 */
 
 #preview-and-generate {
-    /* display: none; */
+    display: none;
     margin-left: 2rem;
 }
 
 #bill-preview {
+
     width: 8.5in;
     /* min-height: 13in; */
     height: 13in;
