@@ -18,53 +18,65 @@ const billInfo = {
                 philHealth: 6240 
             },
             nursingService: {
-                amount: 0,
+                name: "Nursing Service Fee",
+                amount: 1500,
                 philHealth: 1500
             },
             recoveryRoom: {
-                amount: 0,
+                name: "Recovery Room",
+                amount: 1000,
                 philHealth: 1000
             },
             prenatalAndPost: {
-                amount: 0,
+                name: "Prenatal and Postnatal Fee",
+                amount: 2000,
                 philHealth: 2000
             },
             medication: {
-                amount: 0,
+                name: "Medications",
+                amount: 3500,
                 philHealth: 3500
             },
             miscellaneous: {
-                amount: 0,
+                name: "Miscellaneous Fee",
+                amount: 1360,
                 philHealth: 1360
             }
         },
         encp: {
             profFee: {
-                amount: 0,
+                name: "Professional Fee",
+                amount: 978,
                 philHealth: 978
             },
             ens: {
-                amount: 0,
+                name: "Expanded Newborn Screening",
+                amount: 2761.50,
                 philHealth: 2761.50
             },
             bcgVaccine: {
-                amount: 0,
+                name: "BCG Vaccine",
+                amount: 500,
                 philHealth: 500
             },
             vitK: {
-                amount: 0,
+                name: "Vitamin K",
+                amount: 200,
                 philHealth: 200
             },
             hepaBVaccine: {
-                amount: 0,
+                name: "Hepatitis B Vaccine",
+                amount: 500,
                 philHealth: 500
             },
             erythromycin: {
-                amount: 0,
+                name: "Erythromycin Eye Prophylaxis",
+                amount: 130,
                 philHealth: 130
             },
             cordClamp: {
-                amount: 0,
+                name: "Cord Clamp",
+                amount: 50,
                 philHealth: 50
             }
         } 
@@ -123,62 +135,62 @@ export function setParity(count) {
 }
 
 export function setLizaAmount(amount) {
-    billInfo.servicesPackages.mcp.profFee.amount.liza = amount;
+    billInfo.servicesPackages.mcp.profFee.amount.liza = defaultEmptyNumber(amount);
 }
 
 export function setDalireAmount(amount) {
-    billInfo.servicesPackages.mcp.profFee.amount.dalire = amount;
+    billInfo.servicesPackages.mcp.profFee.amount.dalire = defaultEmptyNumber(amount);
 }
 
 export function setNursingService(amount) {
-    billInfo.servicesPackages.mcp.nursingService.amount = amount;
+    billInfo.servicesPackages.mcp.nursingService.amount = defaultEmptyNumber(amount);
 }
 
 export function setRecoveryRoom(amount) {
-    billInfo.servicesPackages.mcp.recoveryRoom.amount = amount;
+    billInfo.servicesPackages.mcp.recoveryRoom.amount = defaultEmptyNumber(amount);
 }
 
 export function setPreAndPostNatal(amount) {
-    billInfo.servicesPackages.mcp.prenatalAndPost.amount = amount;
+    billInfo.servicesPackages.mcp.prenatalAndPost.amount = defaultEmptyNumber(amount);
 }
 
 export function setMedication(amount) {
-    billInfo.servicesPackages.mcp.medication.amount = amount;
+    billInfo.servicesPackages.mcp.medication.amount = defaultEmptyNumber(amount);
 }
 
 export function setMiscellaneous(amount) {
-    billInfo.servicesPackages.mcp.miscellaneous.amount = amount;
+    billInfo.servicesPackages.mcp.miscellaneous.amount = defaultEmptyNumber(amount);
 }
 
 export function setEncpProfFee(amount) {
-    billInfo.servicesPackages.encp.profFee.amount = amount;
+    billInfo.servicesPackages.encp.profFee.amount = defaultEmptyNumber(amount);
 }
 
 export function setEns(amount) {
-    billInfo.servicesPackages.encp.ens.amount = amount;
+    billInfo.servicesPackages.encp.ens.amount = defaultEmptyNumber(amount);
 }
 
 export function setBcgVaccine(amount) {
-    billInfo.servicesPackages.encp.bcgVaccine.amount = amount;
+    billInfo.servicesPackages.encp.bcgVaccine.amount = defaultEmptyNumber(amount);
 }
 
 export function setVitK(amount) {
-    billInfo.servicesPackages.encp.vitK.amount = amount;
+    billInfo.servicesPackages.encp.vitK.amount = defaultEmptyNumber(amount);
 }
 
 export function setHepaBVaccine(amount) {
-    billInfo.servicesPackages.encp.hepaBVaccine.amount = amount;
+    billInfo.servicesPackages.encp.hepaBVaccine.amount = defaultEmptyNumber(amount);
 }
 
 export function setErythromycin(amount) {
-    billInfo.servicesPackages.encp.erythromycin.amount = amount;
+    billInfo.servicesPackages.encp.erythromycin.amount = defaultEmptyNumber(amount);
 }
 
 export function setCordClamp(amount) {
-    billInfo.servicesPackages.encp.cordClamp.amount = amount;
+    billInfo.servicesPackages.encp.cordClamp.amount = defaultEmptyNumber(amount);
 }
 
-export function createNewService(nameVal, qtyVal, unitVal, amountVal) {
+function createNewService(nameVal, qtyVal, unitVal, amountVal) {
     return {
         name: nameVal,
         qty: qtyVal,
@@ -187,7 +199,8 @@ export function createNewService(nameVal, qtyVal, unitVal, amountVal) {
     }
 }
 
-export function addNewAdditionalServices(newService) {
+export function addNewAdditionalServices(nameVal, qtyVal, unitVal, amountVal) {
+    const newService = createNewService(nameVal, qtyVal, unitVal, amountVal);
     billInfo.additionalServices.push(newService);
 }
 
@@ -206,6 +219,14 @@ export function setDateToday(date) {
 
 export function getPatientDetails() {
     return { ...billInfo.patientDetails };
+}
+
+export function getMcpDetails() {
+    return { ...billInfo.servicesPackages.mcp };
+}
+
+export function getEncpDetails() {
+    return { ...billInfo.servicesPackages.encp };
 }
 
 export function getOtherDetails() {

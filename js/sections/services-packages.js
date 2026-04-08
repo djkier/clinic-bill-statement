@@ -1,4 +1,5 @@
-import { viewDisplay, hideDisplay, enableInput, disableInput, nonNegativeMultipleInput, enableAllServiceInput, disableAllServiceInput } from "../util.js";
+import { setLizaAmount, setDalireAmount, setNursingService, setRecoveryRoom, setPreAndPostNatal, setMedication, setMiscellaneous, setEncpProfFee, setEns, setBcgVaccine, setVitK, setHepaBVaccine, setErythromycin, setCordClamp, getMcpDetails, getEncpDetails } from "../state.js";
+import { viewDisplay, hideDisplay, enableInput, disableInput, nonNegativeMultipleInput, enableAllServiceInput, disableAllServiceInput, descToId, disableInputAndClear } from "../util.js";
 
 const packageInputs = document.querySelectorAll("#packages input[type='number']");
 
@@ -12,7 +13,7 @@ const rualCheckBox = document.querySelector("#rual-checkbox");
 const rualInput = document.querySelector("#rual-pf")
 const dalireCheckBox = document.querySelector("#dalire-checkbox");
 const dalireInput = document.querySelector("#dalire-pf");
-const mcpServiceInputs = document.querySelectorAll("#mcp-service-pricing input");
+
 
 const encpCheckBox = document.querySelector("#encp-box");
 const encpServiceCard = document.querySelector("#encp-service");
@@ -22,6 +23,7 @@ const encpServiceInputs = document.querySelectorAll("#encp-service-pricing input
 // -----------------------------------------------------
 // DEFAULTS    -----------------------------------------
 // -----------------------------------------------------
+populateServiceCards(getMcpDetails(), mcpServicePricing, "mcp");
 initMcp();
 initEncp();
 
@@ -36,7 +38,7 @@ nonNegativeMultipleInput(packageInputs);
 function initMcp() {
     defaultMcp();
     defaultProfFee();
-    defaultPricing();
+    defaultMcpPricing();
 }
 
 function defaultMcp() {
@@ -46,18 +48,17 @@ function defaultMcp() {
 
 function defaultProfFee() {
     rualCheckBox.checked = false;
-    disableInput(rualInput);
+    disableInputAndClear(rualInput);
     dalireCheckBox.checked = false;
-    disableInput(dalireInput);
+    disableInputAndClear(dalireInput);
 }
 
-
-
-function defaultPricing() {
+function defaultMcpPricing() {
     mcpServiceBox.checked = false;
     hideDisplay(mcpServicePricing);
-    disableAllServiceInput(mcpServiceInputs);
 }
+
+
 
 mcpCheckBox.addEventListener("change", e => {
     if (e.target.checked) {
@@ -87,9 +88,10 @@ dalireCheckBox.addEventListener("change", e => {
 mcpServiceBox.addEventListener("change", e => {
     if (e.target.checked) {
         viewDisplay(mcpServicePricing);
+        const mcpServiceInputs = document.querySelectorAll("#mcp-service-pricing input");
         enableAllServiceInput(mcpServiceInputs);
     } else {
-        defaultPricing();
+        defaultMcpPricing();
     }
 });
 
@@ -129,7 +131,48 @@ encpServiceBox.addEventListener("change", e => {
     }
 })
 
+// -----------------------------------------------------
+// Common Functions     --------------------------------
+// -----------------------------------------------------
 
+function populateServiceCards(details, section, type) {
+    const keys = Object.keys(details);
+    keys.forEach(key => {
+        
+        if (!(details[key]["name"] === undefined)) {
+            section.appendChild(serviceCardDiv(details[key], type));
+        }
+    });
+}
 
+function serviceCardDiv(detail, type) {
+    const kebabName = descToId(detail.name, type);
+
+    const div = document.createElement("div");
+    div.classList.add("service-row", "service-row-space");
+
+    const label = document.createElement("label");
+    label.textContent = detail.name;
+    label.setAttribute("for", kebabName);
+    
+    const input = document.createElement("input");
+    input.type = "number";
+    input.name = kebabName;
+    input.id = kebabName;
+    input.value = detail.amount;
+
+    div.appendChild(label);
+    div.appendChild(input);
+
+    return div;
+}
+
+// -----------------------------------------------------
+// Preview Btn Handlers --------------------------------
+// -----------------------------------------------------
+function handleItemizedDetailsState() {
+    setLizaAmount(rualInput.value);
+    setDalireAmount(dalireInput.value);
+}
 
 

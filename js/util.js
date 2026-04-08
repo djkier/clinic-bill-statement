@@ -11,9 +11,14 @@ export function enableInput(input) {
     input.disabled = false;
 }
 
+export function disableInputAndClear(input) {
+    disableInput(input);
+    clearInput(input);
+}
+
 export function disableInput(input) {
     input.disabled = true;
-    clearInput(input);
+    
 }
 
 function clearInput(input) {
@@ -58,4 +63,10 @@ export function defaultDateFormat(date) {
     const dd = String(date.getDate()).padStart(2, "0");
 
     return `${yyyy}-${mm}-${dd}`;
+}
+
+export function descToId(desc, prepend) {
+    const parts = desc.toLowerCase().split(" ");
+    parts.unshift(prepend);
+    return parts.join("-");
 }
