@@ -225,8 +225,16 @@ export function getMcpDetails() {
     return { ...billInfo.servicesPackages.mcp };
 }
 
+export function setMcpDetails() {
+    return billInfo.servicesPackages.mcp;
+}
+
 export function getEncpDetails() {
     return { ...billInfo.servicesPackages.encp };
+}
+
+export function setEncpDetails() {
+    return billInfo.servicesPackages.encp;
 }
 
 export function getOtherDetails() {

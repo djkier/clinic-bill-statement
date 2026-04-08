@@ -1,5 +1,5 @@
-import { setLizaAmount, setDalireAmount, setNursingService, setRecoveryRoom, setPreAndPostNatal, setMedication, setMiscellaneous, setEncpProfFee, setEns, setBcgVaccine, setVitK, setHepaBVaccine, setErythromycin, setCordClamp, getMcpDetails, getEncpDetails } from "../state.js";
-import { viewDisplay, hideDisplay, enableInput, disableInput, nonNegativeMultipleInput, enableAllServiceInput, disableAllServiceInput, descToId, disableInputAndClear } from "../util.js";
+import { setLizaAmount, setDalireAmount, setNursingService, setRecoveryRoom, setPreAndPostNatal, setMedication, setMiscellaneous, setEncpProfFee, setEns, setBcgVaccine, setVitK, setHepaBVaccine, setErythromycin, setCordClamp, getMcpDetails, getEncpDetails, setMcpDetails, setEncpDetails } from "../state.js";
+import { viewDisplay, hideDisplay, enableInput, disableInput, nonNegativeMultipleInput, enableAllServiceInput, disableAllServiceInput, descToId, disableInputAndClear, idToDesc } from "../util.js";
 
 const packageInputs = document.querySelectorAll("#packages input[type='number']");
 
@@ -23,7 +23,7 @@ const encpServiceInputs = document.querySelectorAll("#encp-service-pricing input
 // -----------------------------------------------------
 // DEFAULTS    -----------------------------------------
 // -----------------------------------------------------
-populateServiceCards(getMcpDetails(), mcpServicePricing, "mcp");
+initServicesCards();
 initMcp();
 initEncp();
 
@@ -88,8 +88,6 @@ dalireCheckBox.addEventListener("change", e => {
 mcpServiceBox.addEventListener("change", e => {
     if (e.target.checked) {
         viewDisplay(mcpServicePricing);
-        const mcpServiceInputs = document.querySelectorAll("#mcp-service-pricing input");
-        enableAllServiceInput(mcpServiceInputs);
     } else {
         defaultMcpPricing();
     }
@@ -106,10 +104,9 @@ function initEncp() {
 }
 
 function defaultEncpService() {
+    encpServiceBox.checked = false;
     hideDisplay(encpServicePricing);
-    disableAllServiceInput(encpServiceInputs);
 }
-
 
 
 encpCheckBox.addEventListener("change", e => {
@@ -117,7 +114,6 @@ encpCheckBox.addEventListener("change", e => {
         viewDisplay(encpServiceCard);
     } else {
         hideDisplay(encpServiceCard);
-        encpServiceBox.checked = false;
         defaultEncpService();
     }
 })
@@ -125,7 +121,6 @@ encpCheckBox.addEventListener("change", e => {
 encpServiceBox.addEventListener("change", e => {
     if (e.target.checked) {
         viewDisplay(encpServicePricing);
-        enableAllServiceInput(encpServiceInputs);
     } else {
         defaultEncpService();
     }
@@ -134,6 +129,10 @@ encpServiceBox.addEventListener("change", e => {
 // -----------------------------------------------------
 // Common Functions     --------------------------------
 // -----------------------------------------------------
+function initServicesCards() {
+    populateServiceCards(getMcpDetails(), mcpServicePricing, "mcp");
+    populateServiceCards(getEncpDetails(), encpServicePricing, "encp");
+}
 
 function populateServiceCards(details, section, type) {
     const keys = Object.keys(details);
@@ -170,9 +169,36 @@ function serviceCardDiv(detail, type) {
 // -----------------------------------------------------
 // Preview Btn Handlers --------------------------------
 // -----------------------------------------------------
+export function processItem() {
+    handleItemizedDetailsState();
+
+    
+}
+
 function handleItemizedDetailsState() {
     setLizaAmount(rualInput.value);
     setDalireAmount(dalireInput.value);
+    inputToStateService(setMcpDetails, mcpServicePricing);
+    inputToStateService(setEncpDetails, encpServicePricing);
+}
+
+function inputToStateService(setDetails, section) {
+    const inputs = section.querySelectorAll("input");
+    
+    const nameToKey = {};
+    for (const key in setDetails) {
+        const name = setDetails[key].name.toLowerCase();
+        nameToKey[name] = key;
+    }
+
+    for (const input of inputs) {
+        const name = idToDesc(input.id);
+        const key = nameToKey[name];
+
+        if (key !== undefined) {
+            setDetails[key].amount = input.value;
+        }
+    }
 }
 
 

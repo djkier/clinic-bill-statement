@@ -70,3 +70,9 @@ export function descToId(desc, prepend) {
     parts.unshift(prepend);
     return parts.join("-");
 }
+
+export function idToDesc(id) {
+    const parts = id.toLowerCase().split("-");
+    parts.shift();
+    return parts.join(" ");
+}
