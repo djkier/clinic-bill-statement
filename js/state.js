@@ -11,10 +11,18 @@ const billInfo = {
     servicesPackages: {
         mcp: {
             profFee: {
-                amount: {
-                    rual: 0,
-                    dalire: 0
-                },
+                professionals: [
+                    {
+                        name: "Liza H. Rual, RM",
+                        id: "rual-pf",
+                        amount: 0
+                    },
+                    {
+                        name: "Dr.Genevieve Mendoza-Dalire",
+                        id: "dalire-pf",
+                        amount: 0
+                    }
+                ],
                 philHealth: 6240 
             },
             nursingService: {
@@ -134,60 +142,15 @@ export function setParity(count) {
     billInfo.patientDetails.parity = defaultEmptyNumber(count);
 }
 
-export function setLizaAmount(amount) {
-    billInfo.servicesPackages.mcp.profFee.amount.liza = defaultEmptyNumber(amount);
-}
+export function setProfAmount(id, amount) {
+    const profArr = billInfo.servicesPackages.mcp.profFee.professionals;
 
-export function setDalireAmount(amount) {
-    billInfo.servicesPackages.mcp.profFee.amount.dalire = defaultEmptyNumber(amount);
-}
-
-export function setNursingService(amount) {
-    billInfo.servicesPackages.mcp.nursingService.amount = defaultEmptyNumber(amount);
-}
-
-export function setRecoveryRoom(amount) {
-    billInfo.servicesPackages.mcp.recoveryRoom.amount = defaultEmptyNumber(amount);
-}
-
-export function setPreAndPostNatal(amount) {
-    billInfo.servicesPackages.mcp.prenatalAndPost.amount = defaultEmptyNumber(amount);
-}
-
-export function setMedication(amount) {
-    billInfo.servicesPackages.mcp.medication.amount = defaultEmptyNumber(amount);
-}
-
-export function setMiscellaneous(amount) {
-    billInfo.servicesPackages.mcp.miscellaneous.amount = defaultEmptyNumber(amount);
-}
-
-export function setEncpProfFee(amount) {
-    billInfo.servicesPackages.encp.profFee.amount = defaultEmptyNumber(amount);
-}
-
-export function setEns(amount) {
-    billInfo.servicesPackages.encp.ens.amount = defaultEmptyNumber(amount);
-}
-
-export function setBcgVaccine(amount) {
-    billInfo.servicesPackages.encp.bcgVaccine.amount = defaultEmptyNumber(amount);
-}
-
-export function setVitK(amount) {
-    billInfo.servicesPackages.encp.vitK.amount = defaultEmptyNumber(amount);
-}
-
-export function setHepaBVaccine(amount) {
-    billInfo.servicesPackages.encp.hepaBVaccine.amount = defaultEmptyNumber(amount);
-}
-
-export function setErythromycin(amount) {
-    billInfo.servicesPackages.encp.erythromycin.amount = defaultEmptyNumber(amount);
-}
-
-export function setCordClamp(amount) {
-    billInfo.servicesPackages.encp.cordClamp.amount = defaultEmptyNumber(amount);
+    for (let prof of profArr) {
+        if (prof.id.toLowerCase() === id.toLowerCase()) {
+            prof.amount = defaultEmptyNumber(amount);
+            break;
+        }
+    }
 }
 
 function createNewService(nameVal, qtyVal, unitVal, amountVal) {

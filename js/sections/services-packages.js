@@ -1,4 +1,4 @@
-import { setLizaAmount, setDalireAmount, setNursingService, setRecoveryRoom, setPreAndPostNatal, setMedication, setMiscellaneous, setEncpProfFee, setEns, setBcgVaccine, setVitK, setHepaBVaccine, setErythromycin, setCordClamp, getMcpDetails, getEncpDetails, setMcpDetails, setEncpDetails } from "../state.js";
+import { setProfAmount, getMcpDetails, getEncpDetails, setMcpDetails, setEncpDetails } from "../state.js";
 import { viewDisplay, hideDisplay, enableInput, disableInput, nonNegativeMultipleInput, enableAllServiceInput, disableAllServiceInput, descToId, disableInputAndClear, idToDesc } from "../util.js";
 
 const packageInputs = document.querySelectorAll("#packages input[type='number']");
@@ -172,12 +172,21 @@ function serviceCardDiv(detail, type) {
 export function processItem() {
     handleItemizedDetailsState();
 
+    const details = getMcpDetails();
+    console.log("Rual Fee: " + details.profFee.professionals[0].amount);
+    // console.log("Dalire Fee: " + details.profFee.amount.dalire);
     
+    const keys = Object.keys(details);
+    keys.forEach(key => {
+        if (details[key].name !== undefined) {
+            console.log(details[key].name + "=> Amount:" + details[key].amount + " ||PhilHealth: " + details[key].philHealth);
+        }
+    });
 }
 
 function handleItemizedDetailsState() {
-    setLizaAmount(rualInput.value);
-    setDalireAmount(dalireInput.value);
+    setProfAmount(rualInput.id, rualInput.value);
+    setProfAmount(dalireInput.id, dalireInput.value);
     inputToStateService(setMcpDetails, mcpServicePricing);
     inputToStateService(setEncpDetails, encpServicePricing);
 }

@@ -5,6 +5,7 @@ import "./sections/others.js";
 
 import { processPatientDetails } from "./sections/patient-details.js";
 import { processOtherDetailsNonItemized } from "./sections/others.js";
+import { processItem } from "./sections/services-packages.js";
 
 const previewBtn = document.querySelector("#generate-preview-btn");
 const dialog = document.querySelector("dialog");
@@ -12,6 +13,6 @@ const dialog = document.querySelector("dialog");
 previewBtn.addEventListener("click", () => {
     processPatientDetails();
     processOtherDetailsNonItemized(); 
-
+    processItem();
     // dialog.showModal();
 })
