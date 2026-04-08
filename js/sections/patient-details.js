@@ -1,5 +1,5 @@
-import { setPatientName, setDateOfAdmission, setDateOfDischarge, setAge, setBabyGender, setPregnancyCount, setParity } from "../state.js";
-
+import { setPatientName, setDateOfAdmission, setDateOfDischarge, setAge, setBabyGender, setPregnancyCount, setParity, getPatientDetails } from "../state.js";
+import { previewPatientDetails } from "../preview/itemized-details.js";
 // input selector
 const patientNameInput = document.querySelector("#patient-name");
 const admissionDateInput = document.querySelector("#admission-date");
@@ -103,22 +103,9 @@ paraInput.addEventListener("input", e => {
 
 });
 
-
-
-
-// for later use
-// patientNameInput.addEventListener("input", e => {
-//     let nameValue = e.target.value
-//                         .trim()
-//                         .split(" ")
-//                         .filter(word => word)
-//                         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-//                         .join(" ");
-
-//     if (nameValue.length === 0 ) {
-
-//     }
-// })
+// -----------------------------------------------------
+// Preview Btn Handlers --------------------------------
+// -----------------------------------------------------
 
 function formatName(input){
     return input.value
@@ -129,7 +116,7 @@ function formatName(input){
                 .join(" ");
 }
 
-export function handlePatientDetailsState() {
+function handlePatientDetailsState() {
     setPatientName(formatName(patientNameInput));
     setDateOfAdmission(admissionDateInput.value);
     setDateOfDischarge(dischargeDateInput.value);
@@ -139,3 +126,8 @@ export function handlePatientDetailsState() {
     setParity(paraInput.value); 
 }
 
+export function processPatientDetails() {
+    handlePatientDetailsState();
+    
+    previewPatientDetails(getPatientDetails());
+}

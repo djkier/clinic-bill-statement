@@ -72,18 +72,17 @@ const billInfo = {
     additionalServices: [],
     others: {
         discountAmount: 0,
-        preparedBy: ""
+        preparedBy: "",
+        dateToday: new Date()
     }
 };
-
-const noEntryDefault = "&nbsp;&nbsp;&#8212;";
 
 function getValueOrDefault(value, def) {
     return (value === "" || value === null || value === undefined) ? def : value; 
 }
 
 function defaultEmptyText(value) {
-    return getValueOrDefault(value, noEntryDefault);
+    return getValueOrDefault(value, "---");
 }
 
 function defaultEmptyNumber(value) {
@@ -91,7 +90,7 @@ function defaultEmptyNumber(value) {
 }
 
 function defaultEmptyDate(value) {
-    return getValueOrDefault(value, "2000-01-01");
+    return getValueOrDefault(value, "YYYY-MM-DD");
 }
 
 
@@ -201,5 +200,5 @@ export function setPreparedBy(name) {
 }
 
 export function getPatientDetails() {
-    return billInfo.patientDetails;
+    return { ...billInfo.patientDetails }
 }
