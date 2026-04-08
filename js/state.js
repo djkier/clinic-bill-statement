@@ -192,13 +192,26 @@ export function addNewAdditionalServices(newService) {
 }
 
 export function setDiscount(amount) {
-    billInfo.others.discountAmount = amount;
+    billInfo.others.discountAmount = defaultEmptyNumber(amount);
 }
 
 export function setPreparedBy(name) {
-    billInfo.others.preparedBy = name;
+    
+    billInfo.others.preparedBy = defaultEmptyText(name);
+}
+
+export function setDateToday(date) {
+    billInfo.others.dateToday = defaultEmptyDate(date);
 }
 
 export function getPatientDetails() {
-    return { ...billInfo.patientDetails }
+    return { ...billInfo.patientDetails };
+}
+
+export function getOtherDetails() {
+    return { ...billInfo.others };
+}
+
+export function getDiscountAmount() {
+    return billInfo.others.discountAmount;
 }

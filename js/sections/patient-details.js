@@ -1,5 +1,6 @@
 import { setPatientName, setDateOfAdmission, setDateOfDischarge, setAge, setBabyGender, setPregnancyCount, setParity, getPatientDetails } from "../state.js";
-import { previewPatientDetails } from "../preview/itemized-details.js";
+import { previewPatientDetails } from "../preview/non-itemized-details.js";
+import { defaultDateFormat } from "../util.js";
 // input selector
 const patientNameInput = document.querySelector("#patient-name");
 const admissionDateInput = document.querySelector("#admission-date");
@@ -25,11 +26,7 @@ defaultDate(dischargeDateInput, new Date());
 // DATE FORMATS-----------------------------------------
 // -----------------------------------------------------
 function defaultDate(input, date) {
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, "0");
-    const dd = String(date.getDate()).padStart(2, "0");
-    
-    input.value = `${yyyy}-${mm}-${dd}`;
+    input.value = defaultDateFormat(date);
 }
 
 const dateFormat = date =>

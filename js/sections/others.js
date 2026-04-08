@@ -1,4 +1,6 @@
-import { nonNegativeInput } from "../util.js";
+import { setDiscount, setPreparedBy, setDateToday, getOtherDetails } from "../state.js";
+import { previewOtherDetails } from "../preview/non-itemized-details.js";
+import { nonNegativeInput, defaultDateFormat } from "../util.js";
 
 const preparedByValues = [
     "Liza H. Rual, RM", 
@@ -47,4 +49,24 @@ function formatName(name) {
     const firstPart = parts.join(" ");
 
     return `${firstPart} ${lastName[0]}.`;
+}
+
+// -----------------------------------------------------
+// Preview Btn Handlers --------------------------------
+// -----------------------------------------------------
+
+function handleOtherDetailsStateNonItemized() {
+    
+    setPreparedBy(preparedSelect.value);
+    setDateToday(defaultDateFormat(new Date()));
+}
+
+export function handleDiscountAmount() {
+    setDiscount(discountInput.value);
+}
+
+export function processOtherDetailsNonItemized() {
+    handleOtherDetailsStateNonItemized();
+
+    previewOtherDetails(getOtherDetails());
 }
