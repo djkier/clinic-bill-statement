@@ -9,6 +9,10 @@ const billInfo = {
         parity: 0
     },
     servicesPackages: {
+        states: {
+            mcp: false,
+            encp: false
+        },
         mcp: {
             profFee: {
                 professionals: [
@@ -111,6 +115,14 @@ function defaultEmptyNumber(value) {
 
 function defaultEmptyDate(value) {
     return getValueOrDefault(value, "YYYY-MM-DD");
+}
+
+export function setMcpState(bool) {
+    billInfo.servicesPackages.mcp = bool;
+}
+
+export function setEncpState(bool) {
+    billInfo.servicesPackages.encp = bool;
 }
 
 

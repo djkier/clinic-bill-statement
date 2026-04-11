@@ -1,4 +1,4 @@
-import { setProfAmount, getMcpDetails, getEncpDetails, setMcpDetails, setEncpDetails } from "../state.js";
+import { setProfAmount, setMcpState, setEncpState, getMcpDetails, getEncpDetails, setMcpDetails, setEncpDetails } from "../state.js";
 import { viewDisplay, hideDisplay, enableInput, disableInput, nonNegativeMultipleInput, enableAllServiceInput, disableAllServiceInput, descToId, disableInputAndClear, idToDesc } from "../util.js";
 
 const packageInputs = document.querySelectorAll("#packages input[type='number']");
@@ -35,6 +35,7 @@ nonNegativeMultipleInput(packageInputs);
 // -----------------------------------------------------
 // MCP CARD            ---------------------------------
 // -----------------------------------------------------
+
 function initMcp() {
     defaultMcp();
     defaultProfFee();
@@ -60,7 +61,6 @@ function defaultMcpPricing() {
 }
 
 
-
 mcpCheckBox.addEventListener("change", e => {
     if (e.target.checked) {
         viewDisplay(profFeeCard);
@@ -68,6 +68,8 @@ mcpCheckBox.addEventListener("change", e => {
     } else {
         initMcp();
     }
+
+    setMcpState(e.target.checked);
 });
 
 rualCheckBox.addEventListener("change", e => {
@@ -118,6 +120,8 @@ encpCheckBox.addEventListener("change", e => {
         hideDisplay(encpServiceCard);
         defaultEncpService();
     }
+
+    setEncpState(e.target.checked);
 })
 
 encpServiceBox.addEventListener("change", e => {
@@ -175,8 +179,10 @@ export function processItem() {
     handleItemizedDetailsState();
 
     const details = getMcpDetails();
+
+    
     console.log("Rual Fee: " + details.profFee.professionals[0].amount);
-    // console.log("Dalire Fee: " + details.profFee.amount.dalire);
+    console.log("Dalire Fee: " + details.profFee.amount.dalire);
     
     const keys = Object.keys(details);
     keys.forEach(key => {
