@@ -55,6 +55,7 @@ function defaultProfFee() {
 
 function defaultMcpPricing() {
     mcpServiceBox.checked = false;
+    defaultServiceInput(getMcpDetails(), "mcp");
     hideDisplay(mcpServicePricing);
 }
 
@@ -73,7 +74,7 @@ rualCheckBox.addEventListener("change", e => {
     if (e.target.checked) {
         enableInput(rualInput);
     } else {
-        disableInput(rualInput);
+        disableInputAndClear(rualInput);
     }
 });
 
@@ -81,7 +82,7 @@ dalireCheckBox.addEventListener("change", e => {
     if (e.target.checked) {
         enableInput(dalireInput);
     } else {
-        disableInput(dalireInput);
+        disableInputAndClear(dalireInput);
     }
 })
 
@@ -105,6 +106,7 @@ function initEncp() {
 
 function defaultEncpService() {
     encpServiceBox.checked = false;
+    defaultServiceInput(getEncpDetails(), "encp");
     hideDisplay(encpServicePricing);
 }
 
@@ -207,6 +209,24 @@ function inputToStateService(setDetails, section) {
         if (key !== undefined) {
             setDetails[key].amount = input.value;
         }
+    }
+}
+
+function defaultServiceInput(getDetails, prepend) {
+    const nameToId = {};
+    for (const key in getDetails) {
+        if (getDetails[key].name !== undefined) {
+            const keyName = getDetails[key].name.toLowerCase();
+            const id = descToId(keyName, prepend);
+            nameToId[id] = key;
+        }
+        
+    }
+
+    for (const id in nameToId) {
+        const inputEl = document.getElementById(id);
+        const key = nameToId[id];
+        inputEl.value = getDetails[key]?.philHealth ?? "";
     }
 }
 
