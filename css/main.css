@@ -461,40 +461,32 @@ TABLE
 }
 
 /* row */
-
+.services-rendered tbody tr {
+   border-bottom: 1px solid rgba(0, 0, 0, 0.15); 
+}
 
 .services-rendered td {
     text-align: right;
     padding: 0.25rem 3.25rem;
 }
 
-.services-rendered .item-name, .services-rendered .package-name {
+.services-rendered td:nth-child(1) {
     text-align: left;
+    padding: 0.25rem 2rem;
 }
 
-.services-rendered .item-name {
-    padding-left: 2rem;
+.services-rendered .package-name td:nth-child(1) {
+    font-weight: 700;
+    text-align: left;
+    padding-left: 0.5rem;
 }
 
-.services-rendered tbody tr {
-   border-bottom: 1px solid rgba(0, 0, 0, 0.15); 
-}
-
-#hidden-td {
-    visibility: hidden;
-    /* font-weight: 600; */
-}
-
-#rual-row .item-name, #dalire-row .item-name {
-    padding-left: 4rem;
+.services-rendered td.indented {
     font-weight: 600;
+    padding-left: 3rem;
 }
 
-.services-rendered .package-name {
-    padding: 4px;
-    font-weight: 600;
-}
-
+/* edit this part to color the packages names */
 .maternity {
     background-color: oklch(94.614% 0.06994 156.246);
     border-bottom: 2px solid oklch(66.966% 0.1542 151.284);
@@ -522,6 +514,8 @@ TABLE
 .additional .package-name {
     color: rgb(170, 4, 162);
 }
+
+
 
 /* 
 TOTAL AMOUNT 
@@ -678,4 +672,5 @@ input:disabled {
     color: #888;     
     cursor: not-allowed;
 }
+
 
