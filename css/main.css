@@ -460,17 +460,20 @@ TABLE
     width: 10rem;
 }
 
-.item-name, .package-name {
-    text-align: left;
-}
+/* row */
 
-.item-name {
-    padding-left: 2rem;
-}
 
 .services-rendered td {
     text-align: right;
     padding: 0.25rem 3.25rem;
+}
+
+.services-rendered .item-name, .services-rendered .package-name {
+    text-align: left;
+}
+
+.services-rendered .item-name {
+    padding-left: 2rem;
 }
 
 .services-rendered tbody tr {
@@ -487,7 +490,7 @@ TABLE
     font-weight: 600;
 }
 
-.package-name {
+.services-rendered .package-name {
     padding: 4px;
     font-weight: 600;
 }
