@@ -54,7 +54,12 @@ export function enableAllServiceInput(inputArr) {
 }
 
 export function formatMoney(money) {
-    
+    const formatted = money.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+    return formatted;
 }
 
 export function defaultDateFormat(date) {
