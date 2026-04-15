@@ -15,6 +15,7 @@ const billInfo = {
         },
         mcp: {
             profFee: {
+                name: "Professional Fee",
                 professionals: [
                     {
                         name: "Liza H. Rual, RM",
@@ -118,11 +119,11 @@ function defaultEmptyDate(value) {
 }
 
 export function setMcpState(bool) {
-    billInfo.servicesPackages.mcp = bool;
+    billInfo.servicesPackages.states.mcp = bool;
 }
 
 export function setEncpState(bool) {
-    billInfo.servicesPackages.encp = bool;
+    billInfo.servicesPackages.states.encp = bool;
 }
 
 
@@ -156,6 +157,7 @@ export function setParity(count) {
 
 export function setProfAmount(id, amount) {
     const profArr = billInfo.servicesPackages.mcp.profFee.professionals;
+    
 
     for (let prof of profArr) {
         if (prof.id.toLowerCase() === id.toLowerCase()) {
@@ -218,4 +220,8 @@ export function getOtherDetails() {
 
 export function getDiscountAmount() {
     return billInfo.others.discountAmount;
+}
+
+export function getServicePackages() {
+    return { ...billInfo.servicesPackages };
 }

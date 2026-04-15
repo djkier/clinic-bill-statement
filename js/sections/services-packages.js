@@ -1,5 +1,7 @@
-import { setProfAmount, setMcpState, setEncpState, getMcpDetails, getEncpDetails, setMcpDetails, setEncpDetails } from "../state.js";
+import { previewItemizedTable } from "../preview/itemized-details.js";
+import { setProfAmount, setMcpState, setEncpState, getMcpDetails, getEncpDetails, setMcpDetails, setEncpDetails,  getServicePackages} from "../state.js";
 import { viewDisplay, hideDisplay, enableInput, disableInput, nonNegativeMultipleInput, enableAllServiceInput, disableAllServiceInput, descToId, disableInputAndClear, idToDesc } from "../util.js";
+
 
 const packageInputs = document.querySelectorAll("#packages input[type='number']");
 
@@ -144,7 +146,7 @@ function populateServiceCards(details, section, type) {
     const keys = Object.keys(details);
     keys.forEach(key => {
         
-        if (!(details[key]["name"] === undefined)) {
+        if (details[key]["professionals"] === undefined) {
             section.appendChild(serviceCardDiv(details[key], type));
         }
     });
@@ -207,7 +209,7 @@ function inputToStateService(setDetails, section) {
 function defaultServiceInput(getDetails, prepend) {
     const nameToId = {};
     for (const key in getDetails) {
-        if (getDetails[key].name !== undefined) {
+        if (getDetails[key].professionals === undefined) {
             const keyName = getDetails[key].name.toLowerCase();
             const id = descToId(keyName, prepend);
             nameToId[id] = key;
@@ -227,18 +229,7 @@ function defaultServiceInput(getDetails, prepend) {
 export function processItem() {
     handleItemizedDetailsState();
 
-    const details = getMcpDetails();
-
-    
-    console.log("Rual Fee: " + details.profFee.professionals[0].amount);
-    console.log("Dalire Fee: " + details.profFee.amount.dalire);
-    
-    const keys = Object.keys(details);
-    keys.forEach(key => {
-        if (details[key].name !== undefined) {
-            console.log(details[key].name + "=> Amount:" + details[key].amount + " ||PhilHealth: " + details[key].philHealth);
-        }
-    });
+    previewItemizedTable(getServicePackages());
 }
 
 

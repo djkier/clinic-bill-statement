@@ -1,4 +1,4 @@
-import { formatMoney } from "../util";
+import { formatMoney } from "../util.js";
 
 const previewTable = document.querySelector("#preview-table");
 const previewTableBody = document.querySelector("#preview-table tbody");
@@ -23,7 +23,7 @@ function createRow(info) {
     const descTd = createDataCell(name);
     const amountTd = createDataCell(formatMoney(amount));
     const philHealthTd = createDataCell(formatMoney(philHealth));
-    const netTd = createDataCell(computeAmount(amount, philhealth));
+    const netTd = createDataCell(computeAmount(amount, philHealth));
 
     newRow.append(descTd, amountTd, philHealthTd, netTd);
     
@@ -31,7 +31,31 @@ function createRow(info) {
 }
 
 function createProfessionalRows(profFeeInfo) {
+    const { name, professionals, philHealth } = profFeeInfo;
     
+    const profDescRow = document.createElement("tr");
+    profDescRow.appendChild(createDataCell(name));
+    previewTableBody.appendChild(profDescRow);
+
+    let isPhilHealthUsed = false;
+    for (const professional of professionals) {
+        if (professional.amount === 0) {
+            continue;
+        }
+
+        const info = {
+            name: professional.name,
+            amount: Number(professional.amount),
+            philHealth: isPhilHealthUsed ? 0 : philHealth
+        };
+
+        const profRow = createRow(info);
+        profRow.children[0].classList.add("indented");
+
+        previewTableBody.appendChild(profRow);
+
+        isPhilHealthUsed = true;
+    }
 }
 
 function packageRows(details) {
@@ -39,8 +63,7 @@ function packageRows(details) {
         if (details[key].professionals !== undefined) {
             createProfessionalRows(details[key]);
         } else {
-            const row = createRow(details[key]);
-            previewTableBody.appendChild(row);
+            previewTableBody.appendChild(createRow(details[key]));
         }
     }
 }
@@ -60,13 +83,15 @@ function clearTableData() {
 export function previewItemizedTable(servicePackages) {
     const { states, mcp, encp } = servicePackages;
 
+    clearTableData();
     if (states.mcp) {
         addPackageNameRow("Maternity Care Package");
         packageRows(mcp);
     }
 
     if (states.encp) {
-
+        addPackageNameRow("Expanded Newborn Care Package");
+        packageRows(encp);
     }
 
 
