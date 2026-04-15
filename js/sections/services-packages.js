@@ -175,22 +175,7 @@ function serviceCardDiv(detail, type) {
 // -----------------------------------------------------
 // Preview Btn Handlers --------------------------------
 // -----------------------------------------------------
-export function processItem() {
-    handleItemizedDetailsState();
 
-    const details = getMcpDetails();
-
-    
-    console.log("Rual Fee: " + details.profFee.professionals[0].amount);
-    console.log("Dalire Fee: " + details.profFee.amount.dalire);
-    
-    const keys = Object.keys(details);
-    keys.forEach(key => {
-        if (details[key].name !== undefined) {
-            console.log(details[key].name + "=> Amount:" + details[key].amount + " ||PhilHealth: " + details[key].philHealth);
-        }
-    });
-}
 
 function handleItemizedDetailsState() {
     setProfAmount(rualInput.id, rualInput.value);
@@ -218,6 +203,7 @@ function inputToStateService(setDetails, section) {
     }
 }
 
+
 function defaultServiceInput(getDetails, prepend) {
     const nameToId = {};
     for (const key in getDetails) {
@@ -234,6 +220,25 @@ function defaultServiceInput(getDetails, prepend) {
         const key = nameToId[id];
         inputEl.value = getDetails[key]?.philHealth ?? "";
     }
+}
+
+//when edited services is turned off the services default input will be back to its default value
+//the handleItemizedDetailsState() will always get the input value 
+export function processItem() {
+    handleItemizedDetailsState();
+
+    const details = getMcpDetails();
+
+    
+    console.log("Rual Fee: " + details.profFee.professionals[0].amount);
+    console.log("Dalire Fee: " + details.profFee.amount.dalire);
+    
+    const keys = Object.keys(details);
+    keys.forEach(key => {
+        if (details[key].name !== undefined) {
+            console.log(details[key].name + "=> Amount:" + details[key].amount + " ||PhilHealth: " + details[key].philHealth);
+        }
+    });
 }
 
 
