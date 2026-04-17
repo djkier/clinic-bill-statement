@@ -54,12 +54,15 @@ export function enableAllServiceInput(inputArr) {
 }
 
 export function formatMoney(money) {
-    const formatted = money.toLocaleString('en-US', {
+    const num = Number(money);
+
+    //dual validation
+    if (isNaN(num)) return "0.00";
+
+    return num.toLocaleString('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });
-
-    return formatted;
 }
 
 export function defaultDateFormat(date) {

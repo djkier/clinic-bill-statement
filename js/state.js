@@ -234,5 +234,5 @@ export function resetSubTotal() {
 
 export function addAmountOnSubTotal(amount) {
     billInfo.others.subTotalAmount += Number(amount);
-    // console.log(billInfo.others.subTotalAmount);
+    console.log(billInfo.others.subTotalAmount);
 }
