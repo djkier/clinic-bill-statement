@@ -84,3 +84,12 @@ export function idToDesc(id) {
     parts.shift();
     return parts.join(" ");
 }
+
+export function formatName(inputValue){
+    return inputValue
+            .trim()
+            .split(" ")
+            .filter(word => word)
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+}

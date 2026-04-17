@@ -178,9 +178,25 @@ function createNewService(nameVal, qtyVal, unitVal, amountVal) {
     }
 }
 
+function validValue(value) {
+    const val = Number(value);
+    return !isNaN(val) && val > 0;
+}
+
 export function addNewAdditionalServices(nameVal, qtyVal, unitVal, amountVal) {
-    const newService = createNewService(nameVal, qtyVal, unitVal, amountVal);
-    billInfo.additionalServices.push(newService);
+    if (validValue(qtyVal) && validValue(unitVal)) {
+        const newService = createNewService(nameVal, qtyVal, unitVal, amountVal);
+        billInfo.additionalServices.push(newService);
+    }
+
+}
+
+export function clearAdditionalServices() {
+    billInfo.additionalServices.length = 0;
+}
+
+export function getAdditionalServices() {
+    return [ ...billInfo.additionalServices ];
 }
 
 export function setDiscount(amount) {
@@ -234,5 +250,4 @@ export function resetSubTotal() {
 
 export function addAmountOnSubTotal(amount) {
     billInfo.others.subTotalAmount += Number(amount);
-    console.log(billInfo.others.subTotalAmount);
 }

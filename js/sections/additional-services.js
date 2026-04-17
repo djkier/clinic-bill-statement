@@ -1,8 +1,9 @@
+import { previewAdditionalItem } from "../preview/itemized-details.js";
+import { addNewAdditionalServices, clearAdditionalServices, getAdditionalServices } from "../state.js";
 import { nonNegativeInput } from "../util.js";
 
 const table = document.querySelector("#additional table");
 const tbody = document.querySelector("#additional tbody");
-const rows = document.querySelectorAll("#additional tbody tr");
 const amtInputs = document.querySelectorAll("#additional tbody tr td:nth-child(3) input")
 const trashBtns = document.querySelectorAll("#additional .trash-btn");
 const addRowBtn = document.querySelector("#add-row-btn");
@@ -131,6 +132,41 @@ function createTrashBtn() {
 
 function getInputFromTr(row, index) {
     return row.children[index].querySelector("input");
+}
+
+// -----------------------------------------------------
+// Preview Btn Handlers --------------------------------
+// -----------------------------------------------------
+
+function extractValue(cell) {
+    const input = cell.querySelector("input");
+    return input.value;
+}
+
+function rowInputsToState(row) {
+    const cells = row.querySelectorAll("td");
+    addNewAdditionalServices(
+        extractValue(cells[0]),
+        extractValue(cells[1]),
+        extractValue(cells[2]),
+        extractValue(cells[3]),
+    );
+}
+
+function handleAdditionalItemsState() {
+    clearAdditionalServices();
+
+    const rows = tbody.querySelectorAll("tr");
+
+    rows.forEach(row => {
+        rowInputsToState(row);
+    });
+}
+
+export function processAdditional() {
+    handleAdditionalItemsState();
+
+    previewAdditionalItem(getAdditionalServices());
 }
 
 

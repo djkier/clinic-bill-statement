@@ -1,4 +1,4 @@
-import { formatMoney } from "../util.js";
+import { formatMoney, formatName } from "../util.js";
 import { resetSubTotal, addAmountOnSubTotal } from "../state.js";
 
 const previewTable = document.querySelector("#preview-table");
@@ -11,6 +11,9 @@ function createDataCell(value) {
     return newTd;
 }
 
+// -----------------------------------------------------
+// MCP and ENCP Preview --------------------------------
+// -----------------------------------------------------
 
 function createRow(info) {
     const { name, amount, philHealth } = info;
@@ -80,6 +83,7 @@ function clearTableData() {
     previewTableBody.replaceChildren();
 }
 
+
 export function previewItemizedTable(servicePackages) {
     const { states, mcp, encp } = servicePackages;
 
@@ -95,6 +99,30 @@ export function previewItemizedTable(servicePackages) {
         addPackageNameRow("Expanded Newborn Care Package");
         packageRows(encp);
     }
+}
 
+// -----------------------------------------------------
+// Additional Services  --------------------------------
+// -----------------------------------------------------
+function convertItemToInfo(item) {
+    const { name, qty, unit, amount } = item;
+    const descName = `${formatName(name)} x ${qty} x ${formatMoney(unit)}`;
+
+    return {
+        name: descName,
+        amount,
+        philHealth: 0
+    }
+
+}
+
+export function previewAdditionalItem(itemArr) {
+    if (itemArr.length <= 0) return;
+
+    addPackageNameRow("Additional Charges");
+    for (const item of itemArr) {
+        const newRow = createRow(convertItemToInfo(item));
+        previewTableBody.appendChild(newRow);        
+    }
 
 }
