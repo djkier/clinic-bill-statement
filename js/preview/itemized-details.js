@@ -1,4 +1,6 @@
 import { formatMoney } from "../util.js";
+import { resetSubTotal, addAmountOnSubTotal } from "../state.js";
+import { addSubtotal } from "../computations.js";
 
 const previewTable = document.querySelector("#preview-table");
 const previewTableBody = document.querySelector("#preview-table tbody");
@@ -19,11 +21,15 @@ function computeAmount(amount, philHealth) {
 function createRow(info) {
     const { name, amount, philHealth } = info;
     const newRow = document.createElement("tr");
+    const netAmount = computeAmount(amount, philHealth)
 
     const descTd = createDataCell(name);
     const amountTd = createDataCell(formatMoney(amount));
     const philHealthTd = createDataCell(formatMoney(philHealth));
-    const netTd = createDataCell(computeAmount(amount, philHealth));
+    const netTd = createDataCell(netAmount);
+
+    //update state subtotal
+    addAmountOnSubTotal(netAmount);
 
     newRow.append(descTd, amountTd, philHealthTd, netTd);
     
@@ -84,6 +90,8 @@ export function previewItemizedTable(servicePackages) {
     const { states, mcp, encp } = servicePackages;
 
     clearTableData();
+    resetSubTotal();
+
     if (states.mcp) {
         addPackageNameRow("Maternity Care Package");
         packageRows(mcp);

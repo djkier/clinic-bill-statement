@@ -96,7 +96,9 @@ const billInfo = {
     },
     additionalServices: [],
     others: {
+        subTotalAmount: 0,
         discountAmount: 0,
+        totalAmount: 0,
         preparedBy: "",
         dateToday: new Date()
     }
@@ -224,4 +226,12 @@ export function getDiscountAmount() {
 
 export function getServicePackages() {
     return { ...billInfo.servicesPackages };
+}
+
+export function resetSubTotal() {
+    billInfo.others.subTotalAmount = 0;
+}
+
+export function addAmountOnSubTotal(amount) {
+    billInfo.others.subTotalAmount += amount;
 }
