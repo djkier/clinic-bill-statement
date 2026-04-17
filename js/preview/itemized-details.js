@@ -1,6 +1,5 @@
 import { formatMoney } from "../util.js";
 import { resetSubTotal, addAmountOnSubTotal } from "../state.js";
-import { addSubtotal } from "../computations.js";
 
 const previewTable = document.querySelector("#preview-table");
 const previewTableBody = document.querySelector("#preview-table tbody");
@@ -12,21 +11,16 @@ function createDataCell(value) {
     return newTd;
 }
 
-function computeAmount(amount, philHealth) {
-    const net = Number(amount) - Number(philHealth);
-
-    return formatMoney(net);
-}
 
 function createRow(info) {
     const { name, amount, philHealth } = info;
     const newRow = document.createElement("tr");
-    const netAmount = computeAmount(amount, philHealth)
+    const netAmount = Number(amount) - Number(philHealth);
 
     const descTd = createDataCell(name);
     const amountTd = createDataCell(formatMoney(amount));
     const philHealthTd = createDataCell(formatMoney(philHealth));
-    const netTd = createDataCell(netAmount);
+    const netTd = createDataCell(formatMoney(netAmount));
 
     //update state subtotal
     addAmountOnSubTotal(netAmount);

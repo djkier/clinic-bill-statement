@@ -182,8 +182,8 @@ function serviceCardDiv(detail, type) {
 function handleItemizedDetailsState() {
     setProfAmount(rualInput.id, rualInput.value);
     setProfAmount(dalireInput.id, dalireInput.value);
-    inputToStateService(setMcpDetails, mcpServicePricing);
-    inputToStateService(setEncpDetails, encpServicePricing);
+    inputToStateService(setMcpDetails(), mcpServicePricing);
+    inputToStateService(setEncpDetails(), encpServicePricing);
 }
 
 function inputToStateService(setDetails, section) {
@@ -191,7 +191,10 @@ function inputToStateService(setDetails, section) {
     
     const nameToKey = {};
     for (const key in setDetails) {
+        //nursing service fee
         const name = setDetails[key].name.toLowerCase();
+
+        //nameToKey = {nursing service fee: <mcp key for nsf}
         nameToKey[name] = key;
     }
 
