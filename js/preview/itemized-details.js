@@ -126,3 +126,12 @@ export function previewAdditionalItem(itemArr) {
     }
 
 }
+
+// -----------------------------------------------------
+// Summary of Charges   --------------------------------
+// -----------------------------------------------------
+
+
+export function previewSummaryOfCharges() {
+
+}

@@ -251,3 +251,23 @@ export function resetSubTotal() {
 export function addAmountOnSubTotal(amount) {
     billInfo.others.subTotalAmount += Number(amount);
 }
+
+export function getSubTotal() {
+    return billInfo.others.subTotalAmount;
+}
+
+export function updateTotalAmount() {
+    billInfo.others.totalAmount = getSubTotal() - getDiscountAmount();
+}
+
+export function getTotalAmount() {
+    return billInfo.others.totalAmount;
+}
+
+export function getSummaryOfCharges() {
+    return {
+        subTotal: getSubTotal(),
+        discount: getDiscountAmount(),
+        total: getTotalAmount()
+    }
+}

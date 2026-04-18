@@ -1,6 +1,7 @@
-import { setDiscount, setPreparedBy, setDateToday, getOtherDetails } from "../state.js";
+import { setDiscount, setPreparedBy, setDateToday, getOtherDetails, updateTotalAmount } from "../state.js";
 import { previewOtherDetails } from "../preview/non-itemized-details.js";
 import { nonNegativeInput, defaultDateFormat } from "../util.js";
+import { previewSummaryOfCharges } from "../preview/itemized-details.js";
 
 const preparedByValues = [
     "Liza H. Rual, RM", 
@@ -55,14 +56,30 @@ function formatName(name) {
 // Preview Btn Handlers --------------------------------
 // -----------------------------------------------------
 
+
+// -----------------------------------------------------
+// Summary of charges   --------------------------------
+// -----------------------------------------------------
+function handleSummaryOfCharges() {
+    setDiscount(discountInput.value);
+    updateTotalAmount();
+
+}
+
+export function processSummaryOfCharges() {
+    handleSummaryOfCharges();
+
+    previewSummaryOfCharges();
+}
+
+// -----------------------------------------------------
+// Other bill details   --------------------------------
+// -----------------------------------------------------
+
 function handleOtherDetailsStateNonItemized() {
     
     setPreparedBy(preparedSelect.value);
     setDateToday(defaultDateFormat(new Date()));
-}
-
-export function handleDiscountAmount() {
-    setDiscount(discountInput.value);
 }
 
 export function processOtherDetailsNonItemized() {
@@ -70,3 +87,6 @@ export function processOtherDetailsNonItemized() {
 
     previewOtherDetails(getOtherDetails());
 }
+
+
+

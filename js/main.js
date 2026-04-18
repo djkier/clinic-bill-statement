@@ -4,7 +4,7 @@ import "./sections/additional-services.js";
 import "./sections/others.js";
 
 import { processPatientDetails } from "./sections/patient-details.js";
-import { processOtherDetailsNonItemized } from "./sections/others.js";
+import { processOtherDetailsNonItemized, processSummaryOfCharges } from "./sections/others.js";
 import { processItem } from "./sections/services-packages.js";
 import { processAdditional } from "./sections/additional-services.js";
 
@@ -17,6 +17,6 @@ previewBtn.addEventListener("click", () => {
     processOtherDetailsNonItemized(); 
     processItem();
     processAdditional();
-
+    processSummaryOfCharges();
     // dialog.showModal();
 })
