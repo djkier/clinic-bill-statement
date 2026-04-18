@@ -1,7 +1,7 @@
-import { setDiscount, setPreparedBy, setDateToday, getOtherDetails, updateTotalAmount } from "../state.js";
-import { previewOtherDetails } from "../preview/non-itemized-details.js";
+import { setDiscount, setPreparedBy, setDateToday, getOtherDetails, updateTotalAmount, getSummaryOfCharges } from "../state.js";
+import { previewOtherDetails, previewSummaryOfCharges } from "../preview/non-itemized-details.js";
 import { nonNegativeInput, defaultDateFormat } from "../util.js";
-import { previewSummaryOfCharges } from "../preview/itemized-details.js";
+
 
 const preparedByValues = [
     "Liza H. Rual, RM", 
@@ -69,7 +69,7 @@ function handleSummaryOfCharges() {
 export function processSummaryOfCharges() {
     handleSummaryOfCharges();
 
-    previewSummaryOfCharges();
+    previewSummaryOfCharges(getSummaryOfCharges());
 }
 
 // -----------------------------------------------------

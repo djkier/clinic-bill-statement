@@ -1,3 +1,5 @@
+import { formatMoney } from "../util.js";
+
 //today's date
 const statementDate = document.querySelector("#statement-date");
 //patient details
@@ -9,9 +11,15 @@ const babyGender = document.querySelector("#baby-gender");
 const gravida = document.querySelector("#g");
 const para = document.querySelector("#p");
 
+//summary of charges
+const subTotalEl = document.querySelector("#subtotal > p:nth-of-type(2)");
+const discountEl = document.querySelector("#discount-prev > p:nth-of-type(2)");
+const totalEl = document.querySelector("#total-value");
+
 //other details
 const patientNameSignDiv = document.querySelector("#patient-signature");
 const preparedBySignDiv = document.querySelector("#prepared-signature");
+
 
 
 
@@ -51,7 +59,6 @@ function prependName(name, div) {
     }
 }
 
-
 //Add new p element on the designated div 
 function addPara(name, div) {
     const currentPara = div.querySelector("p");
@@ -60,4 +67,25 @@ function addPara(name, div) {
     newPara.textContent = name;
 
     div.insertBefore(newPara, currentPara);
+}
+
+// -----------------------------------------------------
+// Summary of Charges   --------------------------------
+// -----------------------------------------------------
+
+function discountFormat(amount) {
+    return `(${formatMoney(amount)})`;
+}
+
+function updateCharges(amount, element) {
+    element.textContent = amount;
+}
+
+export function previewSummaryOfCharges(summary) {
+    const { subTotal, discount, total } = summary;
+
+    updateCharges(formatMoney(subTotal), subTotalEl);
+    updateCharges(discountFormat(discount), discountEl);
+    updateCharges(formatMoney(total), totalEl);
+
 }
