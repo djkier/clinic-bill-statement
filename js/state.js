@@ -278,3 +278,7 @@ export function getSummaryOfCharges() {
         total: getTotalAmount()
     }
 }
+
+export function saveBill() {
+    return { ...billInfo };
+}

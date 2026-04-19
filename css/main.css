@@ -367,7 +367,9 @@ Preview
 
 #preview-and-generate {
     /* display: none; */
-    margin-left: 2rem;
+
+    /* use this margin-left when editing the preview */
+    /* margin-left: 2rem; */
 }
 
 #bill-preview {
@@ -592,6 +594,7 @@ PRINT PREVIEW
     display: flex;
     justify-content: center;
     column-gap: 1rem;
+
     
 }
 
@@ -603,9 +606,10 @@ PRINT PREVIEW
     border-radius: 12px;
     color: white;
     background-color: #007BFF;
-    height: 40px;
-    width: 6rem;
+    height: 2.2rem;
+    width: 7rem;
     font-weight: 600;
+    font-size: 0.9rem;
 }
 
 .generate-box:hover {
@@ -666,6 +670,16 @@ input:disabled {
     box-shadow: inset 0 0 0 1px #e5e9ce;
     color: #888;     
     cursor: not-allowed;
+}
+
+#load-info-btn, #download-preview {
+    background-color: gray;
+}
+
+#load-info-btn:hover, #download-preview:hover {
+    cursor: not-allowed;
+    background-color: gray;
+    transform: scale(1);
 }
 
 
