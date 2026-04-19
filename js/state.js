@@ -232,8 +232,15 @@ export function setEncpDetails() {
     return billInfo.servicesPackages.encp;
 }
 
-export function getOtherDetails() {
+export function getOtherDetailsxxx() {
     return { ...billInfo.others };
+}
+
+export function getOtherDetails() {
+    return {
+        datePrepared: billInfo.others.dateToday,
+        preparedBy: billInfo.others.preparedBy
+    }
 }
 
 export function getDiscountAmount() {

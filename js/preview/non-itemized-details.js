@@ -1,4 +1,4 @@
-import { formatMoney } from "../util.js";
+import { formatMoney, formatDate } from "../util.js";
 
 //today's date
 const statementDate = document.querySelector("#statement-date");
@@ -18,7 +18,7 @@ const totalEl = document.querySelector("#total-value");
 
 //other details
 const patientNameSignDiv = document.querySelector("#patient-signature");
-const preparedBySignDiv = document.querySelector("#prepared-signature");
+const preparedByEl = document.querySelector("#prepared-signature");
 
 
 
@@ -30,8 +30,8 @@ const preparedBySignDiv = document.querySelector("#prepared-signature");
 export function previewPatientDetails(details) {
     patientName.textContent = details.patientName;
     patientAge.textContent = details.age;
-    admissionDate.textContent = details.dateOfAdmission;
-    dischargeDate.textContent = details.dateOfDischarge;
+    admissionDate.textContent = formatDate(details.dateOfAdmission);
+    dischargeDate.textContent = formatDate(details.dateOfDischarge);
     babyGender.textContent = genderEquivalent(details.babyGender);
     gravida.textContent = details.pregnancyCount;
     para.textContent = details.parity;
@@ -46,8 +46,10 @@ function genderEquivalent(gender) {
 // Others               --------------------------------
 // -----------------------------------------------------
 export function previewOtherDetails(others) {
-    statementDate.textContent = others.dateToday;
-    prependName(others.preparedBy, preparedBySignDiv);
+    const { datePrepared, preparedBy } = others;
+    statementDate.textContent = formatDate(datePrepared);
+
+    prependName(preparedBy, preparedByEl);
 }
 
 function prependName(name, div) {
