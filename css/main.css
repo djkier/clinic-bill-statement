@@ -442,7 +442,7 @@ TABLE
 .services-rendered thead tr {
    background-color: rgb(224, 224, 224);
    padding: 8px;
-   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+   border: 2px solid oklch(55.208% 0.00006 271.152);
 
 }
 
@@ -631,7 +631,7 @@ PRINT PREVIEW
         visibility: hidden;
     }
 
-    #bill-information, #print {
+    #bill-information, #action-btns {
         display: none;
     }
 
@@ -644,33 +644,13 @@ PRINT PREVIEW
         box-shadow: none;
     }
 
-    #hidden-td {
-        visibility: hidden;
-    }
-
-    table {
+    .services-rendered table {
         border: 2px solid oklch(55.208% 0.00006 271.152);
     }
 
-    thead tr {
-        border-bottom: 2px solid oklch(55.208% 0.00006 271.152);
-
-    }
-
-    .package-name-row {
+    .services-rendered thead tr {
         border-bottom: 2px solid oklch(55.208% 0.00006 271.152);
     }
-
-    .expanded, .additional, .maternity {
-        border-top: 2px solid oklch(55.208% 0.00006 271.152);
-        border-bottom: 1px solid oklch(55.208% 0.00006 271.152);
-    }
-
-    .expanded .package-name, .additional .package-name, .maternity .package-name {
-        color: black;
-    }
-
-
 
 }
 
