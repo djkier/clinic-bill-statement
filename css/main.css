@@ -580,10 +580,19 @@ SIGNATURE SECTION
 /* 
 PRINT PREVIEW
  */
-#print {
-    margin-top: 2rem;
+
+ #preview-and-generate {
+    border: 1px solid rgb(105, 105, 105);
+    background-color: white;
+    padding : 0 1.5rem 1.5rem
+}
+
+#action-btns {
+    margin: 1.5rem 0;
     display: flex;
     justify-content: center;
+    column-gap: 1rem;
+    
 }
 
 .generate-box {
@@ -593,17 +602,23 @@ PRINT PREVIEW
     padding: 0 16px;
     border-radius: 12px;
     color: white;
-    background-color: rgb(3, 2, 19);
+    background-color: #007BFF;
     height: 40px;
+    width: 6rem;
     font-weight: 600;
 }
 
 .generate-box:hover {
-    background-color: rgba(3, 2, 19, 0.85);
+    background-color: #0c72df;
     cursor: pointer;
+    transform: scale(1.03);
 }
 
 
+
+#bill-preview {
+    background-color: white;
+}
 
 
 
